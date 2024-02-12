@@ -87,13 +87,12 @@ campaign.
 ## Mockup
 <img width="200" src="mockups/login.png" alt="Login">
 
-<img width="200" src="mockups/home.png" alt="Home"><img width="200" src="mockups/hamburger.png" alt="Hamburger Menu">
+<img width="200" src="mockups/home.png" alt="Home"> <img width="200" src="mockups/hamburger.png" alt="Hamburger Menu">
 
-<img width="200" src="mockups/characters.png" alt="Characters"><img width="200" src="mockups/character.png" alt="Character"><img width="200" src="mockups/spells.png" alt="Spells">
+<img width="200" src="mockups/characters.png" alt="Characters"> <img width="200" src="mockups/character.png" alt="Character"> <img width="200" src="mockups/spells.png" alt="Spells">
 
-<img width="200" src="mockups/character_creator_race.png" alt="Character Creator, Race">
-<img width="200" src="mockups/character_creator_class.png" alt="Character Creator, Class">
+<img width="200" src="mockups/character_creator_race.png" alt="Character Creator, Race"> <img width="200" src="mockups/character_creator_class.png" alt="Character Creator, Class">
 
-<img width="200" src="mockups/campaigns.png" alt="Campaigns"><img width="200" src="mockups/campaign.png" alt="Campaign"><img width="200" src="mockups/create_campaign.png" alt="Create Campaign">
+<img width="200" src="mockups/campaigns.png" alt="Campaigns"> <img width="200" src="mockups/campaign.png" alt="Campaign"> <img width="200" src="mockups/create_campaign.png" alt="Create Campaign">
 
 <img width="200" src="mockups/public_characters.png" alt="Public Characters">
