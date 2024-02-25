@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "636593978566",
+    "project_id": "mythos-manager-cc90b",
+    "storage_bucket": "mythos-manager-cc90b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636593978566:android:db84d70b6ce13a20cdebc7",
+        "android_client_info": {
+          "package_name": "com.example.mythos_manager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDneIkOWWWMZw6fpBLy1iqwANSvYstdjiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
