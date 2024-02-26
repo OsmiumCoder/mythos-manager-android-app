@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class BoxShadowImage extends StatefulWidget {
   final Image image;
   final void Function()? onTap;
-  final String text;
+  final Text text;
   const BoxShadowImage({super.key, required this.image, this.onTap, required this.text});
 
   @override
@@ -43,14 +43,7 @@ class _BoxShadowImageState extends State<BoxShadowImage> {
           ],
         ),
         child: Center(
-          child: Text(
-            widget.text,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-                color: Colors.white,
-                fontSize: 50
-            ),
-          ),
+          child: widget.text
         ),
       ),
     );
