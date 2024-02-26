@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-final mythosThemeData = ThemeData(
+final themeData = ThemeData(
   colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFC7AA87)),
   primaryColor: const Color(0xFFC7AA87),
   fontFamily: GoogleFonts.openSans().fontFamily,
