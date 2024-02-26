@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mythos_manager/features/home/presentation/screens/home_page.dart';
-import 'package:mythos_manager/shared/presentation/components/box_shadow_image.dart';
+import 'package:mythos_manager/shared/presentation/components/mythos_theme_data.dart';
 import 'firebase_options.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 
 Future<void> main() async {
@@ -24,19 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Mythos Manager',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFC7AA87)),
-        primaryColor: const Color(0xFFC7AA87),
-        fontFamily: GoogleFonts.openSans().fontFamily,
-        useMaterial3: true,
-        appBarTheme: AppBarTheme(
-          backgroundColor: const Color(0xFF90714A),
-          titleTextStyle: GoogleFonts.openSans(
-            fontSize: 25,
-            color: Colors.black
-          )
-        )
-      ),
+      theme: mythosThemeData,
       home: const HomePage(),
     );
   }
