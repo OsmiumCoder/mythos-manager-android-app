@@ -1,13 +1,20 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mythos_manager/features/authentication/data/user_repository.dart';
+import 'package:mythos_manager/features/authentication/application/authentication_service.dart';
+import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 
-final authenticationControllerProvider = Provider((ref) {
-  return AuthenticationController(ref.watch(userRepositoryProvider));
+final authenticationControllerProvider = Provider<AuthenticationController>((ref) {
+  return AuthenticationController(ref.watch(authenticationServiceProvider));
 });
 
 class AuthenticationController {
 
-  final UserRepository _userRepository;
+  final AuthenticationService _authenticationService;
 
-  AuthenticationController(this._userRepository);
+  AuthenticationController(this._authenticationService);
+
+  Future signup({required String username, required String email, required String password}) {
+    return _authenticationService.signUp(username: username, email: email, password: password);
+  }
+
+
 }
