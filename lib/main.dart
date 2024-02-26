@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
       title: 'Mythos Manager',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFC7AA87)),
+        primaryColor: const Color(0xFFC7AA87),
         fontFamily: GoogleFonts.openSans().fontFamily,
         useMaterial3: true,
         appBarTheme: AppBarTheme(
