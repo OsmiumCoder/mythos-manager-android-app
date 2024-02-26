@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mythos_manager/shared/presentation/components/box_shadow_image.dart';
-import 'package:mockito/mockito.dart';
 import 'package:network_image_mock/network_image_mock.dart';
+
 void main() {
   group("BoxShadowImageTest", () {
     testWidgets("Test onTapDown changes border to black with no opacity", (tester) async {
