@@ -19,7 +19,6 @@ void main() {
             textDirection: TextDirection.ltr,
           ))));
 
-      print(tester.view.physicalSize);
       final boxShadowFinder = find.byType(BoxShadowImage);
       await tester.pumpAndSettle();
       await tester.startGesture(tester.getCenter(boxShadowFinder));
