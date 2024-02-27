@@ -20,7 +20,9 @@ class HomeScreen extends StatelessWidget {
         title: const Text("Mythos Manager"),
         centerTitle: true,
       ),
-      body: Column(
+      body: SingleChildScrollView(
+
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           BoxShadowImage(
@@ -32,6 +34,7 @@ class HomeScreen extends StatelessWidget {
               ),
               onTap: () {}, // TODO onTap Handler for navigation
           ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -67,6 +70,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
+      )
     );
   }
 }
