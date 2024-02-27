@@ -42,7 +42,10 @@ class LoginScreen extends HookConsumerWidget {
             Container(
               margin: const EdgeInsets.all(5),
               child: ElevatedButton(
-                  child: const Text('Login'),
+                  child: const Text(
+                    'Login',
+                    textAlign: TextAlign.center,
+                  ),
                   onPressed: () {
                     // TODO: wire together to auth controller
                   }),

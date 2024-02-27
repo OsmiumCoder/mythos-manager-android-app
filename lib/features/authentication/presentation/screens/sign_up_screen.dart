@@ -11,11 +11,11 @@ class SignUpScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final TextEditingController usernameTextController =
-    useTextEditingController();
+        useTextEditingController();
     final TextEditingController emailTextController =
-    useTextEditingController();
+        useTextEditingController();
     final TextEditingController passwordTextController =
-    useTextEditingController();
+        useTextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -51,7 +51,10 @@ class SignUpScreen extends HookConsumerWidget {
             Container(
               margin: const EdgeInsets.all(5),
               child: ElevatedButton(
-                  child: const Text('Sign Up'),
+                  child: const Text(
+                    'Sign Up',
+                    textAlign: TextAlign.center,
+                  ),
                   onPressed: () {
                     // TODO: wire together to auth controller
                   }),
