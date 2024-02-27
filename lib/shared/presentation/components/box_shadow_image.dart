@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Author: Liam Welsh
 class BoxShadowImage extends StatefulWidget {
   final Image image;
   final void Function()? onTap;
