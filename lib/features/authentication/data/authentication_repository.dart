@@ -34,20 +34,4 @@ class AuthenticationRepository {
   Future<void> deleteUser(User user) {
     return user.delete();
   }
-
-  Future<User?> signIn(
-      {required String email, required String password}) async {
-    try {
-      final response = await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
-      final user = response.user;
-      return user;
-    } on FirebaseAuthException catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<void> signOut(User user) {
-    return _firebaseAuth.signOut();
-  }
 }
