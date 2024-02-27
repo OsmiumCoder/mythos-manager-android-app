@@ -38,6 +38,7 @@ dependencies:
   google_fonts: ^6.1.0
   mockito: ^5.4.4
   network_image_mock: ^2.1.1
+  flutter_hooks: ^0.20.5
 
 dev_dependencies:
   flutter_test:
