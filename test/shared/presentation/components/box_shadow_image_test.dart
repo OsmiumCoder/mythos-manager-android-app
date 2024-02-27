@@ -32,7 +32,7 @@ void main() {
 
       final BoxShadow boxShadow = decoration.boxShadow![0];
 
-      expect(boxShadow.color, Colors.black);
+      expect(boxShadow.color, BoxShadowImage.boxShadowColor);
     });
 
     testWidgets("Test onTapUp changes back to original boxShadow color",

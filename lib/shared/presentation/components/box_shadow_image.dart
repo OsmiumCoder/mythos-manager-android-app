@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 
 /// Author: Liam Welsh
 class BoxShadowImage extends StatefulWidget {
+  static const boxShadowColor = Colors.black;
+  static const boxShadowOpacity = 0.5;
+
   final Image image;
   final void Function()? onTap;
   final Text text;
-  const BoxShadowImage({super.key, required this.image, this.onTap, required this.text});
+  const BoxShadowImage(
+      {super.key, required this.image, this.onTap, required this.text});
 
   @override
   State<BoxShadowImage> createState() => _BoxShadowImageState();
@@ -31,23 +35,21 @@ class _BoxShadowImageState extends State<BoxShadowImage> {
           ),
           color: Colors.black,
           borderRadius: const BorderRadius.all(Radius.circular(15)),
-          border: Border.all(
-            color: Colors.black
-          ),
+          border: Border.all(color: Colors.black),
           boxShadow: [
             BoxShadow(
-              color: _isPressed ? Colors.black : Colors.black.withOpacity(0.5),
+              color: _isPressed
+                  ? BoxShadowImage.boxShadowColor
+                  : BoxShadowImage.boxShadowColor
+                      .withOpacity(BoxShadowImage.boxShadowOpacity),
               spreadRadius: 5,
               blurRadius: 5,
               offset: const Offset(0, 3),
             ),
           ],
         ),
-        child: Center(
-          child: widget.text
-        ),
+        child: Center(child: widget.text),
       ),
     );
   }
 }
-
