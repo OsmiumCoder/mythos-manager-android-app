@@ -6,6 +6,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 ///
 /// Author: Jonathon Meney
 class SignUpScreen extends HookConsumerWidget {
+  static const String signUpButtonText = "Sign Up";
+  static const String loginButtonText = "Already have an account?\nLogin";
+
   const SignUpScreen({super.key});
 
   @override
@@ -51,8 +54,8 @@ class SignUpScreen extends HookConsumerWidget {
             Container(
               margin: const EdgeInsets.all(5),
               child: ElevatedButton(
-                  child: const Text(
-                    'Sign Up',
+                  child: Text(
+                    signUpButtonText,
                     textAlign: TextAlign.center,
                   ),
                   onPressed: () {
@@ -62,10 +65,10 @@ class SignUpScreen extends HookConsumerWidget {
             Container(
               margin: const EdgeInsets.all(5),
               child: ElevatedButton(
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Already have an account?\nLogin",
+                      loginButtonText,
                       textAlign: TextAlign.center,
                     ),
                   ),

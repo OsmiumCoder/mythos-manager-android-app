@@ -39,9 +39,10 @@ void main() {
     testWidgets('SignUpScreen has correct button texts', (widgetTester) async {
       await widgetTester.pumpWidget(const MaterialApp(home: SignUpScreen()));
 
-      final loginButton = find.widgetWithText(ElevatedButton, 'Sign Up');
-      final signUpButton = find.widgetWithText(
-          ElevatedButton, "Already have an account?\nLogin");
+      final loginButton =
+          find.widgetWithText(ElevatedButton, SignUpScreen.signUpButtonText);
+      final signUpButton =
+          find.widgetWithText(ElevatedButton, SignUpScreen.loginButtonText);
 
       expect(loginButton, findsOneWidget);
       expect(signUpButton, findsOneWidget);
