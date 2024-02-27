@@ -3,8 +3,11 @@ import 'package:mythos_manager/shared/presentation/components/box_shadow_image.d
 
 const placeHolderImage = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/640px-Donald_Trump_official_portrait.jpg";
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+/// Home screen.
+///
+/// Author: Liam Welsh
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   final cardTextStyle = const TextStyle(
     color: Colors.white
@@ -13,7 +16,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         title: const Text("Mythos Manager"),
         centerTitle: true,
