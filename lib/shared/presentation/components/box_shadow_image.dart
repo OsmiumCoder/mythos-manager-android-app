@@ -48,7 +48,13 @@ class _BoxShadowImageState extends State<BoxShadowImage> {
             ),
           ],
         ),
-        child: Center(child: widget.text),
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: FittedBox(
+              fit: BoxFit.contain,
+                child: widget.text,
+              )
+        ),
       ),
     );
   }

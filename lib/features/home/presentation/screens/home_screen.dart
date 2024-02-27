@@ -20,52 +20,77 @@ class HomeScreen extends StatelessWidget {
         title: const Text("Mythos Manager"),
         centerTitle: true,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          BoxShadowImage(
-              image: Image.network(placeHolderImage, width: 350, height: 200),
-              text: Text(
-                  "Campaigns",
-                  textAlign: TextAlign.center,
-                  style: cardTextStyle.copyWith(fontSize: 40),
-              ),
-              onTap: () {}, // TODO onTap Handler for navigation
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              BoxShadowImage(
-                  image: Image.network(placeHolderImage, width: 150, height: 200),
-                  text: Text(
-                      "Favourite Character",
-                      textAlign: TextAlign.center,
-                      style: cardTextStyle.copyWith(fontSize: 30),
-                  ),
-                  onTap: () {}, // TODO onTap Handler for navigation
-              ),
-              BoxShadowImage(
-                  image: Image.network(placeHolderImage, width: 150, height: 200),
-                  text: Text(
-                      "Current Campaign",
-                      textAlign: TextAlign.center,
-                      style: cardTextStyle.copyWith(fontSize: 30),
-                  ),
-                  onTap: () {}, // TODO onTap Handler for navigation
+      body: Container(
+        margin: const EdgeInsets.all(35),
 
+        child: Column(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: BoxShadowImage(
+                      image: Image.network(placeHolderImage, height: 200),
+                      text: Text(
+                          "Campaigns",
+                          textAlign: TextAlign.center,
+                          style: cardTextStyle,
+                      ),
+                      onTap: () {}, // TODO onTap Handler for navigation
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                        child: BoxShadowImage(
+                            image: Image.network(placeHolderImage, height: 300,),
+                            text: Text(
+                                "Favourite\nCharacter",
+                                textAlign: TextAlign.center,
+                                style: cardTextStyle,
+                            ),
+                            onTap: () {}, // TODO onTap Handler for navigation
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                        child: BoxShadowImage(
+                            image: Image.network(placeHolderImage, height: 300,),
+                            text: Text(
+                                "Current\nCampaign",
+                                textAlign: TextAlign.center,
+                                style: cardTextStyle,
+                            ),
+                            onTap: () {}, // TODO onTap Handler for navigation
+
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: BoxShadowImage(
+                      image: Image.network(placeHolderImage),
+                      text: Text(
+                        "Character Creator",
+                        textAlign: TextAlign.center,
+                        style: cardTextStyle,
+                      ),
+                      onTap: () {}, // TODO onTap Handler for navigation
+                  ),
+                ),
               ),
             ],
           ),
-          BoxShadowImage(
-              image: Image.network(placeHolderImage, width: 350, height: 200),
-              text: Text(
-                "Character Creator",
-                textAlign: TextAlign.center,
-                style: cardTextStyle.copyWith(fontSize: 40),
-              ),
-              onTap: () {}, // TODO onTap Handler for navigation
-          ),
-        ],
       ),
     );
   }
