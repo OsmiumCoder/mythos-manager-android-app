@@ -1,8 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final authenticationRepositoryProvider = Provider<AuthenticationRepository>((ref) {
+final authenticationRepositoryProvider =
+    Provider<AuthenticationRepository>((ref) {
   return AuthenticationRepository(FirebaseAuth.instance);
+});
+
+final authenticationStateProvider = StreamProvider<User?>((ref) {
+  return ref.read(authenticationRepositoryProvider).authStateChange;
 });
 
 class AuthenticationRepository {
@@ -12,19 +17,14 @@ class AuthenticationRepository {
 
   Stream<User?> get authStateChange => _firebaseAuth.authStateChanges();
 
-  Future<User> createUser(
+  Future<void> createUser(
       {required String username,
       required String email,
       required String password}) async {
-    try {
-      final response = await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email, password: password);
-      final user = response.user!;
-      await user.updateDisplayName(username);
-      return user;
-    } on FirebaseAuthException catch (e) {
-      rethrow;
-    }
+    final response = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password);
+    final user = response.user!;
+    await user.updateDisplayName(username);
   }
 
   User? currentUser() {
