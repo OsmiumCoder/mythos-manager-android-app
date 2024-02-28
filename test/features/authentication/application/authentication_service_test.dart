@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('authentication controller tests', () {
+  group('authentication service tests', () {
     test('', () {
     });
   });

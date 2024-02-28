@@ -4,12 +4,7 @@ import 'package:mythos_manager/features/authentication/data/authentication_repos
 
 void main() {
   group('authentication repository tests', () {
-    setUp(() {
-      AuthenticationRepository authenticationRepository = AuthenticationRepository(FirebaseAuth.instance);
-    });
-    
     test('auth repo creates user with valid data', () {
-      print(authenticationRepositoryProvider);
     });
   });
 }
