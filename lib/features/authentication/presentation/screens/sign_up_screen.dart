@@ -52,6 +52,8 @@ class SignUpScreen extends HookConsumerWidget {
               },
             ));
 
+    final formKey = GlobalKey<FormState>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sign Up'),
@@ -59,62 +61,85 @@ class SignUpScreen extends HookConsumerWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              margin: const EdgeInsets.all(20),
-              child: TextField(
-                controller: usernameTextController,
-                decoration: const InputDecoration(labelText: "Username"),
+        child: Form(
+          key: formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.all(20),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Username required';
+                    }
+                    return null;
+                  },
+                  controller: usernameTextController,
+                  decoration: const InputDecoration(labelText: "Username"),
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(20),
-              child: TextField(
-                controller: emailTextController,
-                decoration: const InputDecoration(labelText: "Email"),
+              Container(
+                margin: const EdgeInsets.all(20),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Email required';
+                    }
+                    return null;
+                  },
+                  controller: emailTextController,
+                  decoration: const InputDecoration(labelText: "Email"),
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(20),
-              child: TextField(
-                controller: passwordTextController,
-                decoration: const InputDecoration(labelText: "Password"),
+              Container(
+                margin: const EdgeInsets.all(20),
+                child: TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Password required';
+                    }
+                    return null;
+                  },
+                  controller: passwordTextController,
+                  decoration: const InputDecoration(labelText: "Password"),
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(5),
-              child: ElevatedButton(
-                  child: const Text(
-                    signUpButtonText,
-                    textAlign: TextAlign.center,
-                  ),
-                  onPressed: () {
-                    ref
-                        .read(authenticationControllerProvider.notifier)
-                        .signUpAndLogin(
-                            username: usernameTextController.text,
-                            email: emailTextController.text,
-                            password: passwordTextController.text);
-                  }),
-            ),
-            Container(
-              margin: const EdgeInsets.all(5),
-              child: ElevatedButton(
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      loginButtonText,
+              Container(
+                margin: const EdgeInsets.all(5),
+                child: ElevatedButton(
+                    child: const Text(
+                      signUpButtonText,
                       textAlign: TextAlign.center,
                     ),
-                  ),
-                  onPressed: () {
-                    // TODO: send to login route
-                    // Navigator.pushReplacementNamed(context, 'routeName');
-                  }),
-            )
-          ],
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        ref
+                            .read(authenticationControllerProvider.notifier)
+                            .signUpAndLogin(
+                                username: usernameTextController.text,
+                                email: emailTextController.text,
+                                password: passwordTextController.text);
+                      }
+                    }),
+              ),
+              Container(
+                margin: const EdgeInsets.all(5),
+                child: ElevatedButton(
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        loginButtonText,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    onPressed: () {
+                      // TODO: send to login route
+                      // Navigator.pushReplacementNamed(context, 'routeName');
+                    }),
+              )
+            ],
+          ),
         ),
       ),
     );
