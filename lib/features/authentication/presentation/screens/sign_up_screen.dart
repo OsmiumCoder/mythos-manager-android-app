@@ -55,6 +55,7 @@ class SignUpScreen extends HookConsumerWidget {
       appBar: AppBar(
         title: const Text('Sign Up'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),

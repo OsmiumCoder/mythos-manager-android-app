@@ -51,6 +51,7 @@ class LoginScreen extends HookConsumerWidget {
       appBar: AppBar(
         title: const Text('Login'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
