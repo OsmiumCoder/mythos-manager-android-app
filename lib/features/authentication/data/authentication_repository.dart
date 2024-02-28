@@ -34,10 +34,12 @@ class AuthenticationRepository {
       required String password}) async {
     final response = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
-    final user = response.user!;
+    final user = response.user;
 
     // Sets the users username with the provided username when being created.
-    await user.updateDisplayName(username);
+    if (user != null) {
+      await user.updateDisplayName(username);
+    }
   }
 
   /// Returns the currently signed in [User].
