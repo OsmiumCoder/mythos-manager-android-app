@@ -18,4 +18,5 @@ final themeData = ThemeData(
           borderSide: BorderSide(color: Color(0xFF90714A), width: 2)),
       focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Color(0xFF90714A), width: 2))),
+  dialogTheme: const DialogTheme(backgroundColor: Color(0xFFC7AA87)),
 );
