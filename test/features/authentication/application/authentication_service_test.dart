@@ -65,8 +65,6 @@ void main() {
     });
 
     test('signOut signs out the user', () async {
-      final userCredential = MockUserCredential();
-
       when(() => auth.signOut()).thenAnswer((_) async {});
 
       await service.signOut();
