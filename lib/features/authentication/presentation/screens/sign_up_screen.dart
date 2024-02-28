@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
+import 'package:mythos_manager/features/authentication/presentation/controllers/authentication_controller.dart';
+import 'package:mythos_manager/shared/presentation/themes/theme_data.dart';
 
 /// Sign Up screen.
 ///
@@ -19,6 +22,35 @@ class SignUpScreen extends HookConsumerWidget {
         useTextEditingController();
     final TextEditingController passwordTextController =
         useTextEditingController();
+
+    final user = ref.listen(authenticationStateProvider, (_, state) {
+      if (state.value != null) {
+        // TODO: change to named route
+        // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        //   return const HomeScreen();
+        // }));
+      }
+    });
+
+    ref.listen(
+        authenticationControllerProvider,
+        (_, state) => state.whenOrNull(
+              error: (error, stack) {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('Close'),
+                          ),
+                        ],
+                        content: Text(error.toString()),
+                      );
+                    });
+              },
+            ));
 
     return Scaffold(
       appBar: AppBar(
@@ -54,19 +86,24 @@ class SignUpScreen extends HookConsumerWidget {
             Container(
               margin: const EdgeInsets.all(5),
               child: ElevatedButton(
-                  child: Text(
+                  child: const Text(
                     signUpButtonText,
                     textAlign: TextAlign.center,
                   ),
                   onPressed: () {
-                    // TODO: wire together to auth controller
+                    ref
+                        .read(authenticationControllerProvider.notifier)
+                        .signUpAndLogin(
+                            username: usernameTextController.text,
+                            email: emailTextController.text,
+                            password: passwordTextController.text);
                   }),
             ),
             Container(
               margin: const EdgeInsets.all(5),
               child: ElevatedButton(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text(
                       loginButtonText,
                       textAlign: TextAlign.center,
