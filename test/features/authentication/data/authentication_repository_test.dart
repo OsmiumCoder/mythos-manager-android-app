@@ -4,11 +4,9 @@ import 'package:mocktail/mocktail.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 
 class MockFirebaseAuth extends Mock implements FirebaseAuth {}
-
 class MockUserCredential extends Mock implements UserCredential {}
 
-class MockUser extends Mock implements User {}
-
+/// Author: Jonathon Meney
 void main() {
   MockFirebaseAuth auth = MockFirebaseAuth();
   AuthenticationRepository repo = AuthenticationRepository(auth);
