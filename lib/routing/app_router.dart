@@ -10,8 +10,8 @@ import 'unknown_screen.dart';
 class AppRouter {
 
   static const String homeScreen = '/';
-  static const String loginScreen = '/loginScreen';
-  static const String signupScreen = '/signupScreen';
+  static const String loginScreen = '/login';
+  static const String signupScreen = '/sign-up';
 
   AppRouter._();
 
