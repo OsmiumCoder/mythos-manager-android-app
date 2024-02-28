@@ -23,7 +23,7 @@ class AuthenticationController extends AsyncNotifier<void> {
       required String email,
       required String password}) async {
     final AuthenticationService authenticationService =
-        ref.watch(authenticationServiceProvider);
+        ref.read(authenticationServiceProvider);
 
     state = const AsyncLoading();
     state = await AsyncValue.guard(() => authenticationService.signUpAndLogin(
@@ -33,7 +33,7 @@ class AuthenticationController extends AsyncNotifier<void> {
   /// Attempts to login a user with the given email and password.
   Future<void> login({required String email, required String password}) async {
     final AuthenticationService authenticationService =
-        ref.watch(authenticationServiceProvider);
+        ref.read(authenticationServiceProvider);
 
     state = const AsyncLoading();
     state = await AsyncValue.guard(
@@ -43,7 +43,7 @@ class AuthenticationController extends AsyncNotifier<void> {
   /// Signs out the currently signed in user.
   Future<void> signOut() async {
     final AuthenticationService authenticationService =
-        ref.watch(authenticationServiceProvider);
+        ref.read(authenticationServiceProvider);
 
     state = const AsyncLoading();
     state = await AsyncValue.guard(() => authenticationService.signOut());
