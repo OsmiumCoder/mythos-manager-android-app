@@ -13,9 +13,15 @@ final themeData = ThemeData(
   scaffoldBackgroundColor: const Color(0xFFC7AA87),
   textTheme: Typography().white,
   inputDecorationTheme: const InputDecorationTheme(
-      labelStyle: TextStyle(color: Colors.white),
-      enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xFF90714A), width: 2)),
-      focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xFF90714A), width: 2))),
+    labelStyle: TextStyle(color: Colors.white),
+    enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color(0xFF90714A), width: 2)),
+    focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color(0xFF90714A), width: 2)),
+    errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color(0xFF90714A), width: 2)),
+    focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color(0xFF90714A), width: 2)),
+  ),
+  dialogTheme: const DialogTheme(backgroundColor: Color(0xFFC7AA87)),
 );
