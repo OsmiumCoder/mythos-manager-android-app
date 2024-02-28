@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 import 'package:mythos_manager/features/authentication/presentation/controllers/authentication_controller.dart';
+import 'package:mythos_manager/routing/app_router.dart';
 import 'package:mythos_manager/shared/presentation/themes/theme_data.dart';
 
 /// Sign Up screen.
@@ -23,12 +24,9 @@ class SignUpScreen extends HookConsumerWidget {
     final TextEditingController passwordTextController =
         useTextEditingController();
 
-    final user = ref.listen(authenticationStateProvider, (_, state) {
+    ref.listen(authenticationStateProvider, (_, state) {
       if (state.value != null) {
-        // TODO: change to named route
-        // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-        //   return const HomeScreen();
-        // }));
+        Navigator.pushReplacementNamed(context, AppRouter.homeScreen);
       }
     });
 
@@ -134,8 +132,7 @@ class SignUpScreen extends HookConsumerWidget {
                       ),
                     ),
                     onPressed: () {
-                      // TODO: send to login route
-                      // Navigator.pushReplacementNamed(context, 'routeName');
+                      Navigator.pushReplacementNamed(context, AppRouter.loginScreen);
                     }),
               )
             ],
