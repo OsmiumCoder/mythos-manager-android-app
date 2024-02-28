@@ -24,6 +24,7 @@ class AuthenticationController extends AsyncNotifier<void> {
       required String password}) async {
     final AuthenticationService authenticationService =
         ref.watch(authenticationServiceProvider);
+
     state = const AsyncLoading();
     state = await AsyncValue.guard(() => authenticationService.signUpAndLogin(
         username: username, email: email, password: password));
@@ -33,6 +34,7 @@ class AuthenticationController extends AsyncNotifier<void> {
   Future<void> login({required String email, required String password}) async {
     final AuthenticationService authenticationService =
         ref.watch(authenticationServiceProvider);
+
     state = const AsyncLoading();
     state = await AsyncValue.guard(
         () => authenticationService.login(email: email, password: password));
@@ -42,6 +44,7 @@ class AuthenticationController extends AsyncNotifier<void> {
   Future<void> signOut() async {
     final AuthenticationService authenticationService =
         ref.watch(authenticationServiceProvider);
+
     state = const AsyncLoading();
     state = await AsyncValue.guard(() => authenticationService.signOut());
   }
