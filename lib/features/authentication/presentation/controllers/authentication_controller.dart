@@ -2,15 +2,22 @@ import 'dart:async';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/authentication/application/authentication_service.dart';
 
+/// Provides an [AuthenticationController].
 final authenticationControllerProvider =
     AsyncNotifierProvider<AuthenticationController, void>(() {
   return AuthenticationController();
 });
 
+/// Controls all delegation of auth requests.
+///
+/// Author: Jonathon Meney
 class AuthenticationController extends AsyncNotifier<void> {
   @override
   FutureOr build() {}
 
+  /// Signs up a new user with the given username, email, and password.
+  ///
+  /// After a user as been created they will also be logged in.
   Future<void> signUpAndLogin(
       {required String username,
       required String email,
@@ -22,6 +29,7 @@ class AuthenticationController extends AsyncNotifier<void> {
         username: username, email: email, password: password));
   }
 
+  /// Attempts to login a user with the given email and password.
   Future<void> login({required String email, required String password}) async {
     final AuthenticationService authenticationService =
         ref.watch(authenticationServiceProvider);
@@ -30,6 +38,7 @@ class AuthenticationController extends AsyncNotifier<void> {
         () => authenticationService.login(email: email, password: password));
   }
 
+  /// Signs out the currently signed in user.
   Future<void> signOut() async {
     final AuthenticationService authenticationService =
         ref.watch(authenticationServiceProvider);
