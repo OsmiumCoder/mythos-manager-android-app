@@ -9,7 +9,7 @@ final authenticationRepositoryProvider =
 
 /// [StreamProvider] for watching state changes of the current user.
 final authenticationStateProvider = StreamProvider<User?>((ref) {
-  return ref.read(authenticationRepositoryProvider).authStateChange;
+  return ref.watch(authenticationRepositoryProvider).authStateChange;
 });
 
 /// The [AuthenticationRepository] handles all CRUD operations for [User].
