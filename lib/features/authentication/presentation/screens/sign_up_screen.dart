@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 import 'package:mythos_manager/features/authentication/presentation/controllers/authentication_controller.dart';
 import 'package:mythos_manager/routing/app_router.dart';
-import 'package:mythos_manager/shared/presentation/themes/theme_data.dart';
 
 /// Sign Up screen.
 ///
