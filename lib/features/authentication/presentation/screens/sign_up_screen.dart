@@ -102,6 +102,7 @@ class SignUpScreen extends HookConsumerWidget {
                     },
                     controller: passwordTextController,
                     decoration: const InputDecoration(labelText: "Password"),
+                    obscureText: true,
                   ),
                 ),
                 Container(

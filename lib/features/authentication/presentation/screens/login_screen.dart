@@ -71,6 +71,7 @@ class LoginScreen extends HookConsumerWidget {
                 child: TextField(
                   controller: passwordTextController,
                   decoration: const InputDecoration(labelText: "Password"),
+                  obscureText: true,
                 ),
               ),
               Container(
