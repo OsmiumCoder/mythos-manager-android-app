@@ -53,53 +53,55 @@ class LoginScreen extends HookConsumerWidget {
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              margin: const EdgeInsets.all(20),
-              child: TextField(
-                controller: emailTextController,
-                decoration: const InputDecoration(labelText: "Email"),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                margin: const EdgeInsets.all(20),
+                child: TextField(
+                  controller: emailTextController,
+                  decoration: const InputDecoration(labelText: "Email"),
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(20),
-              child: TextField(
-                controller: passwordTextController,
-                decoration: const InputDecoration(labelText: "Password"),
+              Container(
+                margin: const EdgeInsets.all(20),
+                child: TextField(
+                  controller: passwordTextController,
+                  decoration: const InputDecoration(labelText: "Password"),
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(5),
-              child: ElevatedButton(
-                  child: const Text(
-                    loginButtonText,
-                    textAlign: TextAlign.center,
-                  ),
-                  onPressed: () {
-                    ref.read(authenticationControllerProvider.notifier).login(
-                        email: emailTextController.text,
-                        password: passwordTextController.text);
-                  }),
-            ),
-            Container(
-              margin: const EdgeInsets.all(5),
-              child: ElevatedButton(
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      signUpButtonText,
+              Container(
+                margin: const EdgeInsets.all(5),
+                child: ElevatedButton(
+                    child: const Text(
+                      loginButtonText,
                       textAlign: TextAlign.center,
                     ),
-                  ),
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, AppRouter.signupScreen);
-                  }),
-            )
-          ],
+                    onPressed: () {
+                      ref.read(authenticationControllerProvider.notifier).login(
+                          email: emailTextController.text,
+                          password: passwordTextController.text);
+                    }),
+              ),
+              Container(
+                margin: const EdgeInsets.all(5),
+                child: ElevatedButton(
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        signUpButtonText,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, AppRouter.signupScreen);
+                    }),
+              )
+            ],
+          ),
         ),
       ),
     );
