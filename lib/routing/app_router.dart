@@ -13,10 +13,13 @@ class AppRouter {
   static const String loginScreen = '/login';
   static const String signupScreen = '/sign-up';
 
+  // Screens that do not require authentication
+  static const noAuthScreens = [loginScreen, signupScreen];
+
   AppRouter._();
 
   static Route<dynamic> generateRoute(RouteSettings settings, auth) {
-    if (auth == null) {
+    if (auth == null && !noAuthScreens.contains(settings.name)) {
       return MaterialPageRoute(builder: (_) => const SignUpScreen());
     }
 
