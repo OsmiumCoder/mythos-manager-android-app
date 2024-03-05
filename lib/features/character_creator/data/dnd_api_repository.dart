@@ -12,7 +12,6 @@ final dndApiRepository = Provider<DNDAPIRepository>((ref) {
 ///
 /// Author: Jonathon Meney
 class DNDAPIRepository {
-
   /// Base api endpoint for the DND API.
   final apiEndpoint = "https://www.dnd5eapi.co/api";
 
