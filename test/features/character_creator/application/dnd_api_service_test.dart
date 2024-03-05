@@ -6,8 +6,6 @@ import 'package:mythos_manager/features/character_creator/data/dnd_api_repositor
 
 import '../../../provider_container.dart';
 
-class MockHttpClient extends Mock implements http.Client {}
-
 class MockDNDAPIRepository extends Mock implements DNDAPIRepository {}
 
 void main() {
