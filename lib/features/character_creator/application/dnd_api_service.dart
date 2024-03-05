@@ -10,7 +10,6 @@ final dndApiService = Provider<DNDAPIService>((ref) {
 ///
 /// Author: Jonathon Meney
 class DNDAPIService {
-
   /// The [DNDAPIRepository] used to fetch API data.
   final DNDAPIRepository _repository;
 
