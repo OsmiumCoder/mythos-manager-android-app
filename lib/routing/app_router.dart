@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 import 'package:mythos_manager/features/authentication/presentation/screens/screens.dart';
 import 'package:mythos_manager/features/home/presentation/screens/screens.dart';
 import 'unknown_screen.dart';
@@ -17,7 +20,8 @@ class AppRouter {
 
   AppRouter._();
 
-  static Route<dynamic> generateRoute(RouteSettings settings, auth) {
+  static Route<dynamic> generateRoute(RouteSettings settings, WidgetRef ref) {
+    User? auth = ref.read(authenticationStateProvider).value;
     if (auth == null && !noAuthScreens.contains(settings.name)) {
       return MaterialPageRoute(builder: (_) => const SignUpScreen());
     }
