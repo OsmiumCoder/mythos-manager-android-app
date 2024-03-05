@@ -8,7 +8,6 @@ import 'unknown_screen.dart';
 ///
 /// Author: Shreif Abdalla
 class AppRouter {
-
   static const String homeScreen = '/';
   static const String loginScreen = '/login';
   static const String signupScreen = '/sign-up';
@@ -25,23 +24,26 @@ class AppRouter {
 
     switch (settings.name) {
       case homeScreen:
-        return MaterialPageRoute(builder: (context) => const HomeScreen(),
+        return MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
         );
       case loginScreen:
-        return MaterialPageRoute(builder: (_) => const LoginScreen(),
+        return MaterialPageRoute(
+          builder: (_) => const LoginScreen(),
         );
       case signupScreen:
-        return MaterialPageRoute(builder: (_) => const SignUpScreen(),
+        return MaterialPageRoute(
+          builder: (_) => const SignUpScreen(),
         );
     }
-    if(kDebugMode) {
-      return MaterialPageRoute(builder: (_) => const UnknownScreen(),
+    if (kDebugMode) {
+      return MaterialPageRoute(
+        builder: (_) => const UnknownScreen(),
       );
-    }
-    else {
-      return MaterialPageRoute(builder: (_) => const HomeScreen(),
+    } else {
+      return MaterialPageRoute(
+        builder: (_) => const HomeScreen(),
       );
-    }
     }
   }
-
+}

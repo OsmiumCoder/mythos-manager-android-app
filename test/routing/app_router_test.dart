@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 import 'package:mythos_manager/features/authentication/presentation/screens/screens.dart';
 import 'package:mythos_manager/features/home/presentation/screens/screens.dart';
 import 'package:mythos_manager/routing/app_router.dart';
@@ -10,18 +11,23 @@ import 'package:network_image_mock/network_image_mock.dart';
 
 class MockUser extends Mock implements User {}
 
+class MockWidgetRef extends Mock implements WidgetRef {}
+
 void main() {
   group("AppRouter tests", () {
-    final mockUser = MockUser();
-
     testWidgets('Navigating to homeScreen while no user shows SignUpScreen',
         (WidgetTester tester) async {
       mockNetworkImagesFor(() async {
+        WidgetRef ref = MockWidgetRef();
+
+        when(() => ref.read(authenticationStateProvider))
+            .thenReturn(const AsyncData(null));
+
         await tester.pumpWidget(ProviderScope(
           child: MaterialApp(
             initialRoute: AppRouter.homeScreen,
             onGenerateRoute: (settings) {
-              return AppRouter.generateRoute(settings, null);
+              return AppRouter.generateRoute(settings, ref);
             },
           ),
         ));
@@ -33,11 +39,18 @@ void main() {
     testWidgets('Navigating to homeScreen shows HomeScreen',
         (WidgetTester tester) async {
       mockNetworkImagesFor(() async {
-        await tester.pumpWidget(MaterialApp(
-          initialRoute: AppRouter.homeScreen,
-          onGenerateRoute: (settings) {
-            return AppRouter.generateRoute(settings, mockUser);
-          },
+        WidgetRef ref = MockWidgetRef();
+
+        when(() => ref.read(authenticationStateProvider))
+            .thenReturn(AsyncData(MockUser()));
+
+        await tester.pumpWidget(ProviderScope(
+          child: MaterialApp(
+            initialRoute: AppRouter.homeScreen,
+            onGenerateRoute: (settings) {
+              return AppRouter.generateRoute(settings, ref);
+            },
+          ),
         ));
 
         expect(find.byType(HomeScreen), findsOneWidget);
@@ -46,10 +59,15 @@ void main() {
 
     testWidgets('Navigating to loginScreen shows LoginScreen',
         (WidgetTester tester) async {
+      WidgetRef ref = MockWidgetRef();
+
+      when(() => ref.read(authenticationStateProvider))
+          .thenReturn(AsyncData(MockUser()));
+
       await tester.pumpWidget(ProviderScope(
         child: MaterialApp(
           onGenerateRoute: (settings) {
-            return AppRouter.generateRoute(settings, mockUser);
+            return AppRouter.generateRoute(settings, ref);
           },
           initialRoute: AppRouter.loginScreen,
         ),
@@ -60,10 +78,15 @@ void main() {
 
     testWidgets('Navigating to signupScreen shows SignUpScreen',
         (WidgetTester tester) async {
+      WidgetRef ref = MockWidgetRef();
+
+      when(() => ref.read(authenticationStateProvider))
+          .thenReturn(AsyncData(MockUser()));
+
       await tester.pumpWidget(ProviderScope(
         child: MaterialApp(
           onGenerateRoute: (settings) {
-            return AppRouter.generateRoute(settings, mockUser);
+            return AppRouter.generateRoute(settings, ref);
           },
           initialRoute: AppRouter.signupScreen,
         ),
