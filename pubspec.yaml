@@ -40,6 +40,7 @@ dependencies:
   network_image_mock: ^2.1.1
   flutter_hooks: ^0.20.5
   mocktail: ^1.0.3
+  http: ^1.2.0
 
 dev_dependencies:
   flutter_test:
