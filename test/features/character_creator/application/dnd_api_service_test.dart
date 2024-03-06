@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 import 'package:mythos_manager/features/character_creator/application/dnd_api_service.dart';
 import 'package:mythos_manager/features/character_creator/data/dnd_api_repository.dart';
