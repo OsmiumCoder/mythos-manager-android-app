@@ -6,11 +6,12 @@ class BoxShadowImage extends StatefulWidget {
   static const boxShadowColor = Colors.black;
   static const boxShadowOpacity = 0.5;
 
+  final double textPadding;
   final Image image;
   final void Function()? onTap;
   final Text text;
   const BoxShadowImage(
-      {super.key, required this.image, this.onTap, required this.text});
+      {super.key, required this.image, this.onTap, required this.text, this.textPadding = 10});
 
   @override
   State<BoxShadowImage> createState() => _BoxShadowImageState();
@@ -53,10 +54,10 @@ class _BoxShadowImageState extends State<BoxShadowImage> {
             borderRadius: const BorderRadius.all(Radius.circular(15)),
             color: Colors.black.withOpacity(0.4),
           ),
-          padding: const EdgeInsets.all(10),
+          padding: EdgeInsets.all(widget.textPadding),
 
             child: FittedBox(
-                fit: BoxFit.contain,
+                fit: BoxFit.fitWidth,
                   child: widget.text,
                 )
         ),

@@ -37,7 +37,7 @@ class MythosDrawer extends Drawer {
                 ),
               ),
               Container(
-                color: selectedScreen == AppRouter.charactersScreen ? selectedColor : null, // TODO implement color when current route is character,
+                color: selectedScreen == AppRouter.charactersScreen ? selectedColor : null,
                 child: ListTile(
                   leading: const Icon(
                     Icons.people_outline,

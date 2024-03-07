@@ -12,7 +12,7 @@ const placeHolderImage =
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  final cardTextStyle = const TextStyle(color: Colors.white);
+  final cardTextStyle = const TextStyle(color: Colors.white, fontWeight: FontWeight.w500);
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +38,7 @@ class HomeScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: cardTextStyle,
                   ),
+                  textPadding: 70,
                   onTap: () {}, // TODO onTap Handler for navigation
                 ),
               ),
@@ -57,6 +58,7 @@ class HomeScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: cardTextStyle,
                         ),
+                        textPadding: 30,
                         onTap: () {}, // TODO onTap Handler for navigation
                       ),
                     ),
@@ -72,6 +74,7 @@ class HomeScreen extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: cardTextStyle,
                         ),
+                        textPadding: 30,
                         onTap: () {}, // TODO onTap Handler for navigation
                       ),
                     ),
@@ -89,6 +92,7 @@ class HomeScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: cardTextStyle,
                   ),
+                  textPadding: 50,
                   onTap: () {}, // TODO onTap Handler for navigation
                 ),
               ),
