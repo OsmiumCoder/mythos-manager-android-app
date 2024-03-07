@@ -9,11 +9,17 @@ class RaceFutureBuilder extends HookConsumerWidget {
     required this.raceController,
     required this.textStyle,
     required this.subraceController,
+    required this.startingLanguageController,
+    required this.abilityIncreaseController,
+    required this.startingProficiencyController,
   });
 
   final TextEditingController raceController;
   final TextStyle textStyle;
   final TextEditingController subraceController;
+  final TextEditingController startingLanguageController;
+  final TextEditingController abilityIncreaseController;
+  final TextEditingController startingProficiencyController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,14 +30,21 @@ class RaceFutureBuilder extends HookConsumerWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final race = snapshot.data!;
+
             final String abilityBonuses =
                 race["ability_bonuses"].map((element) {
               return "+${element["bonus"]} ${element["ability_score"]["name"]}";
             }).join(", ");
 
+            final List abilityBonusOptions =
+                race["ability_bonus_options"]?["from"]["options"] ?? [];
+
             final String languages = race["languages"].map((element) {
               return "${element["name"]}";
             }).join(", ");
+
+            final List languageOptions =
+                race["language_options"]?["from"]["options"] ?? [];
 
             final String traits = race["traits"].map((element) {
               return "${element["name"]}";
@@ -54,13 +67,6 @@ class RaceFutureBuilder extends HookConsumerWidget {
                 Container(
                   margin: const EdgeInsets.only(bottom: 5),
                   child: Text(
-                    "Alignment: ${race["Alignment"]}",
-                    style: textStyle,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 5),
-                  child: Text(
                     "Size: ${race["size"]}",
                     style: textStyle,
                   ),
@@ -72,6 +78,30 @@ class RaceFutureBuilder extends HookConsumerWidget {
                     style: textStyle,
                   ),
                 ),
+
+                languageOptions.isNotEmpty
+                    ? Container(
+                        margin: const EdgeInsets.only(bottom: 5),
+                        child: Text(
+                          "Choose a Starting Language",
+                          style: textStyle,
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+
+                languageOptions.isNotEmpty
+                    ? Container(
+                        margin: const EdgeInsets.only(bottom: 5),
+                        child: DropdownMenu(
+                            controller: startingLanguageController,
+                            dropdownMenuEntries: languageOptions.map((option) {
+                              return DropdownMenuEntry(
+                                  value: "${option["item"]["name"]}",
+                                  label: "${option["item"]["name"]}");
+                            }).toList()),
+                      )
+                    : const SizedBox.shrink(),
+
                 Container(
                   margin: const EdgeInsets.only(bottom: 5),
                   child: Text(
@@ -86,6 +116,33 @@ class RaceFutureBuilder extends HookConsumerWidget {
                     style: textStyle,
                   ),
                 ),
+
+                abilityBonusOptions.isNotEmpty
+                    ? Container(
+                        margin: const EdgeInsets.only(bottom: 5),
+                        child: Text(
+                          "Choose an Ability Score Increase",
+                          style: textStyle,
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+
+                abilityBonusOptions.isNotEmpty
+                    ? Container(
+                        margin: const EdgeInsets.only(bottom: 5),
+                        child: DropdownMenu(
+                            controller: abilityIncreaseController,
+                            dropdownMenuEntries:
+                                abilityBonusOptions.map((option) {
+                              return DropdownMenuEntry(
+                                  value:
+                                      "${option["bonus"]} ${option["ability_score"]["name"]}",
+                                  label:
+                                      "+${option["bonus"]} ${option["ability_score"]["name"]}");
+                            }).toList()),
+                      )
+                    : const SizedBox.shrink(),
+
                 traits.isNotEmpty
                     ? Container(
                         margin: const EdgeInsets.only(bottom: 5),
@@ -119,12 +176,13 @@ class RaceFutureBuilder extends HookConsumerWidget {
                     ? Container(
                         margin: const EdgeInsets.only(bottom: 10),
                         child: DropdownMenu(
+                            controller: startingProficiencyController,
                             dropdownMenuEntries:
                                 startingProficienciesOptions.map((option) {
-                          return DropdownMenuEntry(
-                              value: option["item"]["index"],
-                              label: option["item"]["name"]);
-                        }).toList()),
+                              return DropdownMenuEntry(
+                                  value: option["item"]["index"],
+                                  label: option["item"]["name"]);
+                            }).toList()),
                       )
                     : const SizedBox.shrink(),
 
@@ -142,6 +200,7 @@ class RaceFutureBuilder extends HookConsumerWidget {
                     ? Container(
                         margin: const EdgeInsets.only(bottom: 10),
                         child: DropdownMenu(
+                            controller: subraceController,
                             onSelected: (selected) {
                               subraceController.text = selected;
                             },

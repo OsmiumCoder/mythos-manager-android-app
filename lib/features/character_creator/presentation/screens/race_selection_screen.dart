@@ -13,6 +13,10 @@ class RaceSelectionScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final raceController = useTextEditingController();
     final subraceController = useTextEditingController();
+    final startingLanguageController = useTextEditingController();
+    final abilityIncreaseController = useTextEditingController();
+    final startingProficiencyController = useTextEditingController();
+
     useListenable(raceController);
     useListenable(subraceController);
 
@@ -40,7 +44,10 @@ class RaceSelectionScreen extends HookConsumerWidget {
                             margin: const EdgeInsets.only(bottom: 10),
                             child: DropdownMenu(
                                 onSelected: (selected) {
-                                  subraceController.clear();
+                                  subraceController.text = "";
+                                  startingLanguageController.clear();
+                                  abilityIncreaseController.clear();
+                                  startingProficiencyController.clear();
                                 },
                                 controller: raceController,
                                 dropdownMenuEntries: allRaces.map((race) {
@@ -53,7 +60,14 @@ class RaceSelectionScreen extends HookConsumerWidget {
                               ? RaceFutureBuilder(
                                   raceController: raceController,
                                   textStyle: textStyle,
-                                  subraceController: subraceController)
+                                  subraceController: subraceController,
+                                  startingLanguageController:
+                                      startingLanguageController,
+                                  abilityIncreaseController:
+                                      abilityIncreaseController,
+                                  startingProficiencyController:
+                                      startingProficiencyController,
+                                )
                               : const SizedBox.shrink(),
                         ],
                       );
@@ -63,6 +77,12 @@ class RaceSelectionScreen extends HookConsumerWidget {
                   }),
               ElevatedButton(
                   onPressed: () {
+                    print(raceController.text);
+                    print(subraceController.text);
+                    print(startingLanguageController.text);
+                    print(abilityIncreaseController.text);
+                    print(startingProficiencyController.text);
+
                     // TODO: route to next
                     // TODO: validate
                     // TODO: push to saving map

@@ -50,20 +50,24 @@ class SubraceFutureBuilder extends HookConsumerWidget {
                     style: textStyle,
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 5),
-                  child: Text(
-                    "Starting Proficiencies: $startingProficiencies",
-                    style: textStyle,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 5),
-                  child: Text(
-                    "Languages: $languages",
-                    style: textStyle,
-                  ),
-                ),
+                startingProficiencies.isNotEmpty
+                    ? Container(
+                        margin: const EdgeInsets.only(bottom: 5),
+                        child: Text(
+                          "Starting Proficiencies: $startingProficiencies",
+                          style: textStyle,
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+                languages.isNotEmpty
+                    ? Container(
+                        margin: const EdgeInsets.only(bottom: 5),
+                        child: Text(
+                          "Languages: $languages",
+                          style: textStyle,
+                        ),
+                      )
+                    : const SizedBox.shrink(),
                 Container(
                   margin: const EdgeInsets.only(bottom: 5),
                   child: Text(
