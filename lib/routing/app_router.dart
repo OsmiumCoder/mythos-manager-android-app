@@ -8,6 +8,7 @@ import 'package:mythos_manager/features/character_creator/presentation/screens/r
 import 'package:mythos_manager/features/home/presentation/screens/screens.dart';
 import '../features/characters/presentation/screens/characters_screen.dart';
 import 'unknown_screen.dart';
+import 'package:mythos_manager/features/character_creator/presentation/screens/backstory_selection_screen.dart';
 
 /// Router class
 ///
@@ -17,7 +18,10 @@ class AppRouter {
   static const String loginScreen = '/login';
   static const String signupScreen = '/sign-up';
   static const String charactersScreen = "/characters";
-  static const String raceSelectionScreen = '/characters/creator/race-selection';
+  static const String raceSelectionScreen =
+      '/characters/creator/race-selection';
+  static const String backstorySelectionScreen =
+      '/characters/creator/backstory-selection';
 
   // Screens that do not require authentication
   static const noAuthScreens = [loginScreen, signupScreen];
@@ -44,6 +48,10 @@ class AppRouter {
         );
       case raceSelectionScreen:
         return MaterialPageRoute(builder: (_) => const RaceSelectionScreen());
+      case backstorySelectionScreen:
+        return MaterialPageRoute(
+          builder: (_) => const BackstorySelectionScreen(),
+        );
     }
     if (kDebugMode) {
       return MaterialPageRoute(builder: (_) => const UnknownScreen());

@@ -11,7 +11,7 @@ final themeData = ThemeData(
       backgroundColor: const Color(0xFF90714A),
       titleTextStyle: GoogleFonts.openSans(fontSize: 25, color: Colors.black)),
   scaffoldBackgroundColor: const Color(0xFFC7AA87),
-  textTheme: Typography().white,
+  textTheme: Typography().black,
   inputDecorationTheme: const InputDecorationTheme(
     labelStyle: TextStyle(color: Colors.white),
     enabledBorder: OutlineInputBorder(
@@ -24,4 +24,20 @@ final themeData = ThemeData(
         borderSide: BorderSide(color: Color(0xFF90714A), width: 2)),
   ),
   dialogTheme: const DialogTheme(backgroundColor: Color(0xFFC7AA87)),
+  dropdownMenuTheme: DropdownMenuThemeData(
+    inputDecorationTheme: const InputDecorationTheme(
+      isDense: true,
+      filled: true,
+      fillColor: Color(0xFF90714A),
+      constraints: BoxConstraints(maxHeight: 40),
+      contentPadding: EdgeInsets.symmetric(horizontal: 10),
+    ),
+    menuStyle: MenuStyle(
+        backgroundColor: MaterialStateProperty.resolveWith(
+              (states) => const Color(0xFF90714A),
+        ),
+        padding: MaterialStateProperty.resolveWith((states) => EdgeInsets.zero),
+        maximumSize: MaterialStateProperty.resolveWith(
+                (states) => const Size(200, 200))),
+  ),
 );
