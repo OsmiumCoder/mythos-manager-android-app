@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 /// Author: Liam Welsh
 class BoxShadowImage extends StatefulWidget {
@@ -17,7 +18,7 @@ class BoxShadowImage extends StatefulWidget {
 
 class _BoxShadowImageState extends State<BoxShadowImage> {
   var _isPressed = false;
-
+  
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -33,7 +34,6 @@ class _BoxShadowImageState extends State<BoxShadowImage> {
             image: widget.image.image,
             fit: BoxFit.cover,
           ),
-          color: Colors.black,
           borderRadius: const BorderRadius.all(Radius.circular(15)),
           border: Border.all(color: Colors.black),
           boxShadow: [
@@ -48,12 +48,17 @@ class _BoxShadowImageState extends State<BoxShadowImage> {
             ),
           ],
         ),
-        child: Padding(
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(15)),
+            color: Colors.black.withOpacity(0.4),
+          ),
           padding: const EdgeInsets.all(10),
-          child: FittedBox(
-              fit: BoxFit.contain,
-                child: widget.text,
-              )
+
+            child: FittedBox(
+                fit: BoxFit.contain,
+                  child: widget.text,
+                )
         ),
       ),
     );
