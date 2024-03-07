@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../routing/app_router.dart';
 import '../../../../shared/presentation/components/components.dart';
 
@@ -10,13 +9,13 @@ const placeHolderImage =
 /// Home screen.
 ///
 /// Author: Liam Welsh
-class HomeScreen extends HookConsumerWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   final cardTextStyle = const TextStyle(color: Colors.white);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Mythos Manager"),
