@@ -17,7 +17,7 @@ class AppRouter {
   static const String loginScreen = '/login';
   static const String signupScreen = '/sign-up';
   static const String charactersScreen = "/characters";
-  static const String backstorySelectionScreen = '/characters/creator/background-selection';
+  static const String backstorySelectionScreen = '/characters/creator/backstory-selection';
 
   // Screens that do not require authentication
   static const noAuthScreens = [loginScreen, signupScreen];

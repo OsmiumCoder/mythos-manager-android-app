@@ -20,7 +20,7 @@ const alignments = [
 ];
 
 class BackstorySelectionScreen extends HookConsumerWidget {
-  const BackstorySelectionScreen({Key? key}) : super(key: key);
+  const BackstorySelectionScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,85 +28,74 @@ class BackstorySelectionScreen extends HookConsumerWidget {
       theme: themeData,
       home: Scaffold(
         appBar: AppBar(title: const Text('Character Creator'), centerTitle: true),
-        body: const SingleChildScrollView(
-          child: BackStoryForm(),
-        ),
-      ),
-    );
-  }
-}
-
-class BackStoryForm extends HookConsumerWidget {
-  const BackStoryForm({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: <Widget>[
-            const Text('Alignment',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black)),
-            const SizedBox(height: 20),
-            DropdownMenu(
-                dropdownMenuEntries: alignments.map((element) {
-              return DropdownMenuEntry(value: element, label: element);
-            }).toList()),
-            const SizedBox(height: 20),
-            const Text('Enter the age of your character',
-                style: TextStyle(color: Colors.black)),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Age',
-                fillColor: Theme.of(context).inputDecorationTheme.fillColor,
-                filled: true,
-              ),
-              style: const TextStyle(color: Colors.black),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: <Widget>[
+                const Text('Alignment',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black)),
+                const SizedBox(height: 20),
+                DropdownMenu(
+                    dropdownMenuEntries: alignments.map((element) {
+                      return DropdownMenuEntry(value: element, label: element);
+                    }).toList()),
+                const SizedBox(height: 20),
+                const Text('Enter the age of your character',
+                    style: TextStyle(color: Colors.black)),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Age',
+                    fillColor: Theme.of(context).inputDecorationTheme.fillColor,
+                    filled: true,
+                  ),
+                  style: const TextStyle(color: Colors.black),
+                ),
+                const SizedBox(height: 20),
+                const Text('Enter the weight of your character',
+                    style: TextStyle(color: Colors.black)),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Weight',
+                    fillColor: Theme.of(context).inputDecorationTheme.fillColor,
+                    filled: true,
+                  ),
+                  style: const TextStyle(color: Colors.black),
+                ),
+                const SizedBox(height: 20),
+                const Text('Enter the height of your character',
+                    style: TextStyle(color: Colors.black)),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Height',
+                    fillColor: Theme.of(context).inputDecorationTheme.fillColor,
+                    filled: true,
+                  ),
+                  style: const TextStyle(color: Colors.black),
+                ),
+                const SizedBox(height: 20),
+                const Text('Enter the backstory of your character',
+                    style: TextStyle(color: Colors.black)),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Please enter',
+                    fillColor: Theme.of(context).inputDecorationTheme.fillColor,
+                    filled: true,
+                  ),
+                  style: const TextStyle(color: Colors.black),
+                  maxLines: 3,
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {}, //TODO Add Navigation
+                  child: const Text('Submit'),
+                ),
+              ],
             ),
-            const SizedBox(height: 20),
-            const Text('Enter the weight of your character',
-                style: TextStyle(color: Colors.black)),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Weight',
-                fillColor: Theme.of(context).inputDecorationTheme.fillColor,
-                filled: true,
-              ),
-              style: const TextStyle(color: Colors.black),
-            ),
-            const SizedBox(height: 20),
-            const Text('Enter the height of your character',
-                style: TextStyle(color: Colors.black)),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Height',
-                fillColor: Theme.of(context).inputDecorationTheme.fillColor,
-                filled: true,
-              ),
-              style: const TextStyle(color: Colors.black),
-            ),
-            const SizedBox(height: 20),
-            const Text('Enter the backstory of your character',
-                style: TextStyle(color: Colors.black)),
-            TextField(
-              decoration: InputDecoration(
-                hintText: 'Please enter',
-                fillColor: Theme.of(context).inputDecorationTheme.fillColor,
-                filled: true,
-              ),
-              style: const TextStyle(color: Colors.black),
-              maxLines: 3,
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {}, //TODO Add Navigation
-              child: const Text('Submit'),
-            ),
-          ],
+          ),
         ),
       ),
     );
