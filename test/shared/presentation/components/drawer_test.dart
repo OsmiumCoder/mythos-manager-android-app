@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mythos_manager/routing/app_router.dart';
 import 'package:mythos_manager/shared/presentation/components/components.dart';
-import 'package:mythos_manager/shared/presentation/themes/theme_data.dart';
-import 'package:network_image_mock/network_image_mock.dart';
 
-// Author: Liam Welsh
+/// Author: Liam Welsh
 void main() {
   group("MythosDrawer Test", () {
     testWidgets("Selecting menu icon opens drawer", (tester) async {
