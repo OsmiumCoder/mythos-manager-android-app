@@ -23,13 +23,13 @@ class CharactersScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(35),
             child: BoxShadowImage(
-                onTap: () {}, // TODO add routing
+                onTap: () => Navigator.of(context).pushNamed(AppRouter.backgroundSelectionScreen), // TODO add routing
                 image: const Image(
                   image:
                       Svg("assets/images/character_creator_button_image.svg"),
                   height: 200,
                 ),
-                text: const Text("Character Creator", style: TextStyle(fontWeight: FontWeight.w500),),
+                text: const Text("Character Creator", style: TextStyle(fontWeight: FontWeight.w500, color: Colors.white),),
                 textPadding: 50,
             ),
           ),
