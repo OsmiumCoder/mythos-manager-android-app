@@ -130,12 +130,12 @@ class RaceFutureBuilder extends HookConsumerWidget {
 
                 subraces.isNotEmpty
                     ? Container(
-                  margin: const EdgeInsets.only(bottom: 5),
-                  child: Text(
-                    "Choose a Subrace",
-                    style: textStyle,
-                  ),
-                )
+                        margin: const EdgeInsets.only(bottom: 5),
+                        child: Text(
+                          "Choose a Subrace",
+                          style: textStyle,
+                        ),
+                      )
                     : const SizedBox.shrink(),
 
                 subraces.isNotEmpty

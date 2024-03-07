@@ -62,8 +62,11 @@ class RaceSelectionScreen extends HookConsumerWidget {
                     }
                   }),
               ElevatedButton(
-
-                  onPressed: () {}, // TODO: route to next
+                  onPressed: () {
+                    // TODO: route to next
+                    // TODO: validate
+                    // TODO: push to saving map
+                  },
                   child: const Text("Select Race")),
             ],
           ),
