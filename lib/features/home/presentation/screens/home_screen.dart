@@ -93,7 +93,9 @@ class HomeScreen extends StatelessWidget {
                     style: cardTextStyle,
                   ),
                   textPadding: 50,
-                  onTap: () {}, // TODO onTap Handler for navigation
+                  onTap: () {
+                    Navigator.pushNamed(context,AppRouter.backgroundSelectionScreen);
+                  }, // TODO onTap Handler for navigation
                 ),
               ),
             ),

@@ -11,7 +11,7 @@ final themeData = ThemeData(
       backgroundColor: const Color(0xFF90714A),
       titleTextStyle: GoogleFonts.openSans(fontSize: 25, color: Colors.black)),
   scaffoldBackgroundColor: const Color(0xFFC7AA87),
-  textTheme: Typography().white,
+  textTheme: Typography().black,
   inputDecorationTheme: const InputDecorationTheme(
     labelStyle: TextStyle(color: Colors.white),
     enabledBorder: OutlineInputBorder(
