@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Authors: Liam Welsh, Jonathon Meney
+/// Authors: Liam Welsh, Jonathon Meney, Sherif Abdalla
 final themeData = ThemeData(
   colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFC7AA87)),
   primaryColor: const Color(0xFFC7AA87),
@@ -38,6 +38,6 @@ final themeData = ThemeData(
         ),
         padding: MaterialStateProperty.resolveWith((states) => EdgeInsets.zero),
         maximumSize: MaterialStateProperty.resolveWith(
-                (states) => const Size(200, 200))),
+                (states) => const Size(double.infinity, 200))),
   ),
 );
