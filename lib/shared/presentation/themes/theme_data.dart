@@ -38,6 +38,6 @@ final themeData = ThemeData(
         ),
         padding: MaterialStateProperty.resolveWith((states) => EdgeInsets.zero),
         maximumSize: MaterialStateProperty.resolveWith(
-                (states) => const Size(200, 200))),
+                (states) => const Size(double.infinity, 200))),
   ),
 );
