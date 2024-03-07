@@ -1,5 +1,8 @@
 
 /// This map is the default map for a new character.
+///
+/// TODO: update with other variables that are needed (class, background)
+/// TODO: move to controller where we can push data overtime on changes
 final Map<String, dynamic> defaultCharacterDataMap = {
   // Race
   "race": "",
