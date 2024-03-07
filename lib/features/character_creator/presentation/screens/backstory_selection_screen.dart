@@ -24,15 +24,13 @@ class BackstorySelectionScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(
-      theme: themeData,
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Character Creator'), centerTitle: true),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: <Widget>[
+    return Scaffold(
+      appBar: AppBar(title: const Text('Character Creator'), centerTitle: true),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: <Widget>[
                 const Text('Alignment',
                     style: TextStyle(
                         fontSize: 18,
@@ -92,10 +90,9 @@ class BackstorySelectionScreen extends HookConsumerWidget {
                 ElevatedButton(
                   onPressed: () {}, //TODO Add Navigation
                   child: const Text('Submit'),
+                )
+                  ],
                 ),
-              ],
-            ),
-          ),
         ),
       ),
     );
