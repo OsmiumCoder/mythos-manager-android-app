@@ -65,4 +65,11 @@ class DNDAPIService {
   Future<Map<String, dynamic>> getSpellsForClass(String className) async {
     return await _repository.getSpellsForClass(className);
   }
+
+  /// Returns list of equipment of a certain category
+  Future<Map<String, dynamic>> getEquipment(String category) async {
+    return await _repository.getEquipment(category);
+  }
+
+
 }
