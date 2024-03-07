@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mythos_manager/shared/presentation/components/box_shadow_image.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import '../../../../routing/app_router.dart';
+import '../../../../shared/presentation/components/components.dart';
 
 const placeHolderImage =
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/640px-Donald_Trump_official_portrait.jpg";
+     "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/640px-Donald_Trump_official_portrait.jpg";
 
 /// Home screen.
 ///
@@ -10,7 +12,7 @@ const placeHolderImage =
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  final cardTextStyle = const TextStyle(color: Colors.white);
+  final cardTextStyle = const TextStyle(color: Colors.white, fontWeight: FontWeight.w500);
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,9 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Mythos Manager"),
         centerTitle: true,
+      ),
+      drawer: const MythosDrawer(
+        selectedScreen: AppRouter.homeScreen,
       ),
       body: Container(
         margin: const EdgeInsets.all(35),
@@ -27,15 +32,13 @@ class HomeScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: BoxShadowImage(
-                  image: Image.network(
-                    placeHolderImage,
-                    height: 200,
-                  ),
+                  image: const Image(image: Svg("assets/images/campaign_button_image.svg"), height: 200),
                   text: Text(
                     "Campaigns",
                     textAlign: TextAlign.center,
                     style: cardTextStyle,
                   ),
+                  textPadding: 70,
                   onTap: () {}, // TODO onTap Handler for navigation
                 ),
               ),
@@ -49,15 +52,13 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           vertical: 5, horizontal: 10),
                       child: BoxShadowImage(
-                        image: Image.network(
-                          placeHolderImage,
-                          height: 300,
-                        ),
+                        image: Image.network(placeHolderImage, height: 200,),
                         text: Text(
                           "Favourite\nCharacter",
                           textAlign: TextAlign.center,
                           style: cardTextStyle,
                         ),
+                        textPadding: 30,
                         onTap: () {}, // TODO onTap Handler for navigation
                       ),
                     ),
@@ -67,15 +68,13 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           vertical: 5, horizontal: 10),
                       child: BoxShadowImage(
-                        image: Image.network(
-                          placeHolderImage,
-                          height: 300,
-                        ),
+                        image: const Image(image: Svg("assets/images/current_campaign_button_image.svg"), height: 200),
                         text: Text(
                           "Current\nCampaign",
                           textAlign: TextAlign.center,
                           style: cardTextStyle,
                         ),
+                        textPadding: 30,
                         onTap: () {}, // TODO onTap Handler for navigation
                       ),
                     ),
@@ -87,15 +86,13 @@ class HomeScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: BoxShadowImage(
-                  image: Image.network(
-                    placeHolderImage,
-                    height: 200,
-                  ),
+                  image: const Image(image: Svg("assets/images/character_creator_button_image.svg"), height: 200, ),
                   text: Text(
                     "Character Creator",
                     textAlign: TextAlign.center,
                     style: cardTextStyle,
                   ),
+                  textPadding: 50,
                   onTap: () {}, // TODO onTap Handler for navigation
                 ),
               ),
