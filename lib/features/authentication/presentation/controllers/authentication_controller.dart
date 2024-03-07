@@ -4,7 +4,7 @@ import 'package:mythos_manager/features/authentication/application/authenticatio
 
 /// Provides an [AuthenticationController].
 final authenticationControllerProvider =
-    AsyncNotifierProvider<AuthenticationController, void>(() {
+AsyncNotifierProvider<AuthenticationController, void>(() {
   return AuthenticationController();
 });
 
