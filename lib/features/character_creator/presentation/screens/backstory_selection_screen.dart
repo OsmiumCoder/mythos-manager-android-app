@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 /// Author: Shreif Abdalla
 
 const alignments = [
-  "Lawful Good",
+  "Lawful good",
   'Neutral Good',
   'Chaotic Good',
   'Lawful Neutral',
@@ -19,17 +19,18 @@ const alignments = [
   'Chaotic Evil'
 ];
 
-class BackstorySelectionScreen extends StatelessWidget {
-  const BackstorySelectionScreen({super.key});
+class BackstorySelectionScreen extends HookConsumerWidget {
+  const BackstorySelectionScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       theme: themeData,
       home: Scaffold(
-        appBar:
-            AppBar(title: const Text('Character Creator'), centerTitle: true),
-        body: const BackStoryForm(),
+        appBar: AppBar(title: const Text('Character Creator'), centerTitle: true),
+        body: const SingleChildScrollView(
+          child: BackStoryForm(),
+        ),
       ),
     );
   }
@@ -60,7 +61,7 @@ class BackStoryForm extends HookConsumerWidget {
                 style: TextStyle(color: Colors.black)),
             TextField(
               decoration: InputDecoration(
-                hintText: 'Please enter',
+                hintText: 'Age',
                 fillColor: Theme.of(context).inputDecorationTheme.fillColor,
                 filled: true,
               ),
@@ -71,7 +72,7 @@ class BackStoryForm extends HookConsumerWidget {
                 style: TextStyle(color: Colors.black)),
             TextField(
               decoration: InputDecoration(
-                hintText: 'Please enter',
+                hintText: 'Weight',
                 fillColor: Theme.of(context).inputDecorationTheme.fillColor,
                 filled: true,
               ),
@@ -82,7 +83,7 @@ class BackStoryForm extends HookConsumerWidget {
                 style: TextStyle(color: Colors.black)),
             TextField(
               decoration: InputDecoration(
-                hintText: 'Please enter',
+                hintText: 'Height',
                 fillColor: Theme.of(context).inputDecorationTheme.fillColor,
                 filled: true,
               ),
@@ -102,10 +103,7 @@ class BackStoryForm extends HookConsumerWidget {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(
-                    context, AppRouter.backgroundSelectionScreen);
-              },
+              onPressed: () {}, //TODO Add Navigation
               child: const Text('Submit'),
             ),
           ],

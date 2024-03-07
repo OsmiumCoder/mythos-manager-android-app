@@ -25,7 +25,6 @@ final themeData = ThemeData(
   ),
   dialogTheme: const DialogTheme(backgroundColor: Color(0xFFC7AA87)),
   dropdownMenuTheme: DropdownMenuThemeData(
-    textStyle: const TextStyle(),
     inputDecorationTheme: const InputDecorationTheme(
       isDense: true,
       filled: true,
