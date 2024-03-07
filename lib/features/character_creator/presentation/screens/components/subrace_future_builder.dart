@@ -43,21 +43,33 @@ class SubraceFutureBuilder extends HookConsumerWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  "Ability Score Increases: $abilityBonuses",
-                  style: textStyle,
+                Container(
+                  margin: const EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    "Ability Score Increases: $abilityBonuses",
+                    style: textStyle,
+                  ),
                 ),
-                Text(
-                  "Starting Proficiencies: $startingProficiencies",
-                  style: textStyle,
+                Container(
+                  margin: const EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    "Starting Proficiencies: $startingProficiencies",
+                    style: textStyle,
+                  ),
                 ),
-                Text(
-                  "Languages: $languages",
-                  style: textStyle,
+                Container(
+                  margin: const EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    "Languages: $languages",
+                    style: textStyle,
+                  ),
                 ),
-                Text(
-                  "Traits: $racialTraits",
-                  style: textStyle,
+                Container(
+                  margin: const EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    "Traits: $racialTraits",
+                    style: textStyle,
+                  ),
                 ),
               ],
             );

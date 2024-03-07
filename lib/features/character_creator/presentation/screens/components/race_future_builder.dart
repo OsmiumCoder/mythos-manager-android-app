@@ -48,43 +48,73 @@ class RaceFutureBuilder extends HookConsumerWidget {
             final List subraces = race["subraces"];
 
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Race Selection.
-                Text(
-                  "Alignment: ${race["Alignment"]}",
-                  style: textStyle,
+                Container(
+                  margin: const EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    "Alignment: ${race["Alignment"]}",
+                    style: textStyle,
+                  ),
                 ),
-                Text(
-                  "Size: ${race["size"]}",
-                  style: textStyle,
+                Container(
+                  margin: const EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    "Size: ${race["size"]}",
+                    style: textStyle,
+                  ),
                 ),
-                Text(
-                  "Languages: $languages",
-                  style: textStyle,
+                Container(
+                  margin: const EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    "Languages: $languages",
+                    style: textStyle,
+                  ),
                 ),
-                Text(
-                  "Speed: ${race["speed"]}",
-                  style: textStyle,
+                Container(
+                  margin: const EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    "Speed: ${race["speed"]}",
+                    style: textStyle,
+                  ),
                 ),
-                Text(
-                  "Ability Score Increases: $abilityBonuses",
-                  style: textStyle,
+                Container(
+                  margin: const EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    "Ability Score Increases: $abilityBonuses",
+                    style: textStyle,
+                  ),
                 ),
                 traits.isNotEmpty
-                    ? Text(
-                        "Traits: $traits",
-                        style: textStyle,
+                    ? Container(
+                        margin: const EdgeInsets.only(bottom: 5),
+                        child: Text(
+                          "Traits: $traits",
+                          style: textStyle,
+                        ),
                       )
                     : const SizedBox.shrink(),
+
                 startingProficiencies.isNotEmpty
-                    ? Text("Starting Proficiencies: $startingProficiencies")
+                    ? Container(
+                        margin: const EdgeInsets.only(bottom: 5),
+                        child: Text(
+                          "Starting Proficiencies: $startingProficiencies",
+                          style: textStyle,
+                        ))
                     : const SizedBox.shrink(),
+
                 startingProficienciesOptions.isNotEmpty
-                    ? Text(
-                        "Starting Proficiencies Options",
-                        style: textStyle,
+                    ? Container(
+                        margin: const EdgeInsets.only(bottom: 5),
+                        child: Text(
+                          "Choose a Starting Proficiency",
+                          style: textStyle,
+                        ),
                       )
                     : const SizedBox.shrink(),
+
                 startingProficienciesOptions.isNotEmpty
                     ? Container(
                         margin: const EdgeInsets.only(bottom: 10),
@@ -97,6 +127,17 @@ class RaceFutureBuilder extends HookConsumerWidget {
                         }).toList()),
                       )
                     : const SizedBox.shrink(),
+
+                subraces.isNotEmpty
+                    ? Container(
+                  margin: const EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    "Choose a Subrace",
+                    style: textStyle,
+                  ),
+                )
+                    : const SizedBox.shrink(),
+
                 subraces.isNotEmpty
                     ? Container(
                         margin: const EdgeInsets.only(bottom: 10),
