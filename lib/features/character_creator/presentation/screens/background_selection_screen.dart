@@ -15,21 +15,21 @@ class BackgroundSelectionScreen extends HookConsumerWidget {
     useListenable(backgroundController);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Character Creator"),
-        centerTitle: true,
-      ),
-      body: FutureBuilder(
-          future: ref.watch(dndApiController).getAllBackgrounds(),
-          builder: (context, snapshot) {
-            final List<dynamic> backgrounds =
-                snapshot.data?["results"] ?? [];
+        appBar: AppBar(
+          title: const Text("Character Creator"),
+          centerTitle: true,
+        ),
+        body: SingleChildScrollView(
+          child: FutureBuilder(
+              future: ref.watch(dndApiController).getAllBackgrounds(),
+              builder: (context, snapshot) {
+                final List<dynamic> backgrounds =
+                    snapshot.data?["results"] ?? [];
 
-            return SingleChildScrollView(
-                child: backgrounds.isNotEmpty
+                return backgrounds.isNotEmpty
                     ? Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Center(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Center(
                           child: Column(
                             children: [
                               const Text("Choose a Background"),
@@ -43,13 +43,14 @@ class BackgroundSelectionScreen extends HookConsumerWidget {
                                           label: background["name"]))
                                       .toList()),
                               if (backgroundController.text.isNotEmpty)
-                                BackgroundFutureBuilder(backgroundController: backgroundController),
+                                BackgroundFutureBuilder(
+                                    backgroundController: backgroundController),
                             ],
                           ),
                         ),
-                    )
-                    : const Center(child: Text("No Backgrounds Found")));
-          }),
-    );
+                      )
+                    : const SizedBox.shrink();
+              }),
+        ));
   }
 }

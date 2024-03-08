@@ -102,7 +102,8 @@ class DNDAPIRepository {
 
   /// Returns list of equipment of a certain category
   Future<Map<String, dynamic>> getEquipment(String category) async {
-    final response = await client.get(Uri.parse("$apiEndpoint/equipment-categories/$category"));
+    const String equipmentEndpoint = "/equipment-categories/";
+    final response = await client.get(Uri.parse(apiEndpoint + equipmentEndpoint + category));
     return jsonDecode(response.body);
   }
   
