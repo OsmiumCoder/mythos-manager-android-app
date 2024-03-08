@@ -8,7 +8,7 @@ final dndApiService = Provider<DNDAPIService>((ref) {
 
 /// Responsible for communication between controller and repository.
 ///
-/// Author: Jonathon Meney
+/// Authors: Jonathon Meney, Liam Welsh
 class DNDAPIService {
   /// The [DNDAPIRepository] used to fetch API data.
   final DNDAPIRepository _repository;

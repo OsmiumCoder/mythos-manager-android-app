@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/character_creator/application/dnd_api_service.dart';
 
+/// Authors: Jonathon Meney, Liam Welsh
+
 /// Provides a [DNDAPIController].
 final dndApiController = Provider<DNDAPIController>((ref) {
   return DNDAPIController(ref.watch(dndApiService));

@@ -10,7 +10,7 @@ final dndApiRepository = Provider<DNDAPIRepository>((ref) {
 
 /// Responsible for fetching all API data for character creation.
 ///
-/// Author: Jonathon Meney, Liam Welsh
+/// Authors: Jonathon Meney, Liam Welsh
 class DNDAPIRepository {
   /// Base api endpoint for the DND API.
   final apiEndpoint = "https://www.dnd5eapi.co/api";
