@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/character_creator/application/dnd_api_service.dart';
 
+/// Authors: Jonathon Meney, Liam Welsh
+
 /// Provides a [DNDAPIController].
 final dndApiController = Provider<DNDAPIController>((ref) {
   return DNDAPIController(ref.watch(dndApiService));
@@ -63,5 +65,10 @@ class DNDAPIController {
   /// Returns the list of spells for a specific class.
   Future<Map<String, dynamic>> getSpellsForClass(String className) async {
     return await _service.getSpellsForClass(className);
+  }
+
+  /// Returns list of equipment of a certain category
+  Future<Map<String, dynamic>> getEquipment(String category) async {
+    return await _service.getEquipment(category);
   }
 }
