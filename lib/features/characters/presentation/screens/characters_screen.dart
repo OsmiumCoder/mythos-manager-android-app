@@ -29,7 +29,7 @@ class CharactersScreen extends StatelessWidget {
                       Svg("assets/images/character_creator_button_image.svg"),
                   height: 200,
                 ),
-                text: const Text("Character Creator", style: TextStyle(fontWeight: FontWeight.w500),),
+                text: const Text("Character Creator", style: TextStyle(fontWeight: FontWeight.w500, color: Colors.white),),
                 textPadding: 50,
             ),
           ),

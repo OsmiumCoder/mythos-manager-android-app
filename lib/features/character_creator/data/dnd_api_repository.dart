@@ -10,7 +10,7 @@ final dndApiRepository = Provider<DNDAPIRepository>((ref) {
 
 /// Responsible for fetching all API data for character creation.
 ///
-/// Author: Jonathon Meney
+/// Authors: Jonathon Meney, Liam Welsh
 class DNDAPIRepository {
   /// Base api endpoint for the DND API.
   final apiEndpoint = "https://www.dnd5eapi.co/api";
@@ -99,4 +99,12 @@ class DNDAPIRepository {
         Uri.parse(apiEndpoint + classEndpoint + className + spellsEndpoint));
     return jsonDecode(response.body);
   }
+
+  /// Returns list of equipment of a certain category
+  Future<Map<String, dynamic>> getEquipment(String category) async {
+    const String equipmentEndpoint = "/equipment-categories/";
+    final response = await client.get(Uri.parse(apiEndpoint + equipmentEndpoint + category));
+    return jsonDecode(response.body);
+  }
+  
 }

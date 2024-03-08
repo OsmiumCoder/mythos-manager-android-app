@@ -8,7 +8,7 @@ final dndApiService = Provider<DNDAPIService>((ref) {
 
 /// Responsible for communication between controller and repository.
 ///
-/// Author: Jonathon Meney
+/// Authors: Jonathon Meney, Liam Welsh
 class DNDAPIService {
   /// The [DNDAPIRepository] used to fetch API data.
   final DNDAPIRepository _repository;
@@ -65,4 +65,11 @@ class DNDAPIService {
   Future<Map<String, dynamic>> getSpellsForClass(String className) async {
     return await _repository.getSpellsForClass(className);
   }
+
+  /// Returns list of equipment of a certain category
+  Future<Map<String, dynamic>> getEquipment(String category) async {
+    return await _repository.getEquipment(category);
+  }
+
+
 }
