@@ -4,6 +4,7 @@ import 'package:mythos_manager/features/character_creator/domain/character.dart'
 void main() {
   group("Character model tests", () {
     Character character = Character(
+      userID: "user-id-valid",
       skillProficiencies: ["perception", "arcana"],
       equipmentProficiencies: ["sword", "armor"],
       equipment: ["longsword", "leather armor"],
@@ -36,6 +37,7 @@ void main() {
     );
 
     test("fromFirestore returns correct Character model", () {
+      expect(character.userID, "user-id-valid");
       expect(character.skillProficiencies, ["perception", "arcana"]);
       expect(character.equipmentProficiencies, ["sword", "armor"]);
       expect(character.equipment, ["longsword", "leather armor"]);
@@ -64,6 +66,7 @@ void main() {
 
     test("toFirestore returns correct map", () {
       expect(character.toFirestore(), {
+        "user_id": "user-id-valid",
         'skill_proficiencies': ['perception', 'arcana'],
         'equipment_proficiencies': ['sword', 'armor'],
         'equipment': ['longsword', 'leather armor'],
