@@ -42,6 +42,8 @@ dependencies:
   mocktail: ^1.0.3
   http: ^1.2.0
   flutter_svg_provider: ^1.0.7
+  fake_cloud_firestore: ^2.4.8
+  firebase_auth_mocks: ^0.13.0
 
 dev_dependencies:
   flutter_test:
