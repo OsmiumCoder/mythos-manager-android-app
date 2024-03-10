@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/character_creator/presentation/controllers/dnd_api_controller.dart';
 import 'package:mythos_manager/features/character_creator/presentation/screens/components/components.dart';
 
+/// Author: Jonathon Meney
 class RaceSelectionScreen extends HookConsumerWidget {
   const RaceSelectionScreen({super.key});
 

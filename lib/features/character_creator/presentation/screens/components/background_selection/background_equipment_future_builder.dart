@@ -1,10 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/character_creator/presentation/controllers/dnd_api_controller.dart';
 
+/// Author: Liam Welsh
 class BackgroundEquipmentFutureBuilder extends HookConsumerWidget {
   final String category;
   final List<TextEditingController> textEditingControllers;
