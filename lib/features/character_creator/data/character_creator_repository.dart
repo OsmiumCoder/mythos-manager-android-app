@@ -21,20 +21,20 @@ class CharacterCreatorRepository {
         .add(character);
   }
 
-  // TODO: move to characters repo in characters/
-  // Future<List<Character>> fetchCharactersForUser(String userID) async {
-  //   QuerySnapshot<Character> querySnapshot = await _firestore
-  //       .collection("characters")
-  //       .where("user_id", isEqualTo: userID)
-  //       .withConverter(
-  //           fromFirestore: Character.fromFirestore,
-  //           toFirestore: (Character character, options) =>
-  //               character.toFirestore())
-  //       .get();
-  //
-  //   return querySnapshot.docs.map((document) {
-  //     Character character = document.data();
-  //     return character;
-  //   }).toList();
-  // }
+// TODO: move to characters repo in characters/
+// Future<List<Character>> fetchCharactersForUser(String userID) async {
+//   QuerySnapshot<Character> querySnapshot = await _firestore
+//       .collection("characters")
+//       .where("user_id", isEqualTo: userID)
+//       .withConverter(
+//           fromFirestore: Character.fromFirestore,
+//           toFirestore: (Character character, options) =>
+//               character.toFirestore())
+//       .get();
+//
+//   return querySnapshot.docs.map((document) {
+//     Character character = document.data();
+//     return character;
+//   }).toList();
+// }
 }

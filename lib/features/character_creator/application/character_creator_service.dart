@@ -27,9 +27,9 @@ class CharacterCreatorService {
     await _characterCreatorRepository.createCharacter(character);
   }
 
-  // TODO: move to character service in characters/
-  // Future<List<Character>> fetchCharactersForUser() async {
-  //   User? auth = _authenticationRepository.currentUser();
-  //   return await _characterCreatorRepository.fetchCharactersForUser(auth!.uid);
-  // }
+// TODO: move to character service in characters/
+// Future<List<Character>> fetchCharactersForUser() async {
+//   User? auth = _authenticationRepository.currentUser();
+//   return await _characterCreatorRepository.fetchCharactersForUser(auth!.uid);
+// }
 }

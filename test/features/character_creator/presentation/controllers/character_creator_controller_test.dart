@@ -6,8 +6,8 @@ import 'package:mythos_manager/features/character_creator/presentation/controlle
 
 import '../../../../provider_container.dart';
 
-class MockCharacterCreatorService extends Mock implements CharacterCreatorService {
-}
+class MockCharacterCreatorService extends Mock
+    implements CharacterCreatorService {}
 
 void main() {
   group("CharacterCreatorController tests", () {
@@ -56,11 +56,12 @@ void main() {
         })
       ]);
 
-      when(() => mockCharacterCreatorService.createCharacter(character)).thenAnswer((invocation) async => true);
+      when(() => mockCharacterCreatorService.createCharacter(character))
+          .thenAnswer((invocation) async => true);
       await container.read(characterController).createCharacter(character);
 
-      verify(() => mockCharacterCreatorService.createCharacter(character)).called(1);
+      verify(() => mockCharacterCreatorService.createCharacter(character))
+          .called(1);
     });
   });
 }
-

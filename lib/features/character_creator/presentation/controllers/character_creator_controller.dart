@@ -15,8 +15,8 @@ class CharacterCreatorController {
     await _service.createCharacter(character);
   }
 
-  // TODO: move to characters controller in characters/
-  // Future<List<Character>> fetchCharactersForUser() async {
-  //   return _service.fetchCharactersForUser();
-  // }
+// TODO: move to characters controller in characters/
+// Future<List<Character>> fetchCharactersForUser() async {
+//   return _service.fetchCharactersForUser();
+// }
 }

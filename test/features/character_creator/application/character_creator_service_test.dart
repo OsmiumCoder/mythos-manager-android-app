@@ -12,7 +12,8 @@ import '../../../provider_container.dart';
 class MockAuthenticationRepository extends Mock
     implements AuthenticationRepository {}
 
-class MockCharacterCreatorRepository extends Mock implements CharacterCreatorRepository {}
+class MockCharacterCreatorRepository extends Mock
+    implements CharacterCreatorRepository {}
 
 void main() {
   group("CharacterCreatorService tests", () {
@@ -67,12 +68,13 @@ void main() {
       ]);
 
       when(() => mockAuthRepo.currentUser()).thenReturn(mockUser);
-      when(() => mockCharacterCreatorRepository.createCharacter(character)).thenAnswer((invocation) async => true);
+      when(() => mockCharacterCreatorRepository.createCharacter(character))
+          .thenAnswer((invocation) async => true);
 
       await container.read(characterCreatorService).createCharacter(character);
 
-      verify(() => mockCharacterCreatorRepository.createCharacter(character)).called(1);
-
+      verify(() => mockCharacterCreatorRepository.createCharacter(character))
+          .called(1);
     });
 
     test("createCharacter adds correct userID and stores model", () async {
@@ -85,8 +87,9 @@ void main() {
 
       when(() => mockAuthRepo.currentUser()).thenReturn(null);
 
-      expectLater(container.read(characterCreatorService).createCharacter(character), throwsA(isA<NoUserFoundException>()));
-
+      expectLater(
+          container.read(characterCreatorService).createCharacter(character),
+          throwsA(isA<NoUserFoundException>()));
     });
   });
 }
