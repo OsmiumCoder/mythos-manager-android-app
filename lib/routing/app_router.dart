@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 import 'package:mythos_manager/features/authentication/presentation/screens/screens.dart';
-import 'package:mythos_manager/features/character_creator/presentation/screens/background_selection_screen.dart';
-import 'package:mythos_manager/features/character_creator/presentation/screens/race_selection_screen.dart';
 import 'package:mythos_manager/features/home/presentation/screens/screens.dart';
 import '../features/characters/presentation/screens/characters_screen.dart';
 import 'unknown_screen.dart';
-import 'package:mythos_manager/features/character_creator/presentation/screens/backstory_selection_screen.dart';
+import 'package:mythos_manager/features/character_creator/presentation/screens/screens.dart';
 
 /// Router class
 ///
@@ -25,6 +23,8 @@ class AppRouter {
       '/characters/creator/background-selection';
   static const String raceSelectionScreen =
       '/characters/creator/race-selection';
+  static const String abilitySelectionScreen =
+      '/characters/creator/ability-selection';
 
   // Screens that do not require authentication
   static const noAuthScreens = [loginScreen, signupScreen];
@@ -58,6 +58,10 @@ class AppRouter {
       case backgroundSelectionScreen:
         return MaterialPageRoute(
           builder: (_) => const BackgroundSelectionScreen(),
+        );
+      case abilitySelectionScreen:
+        return MaterialPageRoute(
+          builder: (_) => const AbilitySelectionScreen(),
         );
     }
     if (kDebugMode) {
