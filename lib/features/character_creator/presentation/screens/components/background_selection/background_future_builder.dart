@@ -4,6 +4,7 @@ import 'package:mythos_manager/features/character_creator/presentation/controlle
 import 'package:mythos_manager/features/character_creator/presentation/screens/components/background_selection/background_equipment_future_builder.dart';
 import 'package:mythos_manager/features/character_creator/presentation/screens/components/background_selection/background_language_future_builder.dart';
 
+/// Author: Liam Welsh
 class BackgroundFutureBuilder extends HookConsumerWidget {
   final TextEditingController backgroundController;
 
