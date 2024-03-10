@@ -12,6 +12,8 @@ import '../../../provider_container.dart';
 class MockAuthenticationRepository extends Mock
     implements AuthenticationRepository {}
 
+class MockCharacterCreatorRepository extends Mock implements CharacterCreatorRepository {}
+
 void main() {
   group("CharacterCreatorService tests", () {
     Character character = Character(
@@ -47,75 +49,37 @@ void main() {
     );
 
     late AuthenticationRepository mockAuthRepo;
-    late FakeFirebaseFirestore fakeFirebaseFirestore;
-    late CharacterCreatorRepository characterCreatorRepository;
     late MockUser mockUser;
+    late CharacterCreatorRepository mockCharacterCreatorRepository;
 
     setUp(() {
       mockAuthRepo = MockAuthenticationRepository();
-      fakeFirebaseFirestore = FakeFirebaseFirestore();
-      characterCreatorRepository =
-          CharacterCreatorRepository(fakeFirebaseFirestore);
       mockUser = MockUser(uid: "valid-id");
+      mockCharacterCreatorRepository = MockCharacterCreatorRepository();
     });
 
-    test("createCharacter adds correct userID and stores model", () async {
+    test("createCharacter calls repo createCharacter", () async {
       final container = createContainer(overrides: [
         characterCreatorService.overrideWith((ref) {
           return CharacterCreatorService(
-              mockAuthRepo, characterCreatorRepository);
+              mockAuthRepo, mockCharacterCreatorRepository);
         })
       ]);
 
       when(() => mockAuthRepo.currentUser()).thenReturn(mockUser);
+      when(() => mockCharacterCreatorRepository.createCharacter(character)).thenAnswer((invocation) async => true);
 
       await container.read(characterCreatorService).createCharacter(character);
 
-      final snapshot = await fakeFirebaseFirestore
-          .collection('characters')
-          .withConverter(
-              fromFirestore: Character.fromFirestore,
-              toFirestore: (Character character, options) =>
-                  character.toFirestore())
-          .get();
+      verify(() => mockCharacterCreatorRepository.createCharacter(character)).called(1);
 
-      // only one character should be stored
-      expect(snapshot.docs.length, 1);
-
-      Character storedCharacter = snapshot.docs.first.data();
-
-      expect(storedCharacter.userID, "valid-id");
-      expect(storedCharacter.skillProficiencies, ["perception", "arcana"]);
-      expect(storedCharacter.equipmentProficiencies, ["sword", "armor"]);
-      expect(storedCharacter.equipment, ["longsword", "leather armor"]);
-      expect(storedCharacter.race, "Elf");
-      expect(storedCharacter.subrace, "High Elf");
-      expect(storedCharacter.size, "Medium");
-      expect(storedCharacter.speed, 30);
-      expect(storedCharacter.abilityScoreIncreases, {"str": 2, "dex": 1});
-      expect(storedCharacter.racialTraits, ["Dark vision", "Resistance"]);
-      expect(storedCharacter.className, "Wizard");
-      expect(storedCharacter.subclass, "Evocation");
-      expect(storedCharacter.hitDie, 12);
-      expect(storedCharacter.savingThrows, ["wis", "int"]);
-      expect(storedCharacter.abilityScores,
-          {"str": 18, "dex": 10, "con": 14, "int": 12, "wis": 16, "cha": 9});
-      expect(storedCharacter.background, "Acolyte");
-      expect(storedCharacter.backgroundFeatureName, "Feature Name");
-      expect(storedCharacter.backgroundFeatureDesc, "A short description.");
-      expect(storedCharacter.alignment, "Lawful Good");
-      expect(storedCharacter.age, "300 years");
-      expect(storedCharacter.weight, "200 lbs.");
-      expect(storedCharacter.height, "6 feet");
-      expect(storedCharacter.backstory,
-          "A tragic story with parents being murdered.");
     });
 
     test("createCharacter adds correct userID and stores model", () async {
       final container = createContainer(overrides: [
         characterCreatorService.overrideWith((ref) {
           return CharacterCreatorService(
-              mockAuthRepo, characterCreatorRepository);
+              mockAuthRepo, mockCharacterCreatorRepository);
         })
       ]);
 
