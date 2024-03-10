@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// Author: Liam Welsh
 class AbilitySelectionRow extends StatelessWidget {
   final TextEditingController controller;
   final int bonus;
