@@ -100,7 +100,7 @@ class AbilitySelectionScreen extends HookConsumerWidget {
                 ],
               );
             } else {
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             }
           },
         ),
