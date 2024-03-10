@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 /// This model holds all relevant data for a [Character].
 class Character {
   /// The id of the user who owns the character.
-  final String userID;
+  String? userID;
 
   /// The list of skills the [Character] is proficient in.
   final List<String>? skillProficiencies;
@@ -105,7 +105,7 @@ class Character {
   final String? backstory;
 
   Character(
-      {required this.userID,
+      {this.userID,
       this.skillProficiencies,
       this.equipmentProficiencies,
       this.equipment,
