@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/character_creator/domain/character.dart';
 
 /// Provides a [CharacterCreatorRepository].
-final characterCreatorRepository = Provider((ref) {
+final characterCreatorRepositoryProvider = Provider((ref) {
   return CharacterCreatorRepository(FirebaseFirestore.instance);
 });
 
@@ -28,21 +28,4 @@ class CharacterCreatorRepository {
         // add used to generate a unique id for each created document.
         .add(character);
   }
-
-// TODO: move to characters repo in characters/
-// Future<List<Character>> fetchCharactersForUser(String userID) async {
-//   QuerySnapshot<Character> querySnapshot = await _firestore
-//       .collection("characters")
-//       .where("user_id", isEqualTo: userID)
-//       .withConverter(
-//           fromFirestore: Character.fromFirestore,
-//           toFirestore: (Character character, options) =>
-//               character.toFirestore())
-//       .get();
-//
-//   return querySnapshot.docs.map((document) {
-//     Character character = document.data();
-//     return character;
-//   }).toList();
-// }
 }

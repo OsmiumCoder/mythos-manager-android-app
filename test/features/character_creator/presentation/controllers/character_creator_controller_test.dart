@@ -51,14 +51,14 @@ void main() {
 
     test("createCharacter calls service createCharacter", () async {
       final container = createContainer(overrides: [
-        characterController.overrideWith((ref) {
+        characterCreatorControllerProvider.overrideWith((ref) {
           return CharacterCreatorController(mockCharacterCreatorService);
         })
       ]);
 
       when(() => mockCharacterCreatorService.createCharacter(character))
           .thenAnswer((invocation) async => true);
-      await container.read(characterController).createCharacter(character);
+      await container.read(characterCreatorControllerProvider).createCharacter(character);
 
       verify(() => mockCharacterCreatorService.createCharacter(character))
           .called(1);

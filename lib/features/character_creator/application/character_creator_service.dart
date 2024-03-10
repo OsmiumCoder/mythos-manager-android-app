@@ -5,9 +5,9 @@ import 'package:mythos_manager/features/character_creator/data/character_creator
 import 'package:mythos_manager/features/character_creator/domain/character.dart';
 
 /// Provides a [CharacterCreatorService].
-final characterCreatorService = Provider((ref) {
+final characterCreatorServiceProvider = Provider((ref) {
   return CharacterCreatorService(ref.watch(authenticationRepositoryProvider),
-      ref.watch(characterCreatorRepository));
+      ref.watch(characterCreatorRepositoryProvider));
 });
 
 /// A [NoUserFoundException] is thrown when a character is created with no auth.
@@ -39,10 +39,4 @@ class CharacterCreatorService {
     character.userID = auth.uid;
     await _characterCreatorRepository.createCharacter(character);
   }
-
-// TODO: move to character service in characters/
-// Future<List<Character>> fetchCharactersForUser() async {
-//   User? auth = _authenticationRepository.currentUser();
-//   return await _characterCreatorRepository.fetchCharactersForUser(auth!.uid);
-// }
 }

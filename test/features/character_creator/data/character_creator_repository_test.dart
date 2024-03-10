@@ -49,12 +49,12 @@ void main() {
     test("createCharacter creates a character document entry with valid data",
         () async {
       final container = createContainer(overrides: [
-        characterCreatorRepository.overrideWith((ref) {
+        characterCreatorRepositoryProvider.overrideWith((ref) {
           return CharacterCreatorRepository(fakeFirebaseFirestore);
         })
       ]);
 
-      container.read(characterCreatorRepository).createCharacter(character);
+      container.read(characterCreatorRepositoryProvider).createCharacter(character);
 
       final snapshot = await fakeFirebaseFirestore
           .collection('characters')
@@ -99,13 +99,13 @@ void main() {
     test("createCharacter generates id for all characters even if same data",
         () async {
       final container = createContainer(overrides: [
-        characterCreatorRepository.overrideWith((ref) {
+        characterCreatorRepositoryProvider.overrideWith((ref) {
           return CharacterCreatorRepository(fakeFirebaseFirestore);
         })
       ]);
 
-      container.read(characterCreatorRepository).createCharacter(character);
-      container.read(characterCreatorRepository).createCharacter(character);
+      container.read(characterCreatorRepositoryProvider).createCharacter(character);
+      container.read(characterCreatorRepositoryProvider).createCharacter(character);
 
       final snapshot = await fakeFirebaseFirestore
           .collection('characters')
