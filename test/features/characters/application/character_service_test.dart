@@ -58,7 +58,8 @@ void main() {
       mockCharacterRepository = MockCharacterRepository();
     });
 
-    test("createCharacter calls repo createCharacter", () async {
+    test("fetchCharacters calls repo fetchCharactersForUser with user id",
+        () async {
       final container = createContainer(overrides: [
         characterServiceProvider.overrideWith((ref) {
           return CharacterService(mockCharacterRepository, mockAuthRepo);
@@ -75,7 +76,7 @@ void main() {
           .called(1);
     });
 
-    test("createCharacter throws NoUserFoundException when no user signed in",
+    test("fetchCharacters throws NoUserFoundException when no user signed in",
         () async {
       final container = createContainer(overrides: [
         characterServiceProvider.overrideWith((ref) {
