@@ -25,7 +25,7 @@ class CharacterCreatorRepository {
             fromFirestore: Character.fromFirestore,
             toFirestore: (Character character, options) =>
                 character.toFirestore())
-        // add used to generate a unique id for each created document.
+        // add is used to generate a unique id for each created document.
         .add(character);
   }
 }
