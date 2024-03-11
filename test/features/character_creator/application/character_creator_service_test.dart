@@ -77,7 +77,7 @@ void main() {
           .called(1);
     });
 
-    test("createCharacter adds correct userID and stores model", () async {
+    test("createCharacter throws NoUserFoundException when no user signed in", () async {
       final container = createContainer(overrides: [
         characterCreatorServiceProvider.overrideWith((ref) {
           return CharacterCreatorService(
