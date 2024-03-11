@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 import 'package:mythos_manager/features/authentication/exceptions/no_user_found_exception.dart';
-import 'package:mythos_manager/features/character_creator/domain/character.dart';
 import 'package:mythos_manager/features/characters/application/character_service.dart';
 import 'package:mythos_manager/features/characters/data/character_repository.dart';
 
