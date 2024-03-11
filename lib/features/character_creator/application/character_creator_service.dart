@@ -7,23 +7,25 @@ import 'package:mythos_manager/features/character_creator/domain/character.dart'
 
 /// Provides a [CharacterCreatorService].
 final characterCreatorServiceProvider = Provider((ref) {
-  return CharacterCreatorService(ref.watch(authenticationRepositoryProvider),
-      ref.watch(characterCreatorRepositoryProvider));
+  return CharacterCreatorService(ref.watch(characterCreatorRepositoryProvider),
+      ref.watch(authenticationRepositoryProvider));
 });
 
 /// Service for performing operations related to character creation.
 ///
 /// Author: Jonathon Meney
 class CharacterCreatorService {
-  /// The [AuthenticationRepository] for fetching the current user.
-  final AuthenticationRepository _authenticationRepository;
-
   /// The [CharacterCreatorRepository] for CRUD operations of character creation.
   final CharacterCreatorRepository _characterCreatorRepository;
 
+  /// The [AuthenticationRepository] for fetching the current user.
+  final AuthenticationRepository _authenticationRepository;
+
   /// Constructs a [CharacterCreatorService].
   CharacterCreatorService(
-      this._authenticationRepository, this._characterCreatorRepository);
+    this._characterCreatorRepository,
+    this._authenticationRepository,
+  );
 
   /// Stores a [Character] in cloud firestore.
   ///

@@ -63,7 +63,7 @@ void main() {
       final container = createContainer(overrides: [
         characterCreatorServiceProvider.overrideWith((ref) {
           return CharacterCreatorService(
-              mockAuthRepo, mockCharacterCreatorRepository);
+              mockCharacterCreatorRepository, mockAuthRepo);
         })
       ]);
 
@@ -71,24 +71,29 @@ void main() {
       when(() => mockCharacterCreatorRepository.createCharacter(character))
           .thenAnswer((invocation) async => true);
 
-      await container.read(characterCreatorServiceProvider).createCharacter(character);
+      await container
+          .read(characterCreatorServiceProvider)
+          .createCharacter(character);
 
       verify(() => mockCharacterCreatorRepository.createCharacter(character))
           .called(1);
     });
 
-    test("createCharacter throws NoUserFoundException when no user signed in", () async {
+    test("createCharacter throws NoUserFoundException when no user signed in",
+        () async {
       final container = createContainer(overrides: [
         characterCreatorServiceProvider.overrideWith((ref) {
           return CharacterCreatorService(
-              mockAuthRepo, mockCharacterCreatorRepository);
+              mockCharacterCreatorRepository, mockAuthRepo);
         })
       ]);
 
       when(() => mockAuthRepo.currentUser()).thenReturn(null);
 
       expectLater(
-          container.read(characterCreatorServiceProvider).createCharacter(character),
+          container
+              .read(characterCreatorServiceProvider)
+              .createCharacter(character),
           throwsA(isA<NoUserFoundException>()));
     });
   });
