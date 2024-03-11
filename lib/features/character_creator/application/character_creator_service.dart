@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
+import 'package:mythos_manager/features/authentication/exceptions/no_user_found_exception.dart';
 import 'package:mythos_manager/features/character_creator/data/character_creator_repository.dart';
 import 'package:mythos_manager/features/character_creator/domain/character.dart';
 
@@ -9,9 +10,6 @@ final characterCreatorServiceProvider = Provider((ref) {
   return CharacterCreatorService(ref.watch(authenticationRepositoryProvider),
       ref.watch(characterCreatorRepositoryProvider));
 });
-
-/// A [NoUserFoundException] is thrown when a character is created with no auth.
-class NoUserFoundException implements Exception {}
 
 /// Service for performing operations related to character creation.
 ///
