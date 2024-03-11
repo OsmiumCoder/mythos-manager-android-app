@@ -25,7 +25,6 @@ class ClassFutureBuilder extends HookConsumerWidget {
   final TextEditingController startingEquipmentController;
 
   @override
-  @override
   Widget build(BuildContext context, WidgetRef ref) {
     return FutureBuilder(
       future: ref.watch(dndApiController).getClass(
@@ -36,15 +35,11 @@ class ClassFutureBuilder extends HookConsumerWidget {
 
           final String hitDie = "Hit Die: ${gameClass["hit_die"]}";
 
-          final String proficiencies = gameClass["starting_proficiencies"] !=
-              null
-              ? gameClass["starting_proficiencies"].map((element) {
+          final String proficiencies = gameClass["proficiencies"].map((element) {
             return "${element["name"]}";
-          }).join(", ")
-              : "";
+          }).join(", ");
 
-          final List proficiencyOptions =
-              gameClass["proficiency_choices"]?["from"]["options"] ?? [];
+          final List proficiencyOptions = gameClass["proficiency_choices"] ?? [];
 
           final String savingThrows =
           gameClass["saving_throws"].map((element) {
@@ -53,7 +48,7 @@ class ClassFutureBuilder extends HookConsumerWidget {
 
           final String startingEquipment =
           gameClass["starting_equipment"].map((element) {
-            return "${element["name"]}";
+            return "${element["equipment"]["name"]}";
           }).join(", ");
 
           final List startingEquipmentOptions =
