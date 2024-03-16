@@ -65,19 +65,37 @@ class ClassFutureBuilder extends HookConsumerWidget {
         final List<dynamic>? startingEquipmentOptionsRaw = gameClass["starting_equipment_options"]?.first["from"]["options"] as List<dynamic>?;
         final List<DropdownMenuItem<String>> equipmentItems1 = [];
         final List<DropdownMenuItem<String>> equipmentItems2 = [];
+        final List<Widget> equipmentWidgets = [];
 
-        // Safe iteration and item creation, considering null and structure checks.
         startingEquipmentOptionsRaw?.forEach((optionGroup) {
-          final List<dynamic>? options = optionGroup["equipment"] as List<dynamic>?;
-          options?.forEach((option) {
-            final String? name = option["name"];
-            if (name != null && name != selectedEquipment2.value && !equipmentItems1.any((item) => item.value == name)) {
-              equipmentItems1.add(DropdownMenuItem(value: name, child: Text(name)));
+          if (optionGroup["option_type"] == "counted_reference") {
+            final String? optionName = optionGroup["of"]["name"];
+            if (optionName != null && !selectedEquipment1.value!.contains(optionName) && !selectedEquipment2.value!.contains(optionName)) {
+              equipmentWidgets.add(DropdownButtonFormField<String>(
+                decoration: InputDecoration(
+                  labelText: 'Choose Equipment',
+                  labelStyle: textStyle,
+                ),
+                value: null,
+                onChanged: (newValue) {
+                  selectedEquipment1.value = newValue ?? "";
+                },
+                items: [DropdownMenuItem(value: optionName, child: Text(optionName))],
+              ));
             }
-            if (name != null && name != selectedEquipment1.value && !equipmentItems2.any((item) => item.value == name)) {
-              equipmentItems2.add(DropdownMenuItem(value: name, child: Text(name)));
+          } else if (optionGroup["option_type"] == "choice") {
+            final String equipmentCategory = optionGroup["choice"]["from"]["equipment_category"]["index"];
+            final List<TextEditingController> controllers = [TextEditingController()];
+            equipmentWidgets.add(BackgroundEquipmentFutureBuilder(
+              textEditingControllers: controllers,
+              category: equipmentCategory,
+            ));
+            final numberofEquipment = optionGroup["choice"]["choose"];
+            final equipmentTextControllers = <TextEditingController>[];
+            for (var i=0; i<numberofEquipment; i++) {
+              equipmentTextControllers.add(TextEditingController());
             }
-          });
+          }
         });
         print(startingEquipmentOptionsRaw);
 
