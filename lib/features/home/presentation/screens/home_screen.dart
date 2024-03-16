@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../routing/app_router.dart';
 import '../../../../shared/presentation/components/components.dart';
+import '../../../character_creator/domain/character.dart';
+import '../../../character_creator/presentation/controllers/character_creation_controller.dart';
 
 const placeHolderImage =
      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/640px-Donald_Trump_official_portrait.jpg";
@@ -9,13 +12,13 @@ const placeHolderImage =
 /// Home screen.
 ///
 /// Author: Liam Welsh
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends HookConsumerWidget {
   const HomeScreen({super.key});
 
   final cardTextStyle = const TextStyle(color: Colors.white, fontWeight: FontWeight.w500);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Mythos Manager"),
@@ -93,7 +96,11 @@ class HomeScreen extends StatelessWidget {
                     style: cardTextStyle,
                   ),
                   textPadding: 50,
-                  onTap: () {}, // TODO onTap Handler for navigation
+                  onTap: () {
+                    // Reset character creation state
+                    ref.read(characterCreationProvider.notifier).state = Character();
+                    Navigator.of(context).pushNamed(AppRouter.raceSelectionScreen);
+                  },
                 ),
               ),
             ),

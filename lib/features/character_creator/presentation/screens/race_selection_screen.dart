@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mythos_manager/features/character_creator/presentation/controllers/character_creation_controller.dart';
 import 'package:mythos_manager/features/character_creator/presentation/controllers/dnd_api_controller.dart';
 import 'package:mythos_manager/features/character_creator/presentation/screens/components/components.dart';
+
+import '../../../../routing/app_router.dart';
+import '../../domain/character.dart';
 
 /// Author: Jonathon Meney
 class RaceSelectionScreen extends HookConsumerWidget {
@@ -21,6 +25,7 @@ class RaceSelectionScreen extends HookConsumerWidget {
     useListenable(raceController);
     useListenable(subraceController);
 
+    final characterBuilder = ref.watch(characterCreationProvider.notifier);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Character Creator'),
@@ -77,16 +82,34 @@ class RaceSelectionScreen extends HookConsumerWidget {
                     }
                   }),
               ElevatedButton(
-                  onPressed: () {
-                    print(raceController.text);
-                    print(subraceController.text);
-                    print(startingLanguageController.text);
-                    print(abilityIncreaseController.text);
-                    print(startingProficiencyController.text);
 
-                    // TODO: route to next
-                    // TODO: validate
-                    // TODO: push to saving map
+                  onPressed: () {
+                    characterBuilder.state = Character.withCollectionsInitialized();
+
+                    characterBuilder.state.race = raceController.text;
+                    characterBuilder.state.subrace = subraceController.text;
+
+                    if (startingLanguageController.text.isNotEmpty) {
+                      characterBuilder.state.languages?.add(startingLanguageController.text);
+                    }
+
+                    if (abilityIncreaseController.text.isNotEmpty) {
+                      final ability = abilityIncreaseController.text.split(" ");
+                      final value = ability[0][1];
+                      final name = ability[1];
+                      characterBuilder.state.abilityScoreIncreases?[name] = int.parse(value);
+                    }
+
+                    if (startingProficiencyController.text.isNotEmpty) {
+                      characterBuilder.state.skillProficiencies?.add(startingProficiencyController.text);
+                    }
+
+                    print(characterBuilder.state.race);
+                    print(characterBuilder.state.subrace);
+                    print(characterBuilder.state.languages);
+                    print(characterBuilder.state.abilityScoreIncreases);
+                    print(characterBuilder.state.skillProficiencies);
+
                   },
                   child: const Text("Select Race")),
             ],

@@ -12,16 +12,16 @@ class Character {
   final List<String>? equipment;
 
   /// The race of the [Character].
-  final String? race;
+  String? race;
 
   /// The subrace of the [Character].
-  final String? subrace;
+  String? subrace;
 
   /// The size of the [Character]'s race.
-  final String? size;
+  String? size;
 
   /// The speed of the [Character].
-  final int? speed;
+  int? speed;
 
   /// The list of languages the [Character] can speak.
   final List<String>? languages;
@@ -42,17 +42,17 @@ class Character {
   final List<String>? racialTraits;
 
   /// The class of the [Character].
-  final String? className;
+  String? className;
 
   /// The subclass of the [Character].
-  final String? subclass;
+  String? subclass;
 
   /// The hit die for the [Character]'s class.
   ///
   /// Integer representative for number of sides to the dice.
   /// Example:
   /// hitDie = 6 --> d6
-  final int? hitDie;
+  int? hitDie;
 
   /// The list of abilities the [Character]'s class has saving throws for.
   ///
@@ -78,28 +78,28 @@ class Character {
   final Map<String, int>? abilityScores;
 
   /// The background of the [Character].
-  final String? background;
+  String? background;
 
   /// The name of the feature from the [Character]'s background.
-  final String? backgroundFeatureName;
+  String? backgroundFeatureName;
 
   /// The description of the feature from the [Character]'s background.
-  final String? backgroundFeatureDesc;
+  String? backgroundFeatureDesc;
 
   /// The alignment of the [Character].
-  final String? alignment;
+  String? alignment;
 
   /// The age of the [Character].
-  final String? age;
+  String? age;
 
   /// The weight of the [Character].
-  final String? weight;
+  String? weight;
 
   /// The height of the [Character].
-  final String? height;
+  String? height;
 
   /// The backstory of the [Character].
-  final String? backstory;
+  String? backstory;
 
   Character(
       {this.skillProficiencies,
@@ -125,6 +125,19 @@ class Character {
       this.weight,
       this.height,
       this.backstory});
+
+  factory Character.withCollectionsInitialized() {
+    return Character(
+      abilityScoreIncreases: {},
+      abilityScores: {},
+      equipment: [],
+      equipmentProficiencies: [],
+      languages: [],
+      racialTraits: [],
+      savingThrows: [],
+      skillProficiencies: [],
+    );
+  }
 
   /// Constructs a [Character] from a firestore data [snapshot].
   factory Character.fromFirestore(
