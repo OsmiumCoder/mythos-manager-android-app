@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import '../../../../routing/app_router.dart';
 import '../../../../shared/presentation/components/components.dart';
+import 'package:mythos_manager/features/character_creator/presentation/screens/class_selection_screen.dart';
 
 const placeHolderImage =
      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/640px-Donald_Trump_official_portrait.jpg";
