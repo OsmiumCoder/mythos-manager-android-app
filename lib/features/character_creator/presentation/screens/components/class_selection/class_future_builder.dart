@@ -86,14 +86,14 @@ class ClassFutureBuilder extends HookConsumerWidget {
           } else if (optionGroup["option_type"] == "choice") {
             final String equipmentCategory = optionGroup["choice"]["from"]["equipment_category"]["index"];
             final List<TextEditingController> controllers = [TextEditingController()];
-            equipmentWidgets.add(BackgroundEquipmentFutureBuilder(
-              textEditingControllers: controllers,
-              category: equipmentCategory,
-            ));
             final numberofEquipment = optionGroup["choice"]["choose"];
             final equipmentTextControllers = <TextEditingController>[];
             for (var i=0; i<numberofEquipment; i++) {
               equipmentTextControllers.add(TextEditingController());
+              equipmentWidgets.add(BackgroundEquipmentFutureBuilder(
+                textEditingControllers: controllers,
+                category: equipmentCategory,
+              ));
             }
           }
         });
