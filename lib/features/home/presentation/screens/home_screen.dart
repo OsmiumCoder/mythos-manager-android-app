@@ -94,9 +94,7 @@ class HomeScreen extends StatelessWidget {
                     style: cardTextStyle,
                   ),
                   textPadding: 50,
-                  onTap: () {
-                    Navigator.pushNamed(context,AppRouter.classSelectionScreen);
-                  }, // TODO onTap Handler for navigation
+                  onTap: () {}, // TODO onTap Handler for navigation
                 ),
               ),
             ),
