@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/character_creator/presentation/controllers/dnd_api_controller.dart';
-import 'package:mythos_manager/features/character_creator/presentation/screens/components/class_selection/subclass_future_builder.dart';
-import 'package:mythos_manager/features/character_creator/presentation/screens/components/components.dart';
 
 class ClassFutureBuilder extends HookConsumerWidget {
   const ClassFutureBuilder({
-    Key? key,
+    super.key,
     required this.classController,
     required this.textStyle,
     required this.subclassController,
@@ -15,7 +13,7 @@ class ClassFutureBuilder extends HookConsumerWidget {
     required this.proficiencyController,
     required this.savingThrowsController,
     required this.startingEquipmentController,
-  }) : super(key: key);
+  });
 
   final TextEditingController classController;
   final TextStyle textStyle;
@@ -29,12 +27,11 @@ class ClassFutureBuilder extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedProficiency1 = useState<String?>(null);
     final selectedProficiency2 = useState<String?>(null);
-    final selectedEquipment1 = useState<String?>(null);
-    final selectedEquipment2 = useState<String?>(null);
-
 
     return FutureBuilder(
-      future: ref.watch(dndApiController).getClass(classController.text.toLowerCase()),
+      future: ref
+          .watch(dndApiController)
+          .getClass(classController.text.toLowerCase()),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
@@ -45,69 +42,56 @@ class ClassFutureBuilder extends HookConsumerWidget {
         }
 
         final gameClass = snapshot.data!;
-        final String hitDie = "Hit Die: ${gameClass["hit_die"]}";
+        final String hitDie = "Hit Die: d${gameClass["hit_die"]}";
 
         final List<dynamic> proficiencyData = gameClass["proficiencies"] ?? [];
-        final String proficiencies = proficiencyData.map((element) => element["name"]).join(", ");
+        final List<String> proficiencies = [];
+        for (var element in proficiencyData) {
+          if (!element["index"].startsWith("saving-throw")) {
+            proficiencies.add(element["name"]);
+          }
+        }
 
         final List<dynamic> savingThrowsData = gameClass["saving_throws"] ?? [];
-        final String savingThrows = savingThrowsData.map((element) => element["name"]).join(", ");
+        final String savingThrows =
+            savingThrowsData.map((element) => element["name"]).join(", ");
 
-        final List<dynamic> proficiencyOptions = gameClass["proficiency_choices"]?.first["from"]["options"] ?? [];
-        final List<DropdownMenuItem<String>> proficiencyItems1 = [];
-        final List<DropdownMenuItem<String>> proficiencyItems2 = [];
+        final List<dynamic> proficiencyOptions =
+            gameClass["proficiency_choices"]?.first["from"]["options"] ?? [];
+        final List<DropdownMenuEntry<String>> proficiencyItems1 = [];
+        final List<DropdownMenuEntry<String>> proficiencyItems2 = [];
 
-        final String startingEquipment = (gameClass["starting_equipment"] as List<dynamic>?)
-            ?.where((element) => element != null && element["equipment"] != null && element["equipment"]["name"] != null)
+        String startingEquipment = (gameClass["starting_equipment"] ?? [])
+            .where((element) =>
+                element != null &&
+                element["equipment"] != null &&
+                element["equipment"]["name"] != null)
             .map((element) => element["equipment"]["name"].toString())
-            .join(", ") ?? "Not available";
+            .join(", ");
 
-        final List<dynamic>? startingEquipmentOptionsRaw = gameClass["starting_equipment_options"]?.first["from"]["options"] as List<dynamic>?;
-        final List<DropdownMenuItem<String>> equipmentItems1 = [];
-        final List<DropdownMenuItem<String>> equipmentItems2 = [];
-        final List<Widget> equipmentWidgets = [];
+        final List<dynamic> startingEquipmentOptions =
+            gameClass["starting_equipment_options"] ?? [];
 
-        startingEquipmentOptionsRaw?.forEach((optionGroup) {
-          if (optionGroup["option_type"] == "counted_reference") {
-            final String? optionName = optionGroup["of"]["name"];
-            if (optionName != null && !selectedEquipment1.value!.contains(optionName) && !selectedEquipment2.value!.contains(optionName)) {
-              equipmentWidgets.add(DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  labelText: 'Choose Equipment',
-                  labelStyle: textStyle,
-                ),
-                value: null,
-                onChanged: (newValue) {
-                  selectedEquipment1.value = newValue ?? "";
-                },
-                items: [DropdownMenuItem(value: optionName, child: Text(optionName))],
-              ));
+        for (var element in startingEquipmentOptions) {
+          element["from"]["options"]?.forEach((element) {
+            if (element["option_type"] == "counted_reference") {
+              startingEquipment +=
+                  ", ${element["count"]} ${element["of"]["name"]}";
             }
-          } else if (optionGroup["option_type"] == "choice") {
-            final String equipmentCategory = optionGroup["choice"]["from"]["equipment_category"]["index"];
-            final List<TextEditingController> controllers = [TextEditingController()];
-            final numberofEquipment = optionGroup["choice"]["choose"];
-            final equipmentTextControllers = <TextEditingController>[];
-            for (var i=0; i<numberofEquipment; i++) {
-              equipmentTextControllers.add(TextEditingController());
-              equipmentWidgets.add(BackgroundEquipmentFutureBuilder(
-                textEditingControllers: controllers,
-                category: equipmentCategory,
-              ));
-            }
-          }
-        });
-        print(startingEquipmentOptionsRaw);
+          });
+        }
 
         for (var option in proficiencyOptions) {
           final String name = option["item"]["name"];
           if (name != selectedProficiency2.value) {
-            proficiencyItems1.add(DropdownMenuItem(value: name, child: Text(name)));
+            proficiencyItems1.add(DropdownMenuEntry(value: name, label: name));
           }
           if (name != selectedProficiency1.value) {
-            proficiencyItems2.add(DropdownMenuItem(value: name, child: Text(name)));
+            proficiencyItems2.add(DropdownMenuEntry(value: name, label: name));
           }
         }
+
+        final List<dynamic> subclasses = gameClass["subclasses"] ?? [];
 
         return SingleChildScrollView(
           child: Column(
@@ -119,62 +103,53 @@ class ClassFutureBuilder extends HookConsumerWidget {
               ),
               Container(
                 margin: const EdgeInsets.only(bottom: 5),
-                child: Text("Proficiencies: $proficiencies", style: textStyle),
+                child: Text("Proficiencies: ${proficiencies.join(", ")}",
+                    style: textStyle),
               ),
               Container(
                 margin: const EdgeInsets.only(bottom: 5),
                 child: Text("Saving Throws: $savingThrows", style: textStyle),
               ),
-              DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  labelText: 'Choose first proficiency',
-                  labelStyle: textStyle,
+              const Text("Choose Proficiencies"),
+              Container(
+                margin: const EdgeInsets.only(bottom: 5),
+                child: DropdownMenu(
+                  dropdownMenuEntries: proficiencyItems1,
+                  onSelected: (newValue) {
+                    selectedProficiency1.value = newValue;
+                  },
                 ),
-                value: selectedProficiency1.value,
-                onChanged: (newValue) {
-                  selectedProficiency1.value = newValue;
-                },
-                items: proficiencyItems1,
-              ),
-              DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  labelText: 'Choose second proficiency',
-                  labelStyle: textStyle,
-                ),
-                value: selectedProficiency2.value,
-                onChanged: (newValue) {
-                  selectedProficiency2.value = newValue;
-                },
-                items: proficiencyItems2,
               ),
               Container(
                 margin: const EdgeInsets.only(bottom: 5),
-                child: Text("Starting Equipment: $startingEquipment", style: textStyle),
+                child: DropdownMenu(
+                    dropdownMenuEntries: proficiencyItems2,
+                    onSelected: (newValue) {
+                      selectedProficiency2.value = newValue;
+                    }),
               ),
-              DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  labelText: 'Choose first equipment',
-                  labelStyle: textStyle,
-                ),
-                value: selectedEquipment1.value,
-                onChanged: (newValue) {
-                  selectedEquipment1.value = newValue;
-                },
-                items: equipmentItems1,
+              Container(
+                margin: const EdgeInsets.only(bottom: 5),
+                child: Text("Starting Equipment: $startingEquipment",
+                    style: textStyle),
               ),
-              DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  labelText: 'Choose second equipment',
-                  labelStyle: textStyle,
-                ),
-                value: selectedEquipment2.value,
-                onChanged: (newValue) {
-                  selectedEquipment2.value = newValue;
-                },
-                items: equipmentItems2,
-              ),
+              subclasses.isNotEmpty
+                  ? const Text("Choose Subclass")
+                  : const SizedBox.shrink(),
+              subclasses.isNotEmpty
+                  ? Container(
+                      margin: const EdgeInsets.only(bottom: 5),
+                      child: DropdownMenu(
+                        controller: subclassController,
+                        dropdownMenuEntries: subclasses.map((element) {
+                          return DropdownMenuEntry(
+                              value: element["name"], label: element["name"]);
+                        }).toList(),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
 
-              // Additional widgets for subclasses, starting equipment, etc.
+              // Additional widgets for subclasses
             ],
           ),
         );
