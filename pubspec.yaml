@@ -32,22 +32,23 @@ dependencies:
     sdk: flutter
 
   firebase_core: ^2.25.4
-  cloud_firestore: ^4.15.5
+  cloud_firestore: ^4.15.8
   firebase_auth: ^4.17.4
   hooks_riverpod: ^2.4.10
   google_fonts: ^6.1.0
-  mockito: ^5.4.4
-  network_image_mock: ^2.1.1
   flutter_hooks: ^0.20.5
-  mocktail: ^1.0.3
   http: ^1.2.0
   flutter_svg_provider: ^1.0.7
-  fake_cloud_firestore: ^2.4.8
-  firebase_auth_mocks: ^0.13.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  mockito: ^5.4.4
+  network_image_mock: ^2.1.1
+  mocktail: ^1.0.3
+  fake_cloud_firestore: ^2.4.8
+  firebase_auth_mocks: ^0.13.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
