@@ -152,7 +152,6 @@ class ClassFutureBuilder extends HookConsumerWidget {
                     )
                   : const SizedBox.shrink(),
 
-              // Additional widgets for subclasses
             ],
           ),
         );
