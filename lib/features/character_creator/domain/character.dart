@@ -104,31 +104,36 @@ class Character {
   /// The backstory of the [Character].
   final String? backstory;
 
-  Character(
-      {this.userID,
-      this.skillProficiencies,
-      this.equipmentProficiencies,
-      this.equipment,
-      this.race,
-      this.subrace,
-      this.size,
-      this.speed,
-      this.languages,
-      this.abilityScoreIncreases,
-      this.racialTraits,
-      this.className,
-      this.subclass,
-      this.hitDie,
-      this.savingThrows,
-      this.abilityScores,
-      this.background,
-      this.backgroundFeatureName,
-      this.backgroundFeatureDesc,
-      this.alignment,
-      this.age,
-      this.weight,
-      this.height,
-      this.backstory});
+  /// The name of the [Character].
+  final String? name;
+
+  Character({
+    this.userID,
+    this.skillProficiencies,
+    this.equipmentProficiencies,
+    this.equipment,
+    this.race,
+    this.subrace,
+    this.size,
+    this.speed,
+    this.languages,
+    this.abilityScoreIncreases,
+    this.racialTraits,
+    this.className,
+    this.subclass,
+    this.hitDie,
+    this.savingThrows,
+    this.abilityScores,
+    this.background,
+    this.backgroundFeatureName,
+    this.backgroundFeatureDesc,
+    this.alignment,
+    this.age,
+    this.weight,
+    this.height,
+    this.backstory,
+    this.name,
+  });
 
   /// Constructs a [Character] from a firestore data [snapshot].
   factory Character.fromFirestore(
@@ -175,6 +180,7 @@ class Character {
       weight: data?["weight"],
       height: data?["height"],
       backstory: data?["backstory"],
+      name: data?["name"]
     );
   }
 
@@ -219,7 +225,8 @@ class Character {
       if (age != null) "age": age,
       if (weight != null) "weight": weight,
       if (height != null) "height": height,
-      if (backstory != null) "backstory": backstory
+      if (backstory != null) "backstory": backstory,
+      if (name != null) "name": name
     };
   }
 }
