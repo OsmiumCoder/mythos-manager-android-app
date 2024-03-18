@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../routing/app_router.dart';
 import '../../../../shared/presentation/components/components.dart';
 import '../../../character_creator/domain/character.dart';
-import '../../../character_creator/presentation/controllers/character_creation_controller.dart';
+import '../../../character_creator/presentation/controllers/character_builder_controller.dart';
 
 const placeHolderImage =
      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/640px-Donald_Trump_official_portrait.jpg";
@@ -98,7 +98,7 @@ class HomeScreen extends HookConsumerWidget {
                   textPadding: 50,
                   onTap: () {
                     // Reset character creation state
-                    ref.read(characterCreationProvider.notifier).state = Character();
+                    ref.read(characterBuilderProvider.notifier).state = CharacterBuilderController();
                     Navigator.of(context).pushNamed(AppRouter.raceSelectionScreen);
                   },
                 ),

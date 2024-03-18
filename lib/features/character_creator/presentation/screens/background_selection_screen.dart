@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mythos_manager/features/character_creator/presentation/controllers/character_builder_controller.dart';
 import 'package:mythos_manager/features/character_creator/presentation/controllers/dnd_api_controller.dart';
 import 'package:mythos_manager/features/character_creator/presentation/screens/components/background_selection/background_future_builder.dart';
 
@@ -14,6 +15,7 @@ class BackgroundSelectionScreen extends HookConsumerWidget {
 
     useListenable(backgroundController);
 
+    final characterBuilder = ref.watch(characterBuilderProvider.notifier);
     return Scaffold(
         appBar: AppBar(
           title: const Text("Character Creator"),
@@ -35,11 +37,18 @@ class BackgroundSelectionScreen extends HookConsumerWidget {
                               const Text("Choose a Background"),
                               DropdownMenu(
                                   controller: backgroundController,
+                                  onSelected: (background) {
+                                    characterBuilder.state.background = background;
+                                    characterBuilder.state.backgroundLanguages.clear();
+                                    characterBuilder.state.backgroundSkillProfs.clear();
+                                    characterBuilder.state.backgroundEquipmentProfs.clear();
+                                    characterBuilder.state.backgroundEquipment.clear();
+                                  },
                                   width: 200,
                                   hintText: "Background",
                                   dropdownMenuEntries: backgrounds
                                       .map((background) => DropdownMenuEntry(
-                                          value: background["index"],
+                                          value: background["name"],
                                           label: background["name"]))
                                       .toList()),
                               if (backgroundController.text.isNotEmpty)

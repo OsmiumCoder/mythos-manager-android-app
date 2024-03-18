@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mythos_manager/features/character_creator/presentation/controllers/character_builder_controller.dart';
 
 /// Author: Liam Welsh
-class AbilitySelectionRow extends StatelessWidget {
+class AbilitySelectionRow extends HookConsumerWidget {
   final TextEditingController controller;
   final int bonus;
   final String type;
@@ -20,7 +22,8 @@ class AbilitySelectionRow extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final characterBuilder = ref.watch(characterBuilderProvider.notifier);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       child: Row(
@@ -37,6 +40,11 @@ class AbilitySelectionRow extends StatelessWidget {
             width: 250,
             child: TextField(
               controller: controller,
+              onChanged: (value) {
+                if (value.isNotEmpty) {
+                  characterBuilder.state.selectedAbilityScoreIncreases[type] = int.parse(value);
+                }
+              },
               decoration: InputDecoration(
                 hintText: "6-18 Range",
                 errorText: _verifyText()

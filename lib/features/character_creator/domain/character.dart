@@ -1,18 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 
 /// This model holds all relevant data for a [Character].
-class Character {
+class Character extends Equatable {
   /// The id of the user who owns the character.
   String? userID;
 
   /// The list of skills the [Character] is proficient in.
-  final List<String>? skillProficiencies;
+  final Set<String>? skillProficiencies;
 
   /// The list of equipment the [Character] is proficient in.
-  final List<String>? equipmentProficiencies;
+  final Set<String>? equipmentProficiencies;
 
   /// The list of equipment(items) in the [Character]'s inventory.
-  final List<String>? equipment;
+  final Set<String>? equipment;
 
   /// The race of the [Character].
   String? race;
@@ -27,7 +28,7 @@ class Character {
   int? speed;
 
   /// The list of languages the [Character] can speak.
-  final List<String>? languages;
+  final Set<String>? languages;
 
   /// Map of ability score increases per ability.
   ///
@@ -42,7 +43,7 @@ class Character {
   final Map<String, int>? abilityScoreIncreases;
 
   /// The list of racial traits for the [Character]'s race.
-  final List<String>? racialTraits;
+  final Set<String>? racialTraits;
 
   /// The class of the [Character].
   String? className;
@@ -63,7 +64,7 @@ class Character {
   /// ```
   /// ["wis", "str"]
   /// ```
-  final List<String>? savingThrows;
+  final Set<String>? savingThrows;
 
   /// Map of ability score base value.
   ///
@@ -139,12 +140,12 @@ class Character {
     return Character(
       abilityScoreIncreases: {},
       abilityScores: {},
-      equipment: [],
-      equipmentProficiencies: [],
-      languages: [],
-      racialTraits: [],
-      savingThrows: [],
-      skillProficiencies: [],
+      equipment: {},
+      equipmentProficiencies: {},
+      languages: {},
+      racialTraits: {},
+      savingThrows: {},
+      skillProficiencies: {},
     );
   }
 
@@ -155,46 +156,47 @@ class Character {
   ) {
     final data = snapshot.data();
     return Character(
-      userID: data?["user_id"],
-      skillProficiencies: data?["skill_proficiencies"] is Iterable
-          ? List.from(data?["skill_proficiencies"])
-          : null,
-      equipmentProficiencies: data?["equipment_proficiencies"] is Iterable
-          ? List.from(data?["equipment_proficiencies"])
-          : null,
-      equipment:
-          data?["equipment"] is Iterable ? List.from(data?["equipment"]) : null,
-      race: data?["race"],
-      subrace: data?["subrace"],
-      size: data?["size"],
-      speed: data?["speed"],
-      languages:
-          data?["languages"] is Iterable ? List.from(data?["languages"]) : null,
-      abilityScoreIncreases: data?["ability_score_increases"] is Map
-          ? Map.from(data?["ability_score_increases"])
-          : null,
-      racialTraits: data?["racial_traits"] is Iterable
-          ? List.from(data?["racial_traits"])
-          : null,
-      className: data?["class"],
-      subclass: data?["subclass"],
-      hitDie: data?["hit_die"],
-      savingThrows: data?["saving_throws"] is Iterable
-          ? List.from(data?["saving_throws"])
-          : null,
-      abilityScores: data?["ability_scores"] is Map
-          ? Map.from(data?["ability_scores"])
-          : null,
-      background: data?["background"],
-      backgroundFeatureName: data?["background_feature_name"],
-      backgroundFeatureDesc: data?["background_feature_desc"],
-      alignment: data?["alignment"],
-      age: data?["age"],
-      weight: data?["weight"],
-      height: data?["height"],
-      backstory: data?["backstory"],
-      name: data?["name"]
-    );
+        userID: data?["user_id"],
+        skillProficiencies: data?["skill_proficiencies"] is Iterable
+            ? Set.from(data?["skill_proficiencies"])
+            : null,
+        equipmentProficiencies: data?["equipment_proficiencies"] is Iterable
+            ? Set.from(data?["equipment_proficiencies"])
+            : null,
+        equipment: data?["equipment"] is Iterable
+            ? Set.from(data?["equipment"])
+            : null,
+        race: data?["race"],
+        subrace: data?["subrace"],
+        size: data?["size"],
+        speed: data?["speed"],
+        languages: data?["languages"] is Iterable
+            ? Set.from(data?["languages"])
+            : null,
+        abilityScoreIncreases: data?["ability_score_increases"] is Map
+            ? Map.from(data?["ability_score_increases"])
+            : null,
+        racialTraits: data?["racial_traits"] is Iterable
+            ? Set.from(data?["racial_traits"])
+            : null,
+        className: data?["class"],
+        subclass: data?["subclass"],
+        hitDie: data?["hit_die"],
+        savingThrows: data?["saving_throws"] is Iterable
+            ? Set.from(data?["saving_throws"])
+            : null,
+        abilityScores: data?["ability_scores"] is Map
+            ? Map.from(data?["ability_scores"])
+            : null,
+        background: data?["background"],
+        backgroundFeatureName: data?["background_feature_name"],
+        backgroundFeatureDesc: data?["background_feature_desc"],
+        alignment: data?["alignment"],
+        age: data?["age"],
+        weight: data?["weight"],
+        height: data?["height"],
+        backstory: data?["backstory"],
+        name: data?["name"]);
   }
 
   /// Returns a map of a [Character]'s attributes to store in Firestore.
@@ -242,4 +244,36 @@ class Character {
       if (name != null) "name": name
     };
   }
+
+
+  @override
+  List<Object?> get props => [
+    userID,
+    skillProficiencies,
+    equipmentProficiencies,
+    equipment,
+    race,
+    subrace,
+    size,
+    speed,
+    languages,
+    abilityScoreIncreases,
+    racialTraits,
+    className,
+    subrace,
+    hitDie,
+    savingThrows,
+    abilityScores,
+    background,
+    backgroundFeatureName,
+    backgroundFeatureDesc,
+    alignment,
+    age,
+    weight,
+    backstory,
+    name,
+  ];
+
+  @override
+  bool? get stringify => true;
 }

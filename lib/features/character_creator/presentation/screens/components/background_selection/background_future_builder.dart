@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mythos_manager/features/character_creator/presentation/controllers/character_builder_controller.dart';
 import 'package:mythos_manager/features/character_creator/presentation/controllers/dnd_api_controller.dart';
 import 'package:mythos_manager/features/character_creator/presentation/screens/components/background_selection/background_equipment_future_builder.dart';
 import 'package:mythos_manager/features/character_creator/presentation/screens/components/background_selection/background_language_future_builder.dart';
+import 'package:mythos_manager/routing/app_router.dart';
 
 /// Author: Liam Welsh
 class BackgroundFutureBuilder extends HookConsumerWidget {
@@ -13,6 +15,7 @@ class BackgroundFutureBuilder extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final characterBuilder = ref.watch(characterBuilderProvider.notifier);
     return FutureBuilder(
         future: ref
             .watch(dndApiController)
@@ -22,13 +25,22 @@ class BackgroundFutureBuilder extends HookConsumerWidget {
             final proficiencies = snapshot.data!["starting_proficiencies"];
 
             final proficienciesText = proficiencies
-                .map((proficiency) => proficiency["name"])
-                .join(", ");
+                .map((proficiency) {
+                  if ((proficiency["name"] as String).toLowerCase() == "skill") {
+                    characterBuilder.state.backgroundSkillProfs.add(proficiency["name"]);
+                  } else {
+                    characterBuilder.state.backgroundEquipmentProfs.add(proficiency["name"]);
+                  }
+              return proficiency["name"];
+            }).join(", ");
 
             final startingEquipment = snapshot.data!["starting_equipment"];
 
             final startingEquipmentText = startingEquipment
-                .map((equipment) => equipment["equipment"]["name"])
+                .map((equipment) {
+                  characterBuilder.state.backgroundEquipment.add(equipment["equipment"]["name"]);
+              return equipment["equipment"]["name"];
+            })
                 .join("; ");
 
             final numberOfLanguages =
@@ -54,6 +66,9 @@ class BackgroundFutureBuilder extends HookConsumerWidget {
 
             final String featureText = snapshot.data!["feature"]["desc"]?[0] ?? "";
 
+            characterBuilder.state.backgroundFeatureDesc = featureText;
+            characterBuilder.state.backgroundFeatureName = snapshot.data!["feature"]["name"];
+
             return Padding(
               padding: const EdgeInsets.only(top: 15.0),
                 child: Column(
@@ -74,6 +89,7 @@ class BackgroundFutureBuilder extends HookConsumerWidget {
                     BackgroundEquipmentFutureBuilder(
                       textEditingControllers: equipmentTextControllers,
                       category: equipmentType,
+                      startingEquipment: startingEquipment.map((eq) => eq["equipment"]["name"]).toList(),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(16),
@@ -82,19 +98,7 @@ class BackgroundFutureBuilder extends HookConsumerWidget {
 
                     ElevatedButton(
                         onPressed: () {
-                          print(backgroundController.text);
-
-                          for (var controller in languageTextControllers) {
-                            print(controller.text);
-                          }
-
-                          for (var controller in equipmentTextControllers) {
-                            print(controller.text);
-                          }
-
-                          // TODO: route to next
-                          // TODO: validate
-                          // TODO: push to saving map
+                          Navigator.of(context).pushNamed(AppRouter.backstorySelectionScreen);
                         },
                         child: const Text("Save Background")),
                   ],

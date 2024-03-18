@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/character_creator/domain/character.dart';
-import 'package:mythos_manager/features/character_creator/presentation/controllers/character_creation_controller.dart';
+import 'package:mythos_manager/features/character_creator/presentation/controllers/character_builder_controller.dart';
 import 'package:mythos_manager/shared/presentation/components/components.dart';
 
 import '../../../../routing/app_router.dart';
@@ -28,7 +28,7 @@ class CharactersScreen extends HookConsumerWidget {
             child: BoxShadowImage(
                 onTap: () {
                   // Reset character creation state
-                  ref.read(characterCreationProvider.notifier).state = Character();
+                  ref.read(characterBuilderProvider.notifier).state = CharacterBuilderController();
                   Navigator.of(context).pushNamed(AppRouter.raceSelectionScreen);
                 },
                 image: const Image(

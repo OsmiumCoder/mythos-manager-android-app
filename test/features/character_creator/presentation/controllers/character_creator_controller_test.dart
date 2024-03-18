@@ -12,19 +12,19 @@ class MockCharacterCreatorService extends Mock
 void main() {
   group("CharacterCreatorController tests", () {
     Character character = Character(
-      skillProficiencies: ["perception", "arcana"],
-      equipmentProficiencies: ["sword", "armor"],
-      equipment: ["longsword", "leather armor"],
+      skillProficiencies: {"perception", "arcana"},
+      equipmentProficiencies: {"sword", "armor"},
+      equipment: {"longsword", "leather armor"},
       race: "Elf",
       subrace: "High Elf",
       size: "Medium",
       speed: 30,
       abilityScoreIncreases: {"str": 2, "dex": 1},
-      racialTraits: ["Dark vision", "Resistance"],
+      racialTraits: {"Dark vision", "Resistance"},
       className: "Wizard",
       subclass: "Evocation",
       hitDie: 12,
-      savingThrows: ["wis", "int"],
+      savingThrows: {"wis", "int"},
       abilityScores: {
         "str": 18,
         "dex": 10,
