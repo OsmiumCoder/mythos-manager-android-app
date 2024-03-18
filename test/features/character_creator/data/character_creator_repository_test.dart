@@ -9,20 +9,20 @@ void main() {
   group("CharacterRepository tests", () {
     Character character = Character(
       userID: "user-id-valid",
-      skillProficiencies: {"perception", "arcana"},
-      equipmentProficiencies: {"sword", "armor"},
-      equipment: {"longsword", "leather armor"},
+      skillProficiencies: const {"perception", "arcana"},
+      equipmentProficiencies: const {"sword", "armor"},
+      equipment: const {"longsword", "leather armor"},
       race: "Elf",
       subrace: "High Elf",
       size: "Medium",
       speed: 30,
-      abilityScoreIncreases: {"str": 2, "dex": 1},
-      racialTraits: {"Dark vision", "Resistance"},
+      abilityScoreIncreases: const {"str": 2, "dex": 1},
+      racialTraits: const {"Dark vision", "Resistance"},
       className: "Wizard",
       subclass: "Evocation",
       hitDie: 12,
-      savingThrows: {"wis", "int"},
-      abilityScores: {
+      savingThrows: const {"wis", "int"},
+      abilityScores: const {
         "str": 18,
         "dex": 10,
         "con": 14,

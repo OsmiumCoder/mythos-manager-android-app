@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:equatable/equatable.dart';
 
 /// This model holds all relevant data for a [Character].
-class Character extends Equatable {
+class Character {
   /// The id of the user who owns the character.
   String? userID;
 
@@ -204,26 +203,26 @@ class Character extends Equatable {
     return {
       // General
       "user_id": userID,
-      if (skillProficiencies != null) "skill_proficiencies": skillProficiencies,
+      if (skillProficiencies != null) "skill_proficiencies": skillProficiencies?.toList(),
       if (equipmentProficiencies != null)
-        "equipment_proficiencies": equipmentProficiencies,
-      if (equipment != null) "equipment": equipment,
+        "equipment_proficiencies": equipmentProficiencies?.toList(),
+      if (equipment != null) "equipment": equipment?.toList(),
 
       // Race
       if (race != null) "race": race,
       if (subrace != null) "subrace": subrace,
       if (size != null) "size": size,
       if (speed != null) "speed": speed,
-      if (languages != null) "languages": languages,
+      if (languages != null) "languages": languages?.toList(),
       if (abilityScoreIncreases != null)
         "ability_score_increases": abilityScoreIncreases,
-      if (racialTraits != null) "racial_traits": racialTraits,
+      if (racialTraits != null) "racial_traits": racialTraits?.toList(),
 
       // Class
       if (className != null) "class": className,
       if (subclass != null) "subclass": subclass,
       if (hitDie != null) "hit_die": hitDie, // Number of sides
-      if (savingThrows != null) "saving_throws": savingThrows,
+      if (savingThrows != null) "saving_throws": savingThrows?.toList(),
 
       // Ability Score
       if (abilityScores != null) "ability_scores": abilityScores,
@@ -244,36 +243,4 @@ class Character extends Equatable {
       if (name != null) "name": name
     };
   }
-
-
-  @override
-  List<Object?> get props => [
-    userID,
-    skillProficiencies,
-    equipmentProficiencies,
-    equipment,
-    race,
-    subrace,
-    size,
-    speed,
-    languages,
-    abilityScoreIncreases,
-    racialTraits,
-    className,
-    subrace,
-    hitDie,
-    savingThrows,
-    abilityScores,
-    background,
-    backgroundFeatureName,
-    backgroundFeatureDesc,
-    alignment,
-    age,
-    weight,
-    backstory,
-    name,
-  ];
-
-  @override
-  bool? get stringify => true;
 }
