@@ -12,7 +12,8 @@ class ClassFutureBuilder extends HookConsumerWidget {
     required this.textStyle,
     required this.subclassController,
     required this.hitDieController,
-    required this.proficiencyController,
+    required this.selectedProficiency1Controller,
+    required this.selectedProficiency2Controller,
     required this.savingThrowsController,
     required this.startingEquipmentController,
   });
@@ -21,16 +22,18 @@ class ClassFutureBuilder extends HookConsumerWidget {
   final TextStyle textStyle;
   final TextEditingController subclassController;
   final TextEditingController hitDieController;
-  final TextEditingController proficiencyController;
+  final TextEditingController selectedProficiency1Controller;
+  final TextEditingController selectedProficiency2Controller;
+
   final TextEditingController savingThrowsController;
   final TextEditingController startingEquipmentController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedProficiency1 = useState<String?>(null);
-    final selectedProficiency2 = useState<String?>(null);
-
     final characterBuilder = ref.watch(characterBuilderProvider.notifier);
+
+    useListenable(selectedProficiency1Controller);
+    useListenable(selectedProficiency2Controller);
 
     return FutureBuilder(
       future: ref
@@ -73,8 +76,6 @@ class ClassFutureBuilder extends HookConsumerWidget {
 
         final List<dynamic> proficiencyOptions =
             gameClass["proficiency_choices"]?.first["from"]["options"] ?? [];
-        final List<DropdownMenuEntry<String>> proficiencyItems1 = [];
-        final List<DropdownMenuEntry<String>> proficiencyItems2 = [];
 
         String startingEquipment = (gameClass["starting_equipment"] ?? [])
             .where((element) =>
@@ -99,15 +100,19 @@ class ClassFutureBuilder extends HookConsumerWidget {
           });
         }
 
-        for (var option in proficiencyOptions) {
-          final String name = option["item"]["name"];
-          if (name != selectedProficiency2.value) {
-            proficiencyItems1.add(DropdownMenuEntry(value: name, label: name));
-          }
-          if (name != selectedProficiency1.value) {
-            proficiencyItems2.add(DropdownMenuEntry(value: name, label: name));
-          }
-        }
+        final proficiencyItems1 = proficiencyOptions
+            .where((element) => element != selectedProficiency2Controller.text)
+            .map((e) => DropdownMenuEntry(
+                value: e["item"]["name"], label: e["item"]["name"]))
+            .toList();
+
+        final proficiencyItems2 = proficiencyOptions
+            .where((element) =>
+                element["item"]["name"].toString().toLowerCase() !=
+                selectedProficiency1Controller.text.toLowerCase())
+            .map((e) => DropdownMenuEntry(
+                value: e["item"]["name"], label: e["item"]["name"]))
+            .toList();
 
         final List<dynamic> subclasses = gameClass["subclasses"] ?? [];
 
@@ -132,39 +137,64 @@ class ClassFutureBuilder extends HookConsumerWidget {
               Container(
                 margin: const EdgeInsets.only(bottom: 5),
                 child: DropdownMenu(
+                  controller: selectedProficiency1Controller,
                   dropdownMenuEntries: proficiencyItems1,
                   onSelected: (newValue) {
-                    // Remove old value if it exists
-                    characterBuilder.state.classSkillProfs.remove(selectedProficiency1.value);
-                    characterBuilder.state.classEquipmentProfs.remove(selectedProficiency1.value);
+                    // Remove any old values
+                    characterBuilder.state.classSkillProfs.removeWhere(
+                        (element) =>
+                            element != newValue &&
+                            element != selectedProficiency2Controller.text &&
+                            !proficiencyData
+                                .map((e) => e["name"])
+                                .contains(element));
 
-                    selectedProficiency1.value = newValue;
+                    characterBuilder.state.classEquipmentProfs.removeWhere(
+                            (element) =>
+                        element != newValue &&
+                            element != selectedProficiency1Controller.text &&
+                            !proficiencyData
+                                .map((e) => e["name"])
+                                .contains(element));
+
+
                     if (newValue!.toLowerCase().contains("skill")) {
                       characterBuilder.state.classSkillProfs.add(newValue);
                     } else {
                       characterBuilder.state.classEquipmentProfs.add(newValue);
                     }
-
                   },
                 ),
               ),
               Container(
                 margin: const EdgeInsets.only(bottom: 5),
                 child: DropdownMenu(
+                    controller: selectedProficiency2Controller,
                     dropdownMenuEntries: proficiencyItems2,
                     onSelected: (newValue) {
-                      // Remove old value if it exists
-                      characterBuilder.state.classSkillProfs.remove(selectedProficiency2.value);
-                      characterBuilder.state.classEquipmentProfs.remove(selectedProficiency2.value);
+                      // Remove any old values
+                      characterBuilder.state.classSkillProfs.removeWhere(
+                              (element) =>
+                          element != newValue &&
+                              element != selectedProficiency1Controller.text &&
+                              !proficiencyData
+                                  .map((e) => e["name"])
+                                  .contains(element));
 
-                      selectedProficiency2.value = newValue;
+                      characterBuilder.state.classEquipmentProfs.removeWhere(
+                              (element) =>
+                          element != newValue &&
+                              element != selectedProficiency1Controller.text &&
+                              !proficiencyData
+                                  .map((e) => e["name"])
+                                  .contains(element));
+
                       if (newValue!.toLowerCase().contains("skill")) {
                         characterBuilder.state.classSkillProfs.add(newValue);
                       } else {
                         characterBuilder.state.classEquipmentProfs
                             .add(newValue);
                       }
-
                     }),
               ),
               Container(

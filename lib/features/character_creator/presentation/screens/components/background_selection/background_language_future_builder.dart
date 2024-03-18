@@ -25,8 +25,8 @@ class BackgroundLanguageFutureBuilder extends HookConsumerWidget {
 
             final filteredLanguages = languages
                 .where((language) => !textEditingControllers
-                    .map((c) => c.text)
-                    .contains('${language["name"]}'))
+                    .map((c) => c.text.toLowerCase())
+                    .contains('${language["name"]}'.toLowerCase()))
                 .toList();
 
             return Padding(
@@ -45,7 +45,7 @@ class BackgroundLanguageFutureBuilder extends HookConsumerWidget {
                           // Remove old languages
                           characterBuilder.state.backgroundLanguages
                               .removeWhere((element) =>
-                                  element != language ||
+                                  element != language &&
                                   !textEditingControllers
                                       .map((e) => e.text)
                                       .contains(element));
@@ -55,7 +55,7 @@ class BackgroundLanguageFutureBuilder extends HookConsumerWidget {
                         },
                         dropdownMenuEntries: filteredLanguages
                             .map((language) => DropdownMenuEntry(
-                                value: language["index"],
+                                value: language["name"],
                                 label: language["name"]))
                             .toList(),
                       ),

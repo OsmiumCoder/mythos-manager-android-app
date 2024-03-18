@@ -50,7 +50,7 @@ class BackgroundEquipmentFutureBuilder extends HookConsumerWidget {
                           // Remove old equipment
                           characterBuilder.state.backgroundEquipment
                               .removeWhere((element) =>
-                                  element != eq || !startingEquipment.contains(element) ||
+                                  element != eq && !startingEquipment.contains(element) &&
                                   !textEditingControllers
                                       .map((e) => e.text)
                                       .contains(element));
@@ -59,7 +59,7 @@ class BackgroundEquipmentFutureBuilder extends HookConsumerWidget {
                         },
                         dropdownMenuEntries: filteredEquipment
                             .map((eq) => DropdownMenuEntry(
-                                value: eq["index"], label: eq["name"]))
+                                value: eq["name"], label: eq["name"]))
                             .toList(),
                       ),
                     ),

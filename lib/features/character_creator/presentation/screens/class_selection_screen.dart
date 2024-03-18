@@ -18,12 +18,16 @@ class ClassSelectionScreen extends HookConsumerWidget {
     final classController = useTextEditingController();
     final subclassController = useTextEditingController();
     final hitDieController = useTextEditingController();
-    final proficiencyController = useTextEditingController();
     final savingThrowsController = useTextEditingController();
     final startingEquipmentController = useTextEditingController();
+    final selectedProficiency1Controller = TextEditingController();
+    final selectedProficiency2Controller = TextEditingController();
 
     useListenable(classController);
     useListenable(subclassController);
+    useListenable(hitDieController);
+    useListenable(savingThrowsController);
+    useListenable(startingEquipmentController);
 
     final characterBuilder = ref.watch(characterBuilderProvider.notifier);
     return Scaffold(
@@ -38,7 +42,8 @@ class ClassSelectionScreen extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Center(
-                  child: Text("Choose a Class", style: TextStyle(fontSize: 20))),
+                  child:
+                      Text("Choose a Class", style: TextStyle(fontSize: 20))),
               FutureBuilder(
                   future: ref.watch(dndApiController).getAllClasses(),
                   builder: (context, snapshot) {
@@ -54,20 +59,24 @@ class ClassSelectionScreen extends HookConsumerWidget {
 
                                   subclassController.text = "";
                                   hitDieController.clear();
-                                  proficiencyController.clear();
+                                  selectedProficiency1Controller.clear();
+                                  selectedProficiency2Controller.clear();
                                   savingThrowsController.clear();
                                   startingEquipmentController.clear();
 
                                   characterBuilder.state.subclass = null;
                                   characterBuilder.state.hitDie = null;
-                                  characterBuilder.state.classSavingThrows.clear();
+                                  characterBuilder.state.classSavingThrows
+                                      .clear();
                                   characterBuilder.state.classEquipment.clear();
-                                  characterBuilder.state.classSkillProfs.clear();
-                                  characterBuilder.state.classEquipmentProfs.clear();
-
+                                  characterBuilder.state.classSkillProfs
+                                      .clear();
+                                  characterBuilder.state.classEquipmentProfs
+                                      .clear();
                                 },
                                 controller: classController,
-                                dropdownMenuEntries: allClasses.map((classData) {
+                                dropdownMenuEntries:
+                                    allClasses.map((classData) {
                                   return DropdownMenuEntry(
                                       value: classData["name"],
                                       label: classData["name"]);
@@ -75,14 +84,19 @@ class ClassSelectionScreen extends HookConsumerWidget {
                           ),
                           classController.text.isNotEmpty
                               ? ClassFutureBuilder(
-                            classController: classController,
-                            textStyle: textStyle,
-                            subclassController: subclassController,
-                            hitDieController: hitDieController,
-                            proficiencyController: proficiencyController,
-                            savingThrowsController: savingThrowsController,
-                            startingEquipmentController: startingEquipmentController,
-                          )
+                                  classController: classController,
+                                  textStyle: textStyle,
+                                  subclassController: subclassController,
+                                  hitDieController: hitDieController,
+                                  selectedProficiency1Controller:
+                                      selectedProficiency1Controller,
+                                  selectedProficiency2Controller:
+                                      selectedProficiency2Controller,
+                                  savingThrowsController:
+                                      savingThrowsController,
+                                  startingEquipmentController:
+                                      startingEquipmentController,
+                                )
                               : const SizedBox.shrink(),
                         ],
                       );
@@ -91,10 +105,10 @@ class ClassSelectionScreen extends HookConsumerWidget {
                     }
                   }),
               ElevatedButton(
-                  onPressed: () {
-                    print(characterBuilder.state.toString());
-                    Navigator.of(context).pushNamed(AppRouter.abilitySelectionScreen);
-                  },
+                  onPressed: classController.text.isNotEmpty
+                      ? () => Navigator.of(context)
+                          .pushNamed(AppRouter.abilitySelectionScreen)
+                      : null,
                   child: const Text('Select Class')),
             ],
           ),
