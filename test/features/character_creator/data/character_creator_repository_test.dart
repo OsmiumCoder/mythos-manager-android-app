@@ -70,15 +70,15 @@ void main() {
       Character storedCharacter = snapshot.docs.first.data();
 
       expect(storedCharacter.userID, "user-id-valid");
-      expect(storedCharacter.skillProficiencies, ["perception", "arcana"]);
-      expect(storedCharacter.equipmentProficiencies, ["sword", "armor"]);
-      expect(storedCharacter.equipment, ["longsword", "leather armor"]);
+      expect(storedCharacter.skillProficiencies, {"perception", "arcana"});
+      expect(storedCharacter.equipmentProficiencies, {"sword", "armor"});
+      expect(storedCharacter.equipment, {"longsword", "leather armor"});
       expect(storedCharacter.race, "Elf");
       expect(storedCharacter.subrace, "High Elf");
       expect(storedCharacter.size, "Medium");
       expect(storedCharacter.speed, 30);
       expect(storedCharacter.abilityScoreIncreases, {"str": 2, "dex": 1});
-      expect(storedCharacter.racialTraits, ["Dark vision", "Resistance"]);
+      expect(storedCharacter.racialTraits, {"Dark vision", "Resistance"});
       expect(storedCharacter.className, "Wizard");
       expect(storedCharacter.subclass, "Evocation");
       expect(storedCharacter.hitDie, 12);
