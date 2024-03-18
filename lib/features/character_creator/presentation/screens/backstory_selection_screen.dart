@@ -13,6 +13,7 @@ class BackstorySelectionScreen extends HookConsumerWidget {
     final weightController = useTextEditingController();
     final heightController = useTextEditingController();
     final backstoryController = useTextEditingController();
+    final nameController = useTextEditingController();
 
     final List alignments = [
       "Lawful good",
@@ -83,6 +84,16 @@ class BackstorySelectionScreen extends HookConsumerWidget {
                 maxLines: 3,
               ),
               const SizedBox(height: 5),
+              const Text('Enter the name of your character'),
+              TextField(
+                controller: nameController,
+                decoration: InputDecoration(
+                  hintText: 'Please enter',
+                  fillColor: Theme.of(context).inputDecorationTheme.fillColor,
+                  filled: true,
+                ),
+              ),
+              const SizedBox(height: 5),
               ElevatedButton(
                 onPressed: () {
                   print(alignmentController.text);
@@ -90,6 +101,7 @@ class BackstorySelectionScreen extends HookConsumerWidget {
                   print(weightController.text);
                   print(heightController.text);
                   print(backstoryController.text);
+                  print(nameController.text);
                   // TODO Add Navigation
                 },
                 child: const Text('Submit'),

@@ -25,6 +25,7 @@ class AppRouter {
       '/characters/creator/race-selection';
   static const String abilitySelectionScreen =
       '/characters/creator/ability-selection';
+  static const String classSelectionScreen = '/characters/creator/class-selection';
 
   // Screens that do not require authentication
   static const noAuthScreens = [loginScreen, signupScreen];
@@ -51,6 +52,8 @@ class AppRouter {
         );
       case raceSelectionScreen:
         return MaterialPageRoute(builder: (_) => const RaceSelectionScreen());
+      case classSelectionScreen:
+        return MaterialPageRoute(builder: (_) => const ClassSelectionScreen());
       case backstorySelectionScreen:
         return MaterialPageRoute(
           builder: (_) => const BackstorySelectionScreen(),

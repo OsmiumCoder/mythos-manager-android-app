@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// This model holds all relevant data for a [Character].
 class Character {
+  /// The id of the user who owns the character.
+  String? userID;
+
   /// The list of skills the [Character] is proficient in.
   final List<String>? skillProficiencies;
 
@@ -101,30 +104,36 @@ class Character {
   /// The backstory of the [Character].
   String? backstory;
 
-  Character(
-      {this.skillProficiencies,
-      this.equipmentProficiencies,
-      this.equipment,
-      this.race,
-      this.subrace,
-      this.size,
-      this.speed,
-      this.languages,
-      this.abilityScoreIncreases,
-      this.racialTraits,
-      this.className,
-      this.subclass,
-      this.hitDie,
-      this.savingThrows,
-      this.abilityScores,
-      this.background,
-      this.backgroundFeatureName,
-      this.backgroundFeatureDesc,
-      this.alignment,
-      this.age,
-      this.weight,
-      this.height,
-      this.backstory});
+  /// The name of the [Character].
+  final String? name;
+
+  Character({
+    this.userID,
+    this.skillProficiencies,
+    this.equipmentProficiencies,
+    this.equipment,
+    this.race,
+    this.subrace,
+    this.size,
+    this.speed,
+    this.languages,
+    this.abilityScoreIncreases,
+    this.racialTraits,
+    this.className,
+    this.subclass,
+    this.hitDie,
+    this.savingThrows,
+    this.abilityScores,
+    this.background,
+    this.backgroundFeatureName,
+    this.backgroundFeatureDesc,
+    this.alignment,
+    this.age,
+    this.weight,
+    this.height,
+    this.backstory,
+    this.name,
+  });
 
   factory Character.withCollectionsInitialized() {
     return Character(
@@ -146,6 +155,7 @@ class Character {
   ) {
     final data = snapshot.data();
     return Character(
+      userID: data?["user_id"],
       skillProficiencies: data?["skill_proficiencies"] is Iterable
           ? List.from(data?["skill_proficiencies"])
           : null,
@@ -160,17 +170,21 @@ class Character {
       speed: data?["speed"],
       languages:
           data?["languages"] is Iterable ? List.from(data?["languages"]) : null,
-      abilityScoreIncreases:
-          data?["ability_score_increases"] is Map ? Map.from(data?["ability_score_increases"]) : null,
-      racialTraits: data?["racial_traits"] is Iterable ? List.from(data?["racial_traits"]) : null,
+      abilityScoreIncreases: data?["ability_score_increases"] is Map
+          ? Map.from(data?["ability_score_increases"])
+          : null,
+      racialTraits: data?["racial_traits"] is Iterable
+          ? List.from(data?["racial_traits"])
+          : null,
       className: data?["class"],
       subclass: data?["subclass"],
       hitDie: data?["hit_die"],
       savingThrows: data?["saving_throws"] is Iterable
           ? List.from(data?["saving_throws"])
           : null,
-      abilityScores:
-          data?["ability_scores"] is Map ? Map.from(data?["ability_scores"]) : null,
+      abilityScores: data?["ability_scores"] is Map
+          ? Map.from(data?["ability_scores"])
+          : null,
       background: data?["background"],
       backgroundFeatureName: data?["background_feature_name"],
       backgroundFeatureDesc: data?["background_feature_desc"],
@@ -179,6 +193,7 @@ class Character {
       weight: data?["weight"],
       height: data?["height"],
       backstory: data?["backstory"],
+      name: data?["name"]
     );
   }
 
@@ -186,6 +201,7 @@ class Character {
   Map<String, dynamic> toFirestore() {
     return {
       // General
+      "user_id": userID,
       if (skillProficiencies != null) "skill_proficiencies": skillProficiencies,
       if (equipmentProficiencies != null)
         "equipment_proficiencies": equipmentProficiencies,
@@ -222,7 +238,8 @@ class Character {
       if (age != null) "age": age,
       if (weight != null) "weight": weight,
       if (height != null) "height": height,
-      if (backstory != null) "backstory": backstory
+      if (backstory != null) "backstory": backstory,
+      if (name != null) "name": name
     };
   }
 }
