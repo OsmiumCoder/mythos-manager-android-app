@@ -5,6 +5,9 @@ import 'package:mythos_manager/features/character_creator/domain/character.dart'
 ///
 /// Author: Jonathon Meney
 class Campaign {
+  /// The id of the user who owns the character.
+  final String userID;
+
   /// The [name] of the campaign.
   final String name;
 
@@ -17,7 +20,11 @@ class Campaign {
   final String? characterUID;
 
   /// Constructs a [Campaign] model.
-  Campaign({required this.name, required this.description, this.characterUID});
+  Campaign(
+      {required this.userID,
+      required this.name,
+      required this.description,
+      this.characterUID});
 
   /// Constructs a [Campaign] from a firestore data [snapshot].
   factory Campaign.fromFirestore(
@@ -26,6 +33,7 @@ class Campaign {
   ) {
     final data = snapshot.data();
     return Campaign(
+      userID: data?["user_id"],
         name: data?["name"],
         description: data?["description"],
         characterUID: data?["character_id"]);
@@ -34,6 +42,7 @@ class Campaign {
   /// Returns a map of a [Campaign]'s attributes to store in Firestore.
   Map<String, dynamic> toFirestore() {
     return {
+      "user_id": userID,
       "name": name,
       "description": description,
       if (characterUID != null) "character_id": characterUID
