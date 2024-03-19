@@ -5,14 +5,24 @@ import 'package:mythos_manager/features/characters/application/character_service
 import 'package:mythos_manager/features/characters/domain/character.dart';
 
 /// Provides a [CharacterController].
-final characterControllerProvider = AsyncNotifierProvider<CharacterController, List<Character>>((){
+final characterControllerProvider =
+    AsyncNotifierProvider<CharacterController, List<Character>>(() {
   return CharacterController();
 });
 
-/// Delegates requests related to [Character]s.
+/// Delegates requests related to [Character]'s.
 ///
 /// Author: Jonathon Meney
 class CharacterController extends AsyncNotifier<List<Character>> {
+  /// Stores a [Character] in cloud firestore.
+  Future<void> createCharacter(Character character) async {
+    state = const AsyncValue.loading();
+
+    state = await AsyncValue.guard(() {
+      ref.watch(characterServiceProvider).createCharacter(character);
+      return _fetchCharacters();
+    });
+  }
 
   /// Returns a list of the signed in users [Character]s.
   Future<List<Character>> _fetchCharacters() async {

@@ -24,6 +24,19 @@ class CharacterService {
   /// Constructs a [CharacterService].
   CharacterService(this._characterRepository, this._authenticationRepository);
 
+  /// Stores a [Character] in cloud firestore.
+  ///
+  /// Throws a [NoUserFoundException] if no user is signed in to attach the
+  /// character to.
+  Future<void> createCharacter(Character character) async {
+    User? auth = _authenticationRepository.currentUser();
+    if (auth == null) {
+      throw NoUserFoundException();
+    }
+    character.userID = auth.uid;
+    await _characterRepository.createCharacter(character);
+  }
+
   /// Returns a list of [Character]s created by the signed in user.
   ///
   /// Throws a [NoUserFoundException] if no user is signed in.
