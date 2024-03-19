@@ -6,7 +6,7 @@ void main() {
     Campaign campaign = Campaign(userID: "id", name: "name", description: "description");
 
     test("fromFirestore returns correct campaign model", () {
-      expect(campaign.id, null);
+      expect(campaign.uid, null);
       expect(campaign.userID, "id");
       expect(campaign.name, "name");
       expect(campaign.description, "description");

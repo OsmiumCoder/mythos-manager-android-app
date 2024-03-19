@@ -6,7 +6,7 @@ import 'package:mythos_manager/features/character_creator/domain/character.dart'
 /// Author: Jonathon Meney
 class Campaign {
   /// The firestore document id.
-  final String? id;
+  final String? uid;
 
   /// The id of the user who owns the character.
   final String userID;
@@ -24,7 +24,7 @@ class Campaign {
 
   /// Constructs a [Campaign] model.
   Campaign(
-      {this.id,
+      {this.uid,
       required this.userID,
       required this.name,
       required this.description,
@@ -37,7 +37,7 @@ class Campaign {
   ) {
     final data = snapshot.data();
     return Campaign(
-        id: data?["id"],
+        uid: data?["id"],
         userID: data?["user_id"],
         name: data?["name"],
         description: data?["description"],
