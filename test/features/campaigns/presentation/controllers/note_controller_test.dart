@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:mythos_manager/features/campaigns/application/campaign_service.dart';
-import 'package:mythos_manager/features/campaigns/presentation/controllers/campaign_controller.dart';
 import 'package:mythos_manager/features/campaigns/presentation/controllers/note_controller.dart';
 
 import '../../../../provider_container.dart';
