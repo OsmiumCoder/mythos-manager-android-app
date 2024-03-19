@@ -6,28 +6,28 @@ class Character {
   String? userID;
 
   /// The list of skills the [Character] is proficient in.
-  final List<String>? skillProficiencies;
+  final Set<String>? skillProficiencies;
 
   /// The list of equipment the [Character] is proficient in.
-  final List<String>? equipmentProficiencies;
+  final Set<String>? equipmentProficiencies;
 
   /// The list of equipment(items) in the [Character]'s inventory.
-  final List<String>? equipment;
+  final Set<String>? equipment;
 
   /// The race of the [Character].
-  final String? race;
+  String? race;
 
   /// The subrace of the [Character].
-  final String? subrace;
+  String? subrace;
 
   /// The size of the [Character]'s race.
-  final String? size;
+  String? size;
 
   /// The speed of the [Character].
-  final int? speed;
+  int? speed;
 
   /// The list of languages the [Character] can speak.
-  final List<String>? languages;
+  final Set<String>? languages;
 
   /// Map of ability score increases per ability.
   ///
@@ -42,20 +42,20 @@ class Character {
   final Map<String, int>? abilityScoreIncreases;
 
   /// The list of racial traits for the [Character]'s race.
-  final List<String>? racialTraits;
+  final Set<String>? racialTraits;
 
   /// The class of the [Character].
-  final String? className;
+  String? className;
 
   /// The subclass of the [Character].
-  final String? subclass;
+  String? subclass;
 
   /// The hit die for the [Character]'s class.
   ///
   /// Integer representative for number of sides to the dice.
   /// Example:
   /// hitDie = 6 --> d6
-  final int? hitDie;
+  int? hitDie;
 
   /// The list of abilities the [Character]'s class has saving throws for.
   ///
@@ -63,7 +63,7 @@ class Character {
   /// ```
   /// ["wis", "str"]
   /// ```
-  final List<String>? savingThrows;
+  final Set<String>? savingThrows;
 
   /// Map of ability score base value.
   ///
@@ -81,28 +81,28 @@ class Character {
   final Map<String, int>? abilityScores;
 
   /// The background of the [Character].
-  final String? background;
+  String? background;
 
   /// The name of the feature from the [Character]'s background.
-  final String? backgroundFeatureName;
+  String? backgroundFeatureName;
 
   /// The description of the feature from the [Character]'s background.
-  final String? backgroundFeatureDesc;
+  String? backgroundFeatureDesc;
 
   /// The alignment of the [Character].
-  final String? alignment;
+  String? alignment;
 
   /// The age of the [Character].
-  final String? age;
+  String? age;
 
   /// The weight of the [Character].
-  final String? weight;
+  String? weight;
 
   /// The height of the [Character].
-  final String? height;
+  String? height;
 
   /// The backstory of the [Character].
-  final String? backstory;
+  String? backstory;
 
   /// The name of the [Character].
   final String? name;
@@ -135,6 +135,19 @@ class Character {
     this.name,
   });
 
+  factory Character.withCollectionsInitialized() {
+    return Character(
+      abilityScoreIncreases: {},
+      abilityScores: {},
+      equipment: {},
+      equipmentProficiencies: {},
+      languages: {},
+      racialTraits: {},
+      savingThrows: {},
+      skillProficiencies: {},
+    );
+  }
+
   /// Constructs a [Character] from a firestore data [snapshot].
   factory Character.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
@@ -142,46 +155,47 @@ class Character {
   ) {
     final data = snapshot.data();
     return Character(
-      userID: data?["user_id"],
-      skillProficiencies: data?["skill_proficiencies"] is Iterable
-          ? List.from(data?["skill_proficiencies"])
-          : null,
-      equipmentProficiencies: data?["equipment_proficiencies"] is Iterable
-          ? List.from(data?["equipment_proficiencies"])
-          : null,
-      equipment:
-          data?["equipment"] is Iterable ? List.from(data?["equipment"]) : null,
-      race: data?["race"],
-      subrace: data?["subrace"],
-      size: data?["size"],
-      speed: data?["speed"],
-      languages:
-          data?["languages"] is Iterable ? List.from(data?["languages"]) : null,
-      abilityScoreIncreases: data?["ability_score_increases"] is Map
-          ? Map.from(data?["ability_score_increases"])
-          : null,
-      racialTraits: data?["racial_traits"] is Iterable
-          ? List.from(data?["racial_traits"])
-          : null,
-      className: data?["class"],
-      subclass: data?["subclass"],
-      hitDie: data?["hit_die"],
-      savingThrows: data?["saving_throws"] is Iterable
-          ? List.from(data?["saving_throws"])
-          : null,
-      abilityScores: data?["ability_scores"] is Map
-          ? Map.from(data?["ability_scores"])
-          : null,
-      background: data?["background"],
-      backgroundFeatureName: data?["background_feature_name"],
-      backgroundFeatureDesc: data?["background_feature_desc"],
-      alignment: data?["alignment"],
-      age: data?["age"],
-      weight: data?["weight"],
-      height: data?["height"],
-      backstory: data?["backstory"],
-      name: data?["name"]
-    );
+        userID: data?["user_id"],
+        skillProficiencies: data?["skill_proficiencies"] is Iterable
+            ? Set.from(data?["skill_proficiencies"])
+            : null,
+        equipmentProficiencies: data?["equipment_proficiencies"] is Iterable
+            ? Set.from(data?["equipment_proficiencies"])
+            : null,
+        equipment: data?["equipment"] is Iterable
+            ? Set.from(data?["equipment"])
+            : null,
+        race: data?["race"],
+        subrace: data?["subrace"],
+        size: data?["size"],
+        speed: data?["speed"],
+        languages: data?["languages"] is Iterable
+            ? Set.from(data?["languages"])
+            : null,
+        abilityScoreIncreases: data?["ability_score_increases"] is Map
+            ? Map.from(data?["ability_score_increases"])
+            : null,
+        racialTraits: data?["racial_traits"] is Iterable
+            ? Set.from(data?["racial_traits"])
+            : null,
+        className: data?["class"],
+        subclass: data?["subclass"],
+        hitDie: data?["hit_die"],
+        savingThrows: data?["saving_throws"] is Iterable
+            ? Set.from(data?["saving_throws"])
+            : null,
+        abilityScores: data?["ability_scores"] is Map
+            ? Map.from(data?["ability_scores"])
+            : null,
+        background: data?["background"],
+        backgroundFeatureName: data?["background_feature_name"],
+        backgroundFeatureDesc: data?["background_feature_desc"],
+        alignment: data?["alignment"],
+        age: data?["age"],
+        weight: data?["weight"],
+        height: data?["height"],
+        backstory: data?["backstory"],
+        name: data?["name"]);
   }
 
   /// Returns a map of a [Character]'s attributes to store in Firestore.
@@ -189,26 +203,26 @@ class Character {
     return {
       // General
       "user_id": userID,
-      if (skillProficiencies != null) "skill_proficiencies": skillProficiencies,
+      if (skillProficiencies != null) "skill_proficiencies": skillProficiencies?.toList(),
       if (equipmentProficiencies != null)
-        "equipment_proficiencies": equipmentProficiencies,
-      if (equipment != null) "equipment": equipment,
+        "equipment_proficiencies": equipmentProficiencies?.toList(),
+      if (equipment != null) "equipment": equipment?.toList(),
 
       // Race
       if (race != null) "race": race,
       if (subrace != null) "subrace": subrace,
       if (size != null) "size": size,
       if (speed != null) "speed": speed,
-      if (languages != null) "languages": languages,
+      if (languages != null) "languages": languages?.toList(),
       if (abilityScoreIncreases != null)
         "ability_score_increases": abilityScoreIncreases,
-      if (racialTraits != null) "racial_traits": racialTraits,
+      if (racialTraits != null) "racial_traits": racialTraits?.toList(),
 
       // Class
       if (className != null) "class": className,
       if (subclass != null) "subclass": subclass,
       if (hitDie != null) "hit_die": hitDie, // Number of sides
-      if (savingThrows != null) "saving_throws": savingThrows,
+      if (savingThrows != null) "saving_throws": savingThrows?.toList(),
 
       // Ability Score
       if (abilityScores != null) "ability_scores": abilityScores,

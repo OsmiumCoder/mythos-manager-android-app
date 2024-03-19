@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mythos_manager/features/character_creator/presentation/controllers/character_builder_controller.dart';
 import 'package:mythos_manager/features/character_creator/presentation/controllers/dnd_api_controller.dart';
 import 'package:mythos_manager/features/character_creator/presentation/screens/components/ability_selection/ability_selection_row.dart';
+import 'package:mythos_manager/routing/app_router.dart';
 
 /// Author: Liam Welsh
 class AbilitySelectionScreen extends HookConsumerWidget {
@@ -32,6 +34,13 @@ class AbilitySelectionScreen extends HookConsumerWidget {
     useListenable(wisController);
     useListenable(chaController);
 
+    final characterBuilder = ref.watch(characterBuilderProvider.notifier);
+
+    useEffect(() {
+      characterBuilder.state.selectedAbilityScoreIncreases.clear();
+      return null;
+    }, const []);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Character Creator"),
@@ -39,9 +48,8 @@ class AbilitySelectionScreen extends HookConsumerWidget {
       ),
       body: SingleChildScrollView(
         child: FutureBuilder(
-          future: ref
-              .watch(dndApiController)
-              .getRace("elf"), // TODO Get selected race
+          future:
+              ref.watch(dndApiController).getRace(characterBuilder.state.race!),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final abilityBonuses = snapshot.data!["ability_bonuses"] as List;
@@ -87,12 +95,7 @@ class AbilitySelectionScreen extends HookConsumerWidget {
                     child: ElevatedButton(
                       child: const Text("Select Scores"),
                       onPressed: () {
-                        print(strController.text);
-                        print(dexController.text);
-                        print(conController.text);
-                        print(intController.text);
-                        print(wisController.text);
-                        print(chaController.text);
+                        Navigator.pushNamed(context, AppRouter.backgroundSelectionScreen);
                       },
                     ),
                   )

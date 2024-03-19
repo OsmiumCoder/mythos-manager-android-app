@@ -9,20 +9,20 @@ void main() {
   group("CharacterRepository tests", () {
     Character character = Character(
       userID: "user-id-valid",
-      skillProficiencies: ["perception", "arcana"],
-      equipmentProficiencies: ["sword", "armor"],
-      equipment: ["longsword", "leather armor"],
+      skillProficiencies: const {"perception", "arcana"},
+      equipmentProficiencies: const {"sword", "armor"},
+      equipment: const {"longsword", "leather armor"},
       race: "Elf",
       subrace: "High Elf",
       size: "Medium",
       speed: 30,
-      abilityScoreIncreases: {"str": 2, "dex": 1},
-      racialTraits: ["Dark vision", "Resistance"],
+      abilityScoreIncreases: const {"str": 2, "dex": 1},
+      racialTraits: const {"Dark vision", "Resistance"},
       className: "Wizard",
       subclass: "Evocation",
       hitDie: 12,
-      savingThrows: ["wis", "int"],
-      abilityScores: {
+      savingThrows: const {"wis", "int"},
+      abilityScores: const {
         "str": 18,
         "dex": 10,
         "con": 14,
@@ -70,15 +70,15 @@ void main() {
       Character storedCharacter = snapshot.docs.first.data();
 
       expect(storedCharacter.userID, "user-id-valid");
-      expect(storedCharacter.skillProficiencies, ["perception", "arcana"]);
-      expect(storedCharacter.equipmentProficiencies, ["sword", "armor"]);
-      expect(storedCharacter.equipment, ["longsword", "leather armor"]);
+      expect(storedCharacter.skillProficiencies, {"perception", "arcana"});
+      expect(storedCharacter.equipmentProficiencies, {"sword", "armor"});
+      expect(storedCharacter.equipment, {"longsword", "leather armor"});
       expect(storedCharacter.race, "Elf");
       expect(storedCharacter.subrace, "High Elf");
       expect(storedCharacter.size, "Medium");
       expect(storedCharacter.speed, 30);
       expect(storedCharacter.abilityScoreIncreases, {"str": 2, "dex": 1});
-      expect(storedCharacter.racialTraits, ["Dark vision", "Resistance"]);
+      expect(storedCharacter.racialTraits, {"Dark vision", "Resistance"});
       expect(storedCharacter.className, "Wizard");
       expect(storedCharacter.subclass, "Evocation");
       expect(storedCharacter.hitDie, 12);

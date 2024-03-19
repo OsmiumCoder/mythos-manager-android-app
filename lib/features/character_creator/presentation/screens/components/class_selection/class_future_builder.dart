@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mythos_manager/features/character_creator/presentation/controllers/character_builder_controller.dart';
 import 'package:mythos_manager/features/character_creator/presentation/controllers/dnd_api_controller.dart';
 
-
-
-///Author: Shreif Abdalla
+///Author: Shreif Abdalla, Liam Welsh
 class ClassFutureBuilder extends HookConsumerWidget {
   const ClassFutureBuilder({
     super.key,
@@ -13,7 +12,8 @@ class ClassFutureBuilder extends HookConsumerWidget {
     required this.textStyle,
     required this.subclassController,
     required this.hitDieController,
-    required this.proficiencyController,
+    required this.selectedProficiency1Controller,
+    required this.selectedProficiency2Controller,
     required this.savingThrowsController,
     required this.startingEquipmentController,
   });
@@ -22,14 +22,18 @@ class ClassFutureBuilder extends HookConsumerWidget {
   final TextStyle textStyle;
   final TextEditingController subclassController;
   final TextEditingController hitDieController;
-  final TextEditingController proficiencyController;
+  final TextEditingController selectedProficiency1Controller;
+  final TextEditingController selectedProficiency2Controller;
+
   final TextEditingController savingThrowsController;
   final TextEditingController startingEquipmentController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedProficiency1 = useState<String?>(null);
-    final selectedProficiency2 = useState<String?>(null);
+    final characterBuilder = ref.watch(characterBuilderProvider.notifier);
+
+    useListenable(selectedProficiency1Controller);
+    useListenable(selectedProficiency2Controller);
 
     return FutureBuilder(
       future: ref
@@ -47,30 +51,42 @@ class ClassFutureBuilder extends HookConsumerWidget {
         final gameClass = snapshot.data!;
         final String hitDie = "Hit Die: d${gameClass["hit_die"]}";
 
+        characterBuilder.state.hitDie = gameClass["hit_die"];
+
         final List<dynamic> proficiencyData = gameClass["proficiencies"] ?? [];
         final List<String> proficiencies = [];
+
         for (var element in proficiencyData) {
           if (!element["index"].startsWith("saving-throw")) {
             proficiencies.add(element["name"]);
+
+            if ((element["name"] as String).toLowerCase().contains("skill")) {
+              characterBuilder.state.classSkillProfs.add(element["name"]);
+            } else {
+              characterBuilder.state.classEquipmentProfs.add(element["name"]);
+            }
           }
         }
 
         final List<dynamic> savingThrowsData = gameClass["saving_throws"] ?? [];
-        final String savingThrows =
-            savingThrowsData.map((element) => element["name"]).join(", ");
+        final String savingThrows = savingThrowsData.map((element) {
+          characterBuilder.state.classSavingThrows.add(element["name"]);
+          return element["name"];
+        }).join(", ");
 
         final List<dynamic> proficiencyOptions =
             gameClass["proficiency_choices"]?.first["from"]["options"] ?? [];
-        final List<DropdownMenuEntry<String>> proficiencyItems1 = [];
-        final List<DropdownMenuEntry<String>> proficiencyItems2 = [];
 
         String startingEquipment = (gameClass["starting_equipment"] ?? [])
             .where((element) =>
                 element != null &&
                 element["equipment"] != null &&
                 element["equipment"]["name"] != null)
-            .map((element) => element["equipment"]["name"].toString())
-            .join(", ");
+            .map((element) {
+          characterBuilder.state.classEquipment
+              .add(element["equipment"]["name"]);
+          return element["equipment"]["name"];
+        }).join(", ");
 
         final List<dynamic> startingEquipmentOptions =
             gameClass["starting_equipment_options"] ?? [];
@@ -84,15 +100,19 @@ class ClassFutureBuilder extends HookConsumerWidget {
           });
         }
 
-        for (var option in proficiencyOptions) {
-          final String name = option["item"]["name"];
-          if (name != selectedProficiency2.value) {
-            proficiencyItems1.add(DropdownMenuEntry(value: name, label: name));
-          }
-          if (name != selectedProficiency1.value) {
-            proficiencyItems2.add(DropdownMenuEntry(value: name, label: name));
-          }
-        }
+        final proficiencyItems1 = proficiencyOptions
+            .where((element) => element != selectedProficiency2Controller.text)
+            .map((e) => DropdownMenuEntry(
+                value: e["item"]["name"], label: e["item"]["name"]))
+            .toList();
+
+        final proficiencyItems2 = proficiencyOptions
+            .where((element) =>
+                element["item"]["name"].toString().toLowerCase() !=
+                selectedProficiency1Controller.text.toLowerCase())
+            .map((e) => DropdownMenuEntry(
+                value: e["item"]["name"], label: e["item"]["name"]))
+            .toList();
 
         final List<dynamic> subclasses = gameClass["subclasses"] ?? [];
 
@@ -117,18 +137,64 @@ class ClassFutureBuilder extends HookConsumerWidget {
               Container(
                 margin: const EdgeInsets.only(bottom: 5),
                 child: DropdownMenu(
+                  controller: selectedProficiency1Controller,
                   dropdownMenuEntries: proficiencyItems1,
                   onSelected: (newValue) {
-                    selectedProficiency1.value = newValue;
+                    // Remove any old values
+                    characterBuilder.state.classSkillProfs.removeWhere(
+                        (element) =>
+                            element != newValue &&
+                            element != selectedProficiency2Controller.text &&
+                            !proficiencyData
+                                .map((e) => e["name"])
+                                .contains(element));
+
+                    characterBuilder.state.classEquipmentProfs.removeWhere(
+                            (element) =>
+                        element != newValue &&
+                            element != selectedProficiency1Controller.text &&
+                            !proficiencyData
+                                .map((e) => e["name"])
+                                .contains(element));
+
+
+                    if (newValue!.toLowerCase().contains("skill")) {
+                      characterBuilder.state.classSkillProfs.add(newValue);
+                    } else {
+                      characterBuilder.state.classEquipmentProfs.add(newValue);
+                    }
                   },
                 ),
               ),
               Container(
                 margin: const EdgeInsets.only(bottom: 5),
                 child: DropdownMenu(
+                    controller: selectedProficiency2Controller,
                     dropdownMenuEntries: proficiencyItems2,
                     onSelected: (newValue) {
-                      selectedProficiency2.value = newValue;
+                      // Remove any old values
+                      characterBuilder.state.classSkillProfs.removeWhere(
+                              (element) =>
+                          element != newValue &&
+                              element != selectedProficiency1Controller.text &&
+                              !proficiencyData
+                                  .map((e) => e["name"])
+                                  .contains(element));
+
+                      characterBuilder.state.classEquipmentProfs.removeWhere(
+                              (element) =>
+                          element != newValue &&
+                              element != selectedProficiency1Controller.text &&
+                              !proficiencyData
+                                  .map((e) => e["name"])
+                                  .contains(element));
+
+                      if (newValue!.toLowerCase().contains("skill")) {
+                        characterBuilder.state.classSkillProfs.add(newValue);
+                      } else {
+                        characterBuilder.state.classEquipmentProfs
+                            .add(newValue);
+                      }
                     }),
               ),
               Container(
@@ -144,6 +210,8 @@ class ClassFutureBuilder extends HookConsumerWidget {
                       margin: const EdgeInsets.only(bottom: 5),
                       child: DropdownMenu(
                         controller: subclassController,
+                        onSelected: (subclass) =>
+                            characterBuilder.state.subclass = subclass,
                         dropdownMenuEntries: subclasses.map((element) {
                           return DropdownMenuEntry(
                               value: element["name"], label: element["name"]);
@@ -151,7 +219,6 @@ class ClassFutureBuilder extends HookConsumerWidget {
                       ),
                     )
                   : const SizedBox.shrink(),
-
             ],
           ),
         );

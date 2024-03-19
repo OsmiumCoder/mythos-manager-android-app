@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mythos_manager/features/character_creator/presentation/controllers/character_builder_controller.dart';
+import 'package:mythos_manager/features/character_creator/presentation/controllers/character_creator_controller.dart';
+import 'package:mythos_manager/routing/app_router.dart';
 
-/// Author: Shreif Abdalla
+/// Author: Shreif Abdalla, Liam Welsh
 class BackstorySelectionScreen extends HookConsumerWidget {
   const BackstorySelectionScreen({super.key});
 
@@ -15,7 +18,7 @@ class BackstorySelectionScreen extends HookConsumerWidget {
     final backstoryController = useTextEditingController();
     final nameController = useTextEditingController();
 
-    final List alignments = [
+    const List alignments = [
       "Lawful good",
       'Neutral Good',
       'Chaotic Good',
@@ -27,6 +30,8 @@ class BackstorySelectionScreen extends HookConsumerWidget {
       'Chaotic Evil'
     ];
 
+    final characterBuilder = ref.watch(characterBuilderProvider.notifier);
+    final characterSaver = ref.watch(characterCreatorControllerProvider);
     return Scaffold(
       appBar: AppBar(title: const Text('Character Creator'), centerTitle: true),
       body: SingleChildScrollView(
@@ -39,6 +44,7 @@ class BackstorySelectionScreen extends HookConsumerWidget {
               const SizedBox(height: 5),
               DropdownMenu(
                   controller: alignmentController,
+                  onSelected: (alignment) => characterBuilder.state.alignment = alignment,
                   dropdownMenuEntries: alignments.map((element) {
                     return DropdownMenuEntry(value: element, label: element);
                   }).toList()),
@@ -46,6 +52,7 @@ class BackstorySelectionScreen extends HookConsumerWidget {
               const Text('Enter the age of your character'),
               TextField(
                 controller: ageController,
+                onChanged: (age) => age.isNotEmpty ? characterBuilder.state.age = age : null,
                 decoration: InputDecoration(
                   hintText: 'Age',
                   fillColor: Theme.of(context).inputDecorationTheme.fillColor,
@@ -56,6 +63,7 @@ class BackstorySelectionScreen extends HookConsumerWidget {
               const Text('Enter the weight of your character'),
               TextField(
                 controller: weightController,
+                onChanged: (weight) => weight.isNotEmpty ? characterBuilder.state.weight = weight : null,
                 decoration: InputDecoration(
                   hintText: 'Weight',
                   fillColor: Theme.of(context).inputDecorationTheme.fillColor,
@@ -66,6 +74,7 @@ class BackstorySelectionScreen extends HookConsumerWidget {
               const Text('Enter the height of your character'),
               TextField(
                 controller: heightController,
+                onChanged: (height) => height.isNotEmpty ? characterBuilder.state.height = height : null,
                 decoration: InputDecoration(
                   hintText: 'Height',
                   fillColor: Theme.of(context).inputDecorationTheme.fillColor,
@@ -76,8 +85,9 @@ class BackstorySelectionScreen extends HookConsumerWidget {
               const Text('Enter the backstory of your character'),
               TextField(
                 controller: backstoryController,
+                onChanged: (backStory) => backStory.isNotEmpty ? characterBuilder.state.backstory = backStory : null,
                 decoration: InputDecoration(
-                  hintText: 'Please enter',
+                  hintText: 'Backstory',
                   fillColor: Theme.of(context).inputDecorationTheme.fillColor,
                   filled: true,
                 ),
@@ -87,8 +97,9 @@ class BackstorySelectionScreen extends HookConsumerWidget {
               const Text('Enter the name of your character'),
               TextField(
                 controller: nameController,
+                onChanged: (name) => name.isNotEmpty ? characterBuilder.state.name = name : null,
                 decoration: InputDecoration(
-                  hintText: 'Please enter',
+                  hintText: 'Name',
                   fillColor: Theme.of(context).inputDecorationTheme.fillColor,
                   filled: true,
                 ),
@@ -96,13 +107,8 @@ class BackstorySelectionScreen extends HookConsumerWidget {
               const SizedBox(height: 5),
               ElevatedButton(
                 onPressed: () {
-                  print(alignmentController.text);
-                  print(ageController.text);
-                  print(weightController.text);
-                  print(heightController.text);
-                  print(backstoryController.text);
-                  print(nameController.text);
-                  // TODO Add Navigation
+                  characterSaver.createCharacter(characterBuilder.state.toCharacter());
+                  Navigator.pushReplacementNamed(context, AppRouter.charactersScreen);
                 },
                 child: const Text('Submit'),
               )

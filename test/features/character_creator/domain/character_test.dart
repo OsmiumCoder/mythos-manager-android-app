@@ -5,19 +5,19 @@ void main() {
   group("Character model tests", () {
     Character character = Character(
       userID: "user-id-valid",
-      skillProficiencies: ["perception", "arcana"],
-      equipmentProficiencies: ["sword", "armor"],
-      equipment: ["longsword", "leather armor"],
+      skillProficiencies: {"perception", "arcana"},
+      equipmentProficiencies: {"sword", "armor"},
+      equipment: {"longsword", "leather armor"},
       race: "Elf",
       subrace: "High Elf",
       size: "Medium",
       speed: 30,
       abilityScoreIncreases: {"str": 2, "dex": 1},
-      racialTraits: ["Dark vision", "Resistance"],
+      racialTraits: {"Dark vision", "Resistance"},
       className: "Wizard",
       subclass: "Evocation",
       hitDie: 12,
-      savingThrows: ["wis", "int"],
+      savingThrows: {"wis", "int"},
       abilityScores: {
         "str": 18,
         "dex": 10,
@@ -38,19 +38,19 @@ void main() {
 
     test("fromFirestore returns correct Character model", () {
       expect(character.userID, "user-id-valid");
-      expect(character.skillProficiencies, ["perception", "arcana"]);
-      expect(character.equipmentProficiencies, ["sword", "armor"]);
-      expect(character.equipment, ["longsword", "leather armor"]);
+      expect(character.skillProficiencies, {"perception", "arcana"});
+      expect(character.equipmentProficiencies, {"sword", "armor"});
+      expect(character.equipment, {"longsword", "leather armor"});
       expect(character.race, "Elf");
       expect(character.subrace, "High Elf");
       expect(character.size, "Medium");
       expect(character.speed, 30);
       expect(character.abilityScoreIncreases, {"str": 2, "dex": 1});
-      expect(character.racialTraits, ["Dark vision", "Resistance"]);
+      expect(character.racialTraits, {"Dark vision", "Resistance"});
       expect(character.className, "Wizard");
       expect(character.subclass, "Evocation");
       expect(character.hitDie, 12);
-      expect(character.savingThrows, ["wis", "int"]);
+      expect(character.savingThrows, {"wis", "int"});
       expect(character.abilityScores,
           {"str": 18, "dex": 10, "con": 14, "int": 12, "wis": 16, "cha": 9});
       expect(character.background, "Acolyte");

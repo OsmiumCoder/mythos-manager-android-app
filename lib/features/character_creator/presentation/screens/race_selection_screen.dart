@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mythos_manager/features/character_creator/domain/character.dart';
+import 'package:mythos_manager/features/character_creator/presentation/controllers/character_builder_controller.dart';
 import 'package:mythos_manager/features/character_creator/presentation/controllers/dnd_api_controller.dart';
 import 'package:mythos_manager/features/character_creator/presentation/screens/components/components.dart';
 
-/// Author: Jonathon Meney
+import '../../../../routing/app_router.dart';
+
+/// Author: Jonathon Meney, Liam Welsh
 class RaceSelectionScreen extends HookConsumerWidget {
   const RaceSelectionScreen({super.key});
 
@@ -21,6 +25,7 @@ class RaceSelectionScreen extends HookConsumerWidget {
     useListenable(raceController);
     useListenable(subraceController);
 
+    final characterBuilder = ref.watch(characterBuilderProvider.notifier);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Character Creator'),
@@ -44,11 +49,18 @@ class RaceSelectionScreen extends HookConsumerWidget {
                           Container(
                             margin: const EdgeInsets.only(bottom: 10),
                             child: DropdownMenu(
-                                onSelected: (selected) {
-                                  subraceController.text = "";
-                                  startingLanguageController.clear();
-                                  abilityIncreaseController.clear();
+                                onSelected: (race) {
+                                  subraceController.clear();
                                   startingProficiencyController.clear();
+                                  abilityIncreaseController.clear();
+                                  startingLanguageController.clear();
+
+                                  characterBuilder.state.raceLanguages.clear();
+                                  characterBuilder.state.raceEquipmentProfs.clear();
+                                  characterBuilder.state.raceSkillProfs.clear();
+                                  characterBuilder.state.raceAbilityScores.clear();
+
+                                  characterBuilder.state.race = race;
                                 },
                                 controller: raceController,
                                 dropdownMenuEntries: allRaces.map((race) {
@@ -77,17 +89,10 @@ class RaceSelectionScreen extends HookConsumerWidget {
                     }
                   }),
               ElevatedButton(
-                  onPressed: () {
-                    print(raceController.text);
-                    print(subraceController.text);
-                    print(startingLanguageController.text);
-                    print(abilityIncreaseController.text);
-                    print(startingProficiencyController.text);
-
-                    // TODO: route to next
-                    // TODO: validate
-                    // TODO: push to saving map
-                  },
+                  onPressed: raceController.text.isNotEmpty
+                      ? () => Navigator
+                          .pushNamed(context, AppRouter.classSelectionScreen)
+                      : null,
                   child: const Text("Select Race")),
             ],
           ),
