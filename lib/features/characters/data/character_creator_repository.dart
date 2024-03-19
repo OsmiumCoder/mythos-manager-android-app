@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mythos_manager/features/character_creator/domain/character.dart';
+import 'package:mythos_manager/features/characters/domain/character.dart';
 
 /// Provides a [CharacterCreatorRepository].
 final characterCreatorRepositoryProvider = Provider((ref) {

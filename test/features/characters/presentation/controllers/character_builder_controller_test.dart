@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mythos_manager/features/character_creator/domain/character.dart';
-import 'package:mythos_manager/features/character_creator/presentation/controllers/character_builder_controller.dart';
+import 'package:mythos_manager/features/characters/domain/character.dart';
+import 'package:mythos_manager/features/characters/presentation/controllers/character_builder_controller.dart';
 
 void main() {
   group("CharacterBuilderController tests", () {

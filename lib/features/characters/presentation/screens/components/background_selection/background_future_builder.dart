@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mythos_manager/features/character_creator/presentation/controllers/character_builder_controller.dart';
-import 'package:mythos_manager/features/character_creator/presentation/controllers/dnd_api_controller.dart';
-import 'package:mythos_manager/features/character_creator/presentation/screens/components/background_selection/background_equipment_future_builder.dart';
-import 'package:mythos_manager/features/character_creator/presentation/screens/components/background_selection/background_language_future_builder.dart';
+import 'package:mythos_manager/features/characters/presentation/controllers/character_builder_controller.dart';
+import 'package:mythos_manager/features/characters/presentation/controllers/dnd_api_controller.dart';
+import 'package:mythos_manager/features/characters/presentation/screens/components/components.dart';
 import 'package:mythos_manager/routing/app_router.dart';
 
 /// Author: Liam Welsh

@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 import 'package:mythos_manager/features/authentication/exceptions/no_user_found_exception.dart';
-import 'package:mythos_manager/features/character_creator/domain/character.dart';
 import 'package:mythos_manager/features/characters/data/character_repository.dart';
+import 'package:mythos_manager/features/characters/domain/character.dart';
 
 /// Provides a [CharacterService].
 final characterServiceProvider = Provider((ref) {

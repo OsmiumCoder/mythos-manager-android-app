@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mythos_manager/features/character_creator/presentation/controllers/character_builder_controller.dart';
-import 'package:mythos_manager/features/character_creator/presentation/controllers/character_creator_controller.dart';
+import 'package:mythos_manager/features/characters/presentation/controllers/character_builder_controller.dart';
+import 'package:mythos_manager/features/characters/presentation/controllers/character_creator_controller.dart';
 import 'package:mythos_manager/routing/app_router.dart';
 
 /// Author: Shreif Abdalla, Liam Welsh

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mythos_manager/features/character_creator/presentation/controllers/character_builder_controller.dart';
-import 'package:mythos_manager/features/character_creator/presentation/controllers/dnd_api_controller.dart';
+import 'package:mythos_manager/features/characters/presentation/controllers/character_builder_controller.dart';
+import 'package:mythos_manager/features/characters/presentation/controllers/dnd_api_controller.dart';
 
 
 /// Author: Jonathon Meney, Liam Welsh
@@ -49,7 +49,7 @@ class SubraceFutureBuilder extends HookConsumerWidget {
             }).join(", ");
 
             final String racialTraits = subrace["traits"].map((element) {
-              characterBuilder.state.racialTraits?.add(element);
+              characterBuilder.state.racialTraits.add(element);
               return "${element["name"]}";
             }).join(", ");
 

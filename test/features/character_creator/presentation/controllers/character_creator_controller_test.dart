@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:mythos_manager/features/character_creator/application/character_creator_service.dart';
-import 'package:mythos_manager/features/character_creator/domain/character.dart';
-import 'package:mythos_manager/features/character_creator/presentation/controllers/character_creator_controller.dart';
+import 'package:mythos_manager/features/characters/application/character_creator_service.dart';
+import 'package:mythos_manager/features/characters/domain/character.dart';
+import 'package:mythos_manager/features/characters/presentation/controllers/character_creator_controller.dart';
 
 import '../../../../provider_container.dart';
 

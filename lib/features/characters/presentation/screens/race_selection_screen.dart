@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mythos_manager/features/character_creator/domain/character.dart';
-import 'package:mythos_manager/features/character_creator/presentation/controllers/character_builder_controller.dart';
-import 'package:mythos_manager/features/character_creator/presentation/controllers/dnd_api_controller.dart';
-import 'package:mythos_manager/features/character_creator/presentation/screens/components/components.dart';
+import 'package:mythos_manager/features/characters/presentation/controllers/character_builder_controller.dart';
+import 'package:mythos_manager/features/characters/presentation/controllers/dnd_api_controller.dart';
+import 'package:mythos_manager/features/characters/presentation/screens/components/components.dart';
 
 import '../../../../routing/app_router.dart';
 

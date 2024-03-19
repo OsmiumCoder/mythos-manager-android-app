@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:mythos_manager/features/character_creator/application/dnd_api_service.dart';
-import 'package:mythos_manager/features/character_creator/data/dnd_api_repository.dart';
+import 'package:mythos_manager/features/characters/application/dnd_api_service.dart';
+import 'package:mythos_manager/features/characters/data/dnd_api_repository.dart';
 
 import '../../../provider_container.dart';
 

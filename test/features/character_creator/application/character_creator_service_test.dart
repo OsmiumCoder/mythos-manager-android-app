@@ -2,10 +2,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 import 'package:mythos_manager/features/authentication/exceptions/no_user_found_exception.dart';
-import 'package:mythos_manager/features/character_creator/application/character_creator_service.dart';
-import 'package:mythos_manager/features/character_creator/data/character_creator_repository.dart';
+import 'package:mythos_manager/features/characters/application/character_creator_service.dart';
+import 'package:mythos_manager/features/characters/data/character_creator_repository.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
-import 'package:mythos_manager/features/character_creator/domain/character.dart';
+import 'package:mythos_manager/features/characters/domain/character.dart';
 
 import '../../../provider_container.dart';
 

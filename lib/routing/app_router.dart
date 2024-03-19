@@ -5,9 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 import 'package:mythos_manager/features/authentication/presentation/screens/screens.dart';
 import 'package:mythos_manager/features/home/presentation/screens/screens.dart';
-import '../features/characters/presentation/screens/characters_screen.dart';
 import 'unknown_screen.dart';
-import 'package:mythos_manager/features/character_creator/presentation/screens/screens.dart';
+import 'package:mythos_manager/features/characters/presentation/screens/screens.dart';
 
 /// Router class
 ///

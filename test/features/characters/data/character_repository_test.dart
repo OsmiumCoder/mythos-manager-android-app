@@ -1,7 +1,7 @@
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mythos_manager/features/character_creator/domain/character.dart';
 import 'package:mythos_manager/features/characters/data/character_repository.dart';
+import 'package:mythos_manager/features/characters/domain/character.dart';
 
 import '../../../provider_container.dart';
 
