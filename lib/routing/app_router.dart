@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 import 'package:mythos_manager/features/authentication/presentation/screens/screens.dart';
+import 'package:mythos_manager/features/campaigns/presentation/screens/campaign_creation_screen.dart';
 import 'package:mythos_manager/features/home/presentation/screens/screens.dart';
 import '../features/characters/presentation/screens/characters_screen.dart';
 import 'unknown_screen.dart';
@@ -26,6 +27,7 @@ class AppRouter {
   static const String abilitySelectionScreen =
       '/characters/creator/ability-selection';
   static const String classSelectionScreen = '/characters/creator/class-selection';
+  static const String campaignCreationScreen = '/campaigns/creator';
 
   // Screens that do not require authentication
   static const noAuthScreens = [loginScreen, signupScreen];
@@ -65,6 +67,10 @@ class AppRouter {
       case abilitySelectionScreen:
         return MaterialPageRoute(
           builder: (_) => const AbilitySelectionScreen(),
+        );
+      case campaignCreationScreen:
+        return MaterialPageRoute(
+          builder: (_) => const CampaignCreationScreen(),
         );
     }
     if (kDebugMode) {
