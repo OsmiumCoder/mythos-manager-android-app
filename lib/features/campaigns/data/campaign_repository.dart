@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/campaigns/domain/campaign.dart';
+import 'package:mythos_manager/features/campaigns/domain/note.dart';
 
 /// Provides a [CampaignRepository].
 final campaignRepositoryProvider = Provider((ref) {
@@ -41,6 +42,33 @@ class CampaignRepository {
     return querySnapshot.docs.map((document) {
       Campaign campaign = document.data();
       return campaign;
+    }).toList();
+  }
+
+  /// Stores a [Note] model in firestore database.
+  Future<void> createNote(Note note) async {
+    await _firestore
+        .collection("notes")
+        .withConverter(
+            fromFirestore: Note.fromFirestore,
+            toFirestore: (Note note, options) => note.toFirestore())
+        // add is used to generate a unique id for each created document.
+        .add(note);
+  }
+
+  /// Returns a list of [Note]'s for a given campaign.
+  Future<List<Note>> fetchNotesForCampaign(String campaignID) async {
+    QuerySnapshot<Note> querySnapshot = await _firestore
+        .collection("notes")
+        .where("campaign_id", isEqualTo: campaignID)
+        .withConverter(
+            fromFirestore: Note.fromFirestore,
+            toFirestore: (Note note, options) => note.toFirestore())
+        .get();
+
+    return querySnapshot.docs.map((document) {
+      Note note = document.data();
+      return note;
     }).toList();
   }
 }
