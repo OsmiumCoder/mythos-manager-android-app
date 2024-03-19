@@ -90,8 +90,8 @@ class RaceSelectionScreen extends HookConsumerWidget {
                   }),
               ElevatedButton(
                   onPressed: raceController.text.isNotEmpty
-                      ? () => Navigator.of(context)
-                          .pushNamed(AppRouter.classSelectionScreen)
+                      ? () => Navigator
+                          .pushNamed(context, AppRouter.classSelectionScreen)
                       : null,
                   child: const Text("Select Race")),
             ],

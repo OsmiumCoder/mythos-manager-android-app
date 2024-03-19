@@ -108,7 +108,7 @@ class BackstorySelectionScreen extends HookConsumerWidget {
               ElevatedButton(
                 onPressed: () {
                   characterSaver.createCharacter(characterBuilder.state.toCharacter());
-                  Navigator.of(context).pushReplacementNamed(AppRouter.charactersScreen);
+                  Navigator.pushReplacementNamed(context, AppRouter.charactersScreen);
                 },
                 child: const Text('Submit'),
               )

@@ -98,7 +98,7 @@ class BackgroundFutureBuilder extends HookConsumerWidget {
 
                     ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).pushNamed(AppRouter.backstorySelectionScreen);
+                          Navigator.pushNamed(context, AppRouter.backstorySelectionScreen);
                         },
                         child: const Text("Save Background")),
                   ],

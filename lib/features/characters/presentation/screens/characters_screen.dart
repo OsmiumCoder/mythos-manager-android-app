@@ -29,7 +29,7 @@ class CharactersScreen extends HookConsumerWidget {
                 onTap: () {
                   // Reset character creation state
                   ref.read(characterBuilderProvider.notifier).state = CharacterBuilderController();
-                  Navigator.of(context).pushNamed(AppRouter.raceSelectionScreen);
+                  Navigator.pushNamed(context, AppRouter.raceSelectionScreen);
                 },
                 image: const Image(
                   image:

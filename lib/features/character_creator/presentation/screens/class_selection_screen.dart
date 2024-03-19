@@ -20,8 +20,8 @@ class ClassSelectionScreen extends HookConsumerWidget {
     final hitDieController = useTextEditingController();
     final savingThrowsController = useTextEditingController();
     final startingEquipmentController = useTextEditingController();
-    final selectedProficiency1Controller = TextEditingController();
-    final selectedProficiency2Controller = TextEditingController();
+    final selectedProficiency1Controller = useTextEditingController();
+    final selectedProficiency2Controller = useTextEditingController();
 
     useListenable(classController);
     useListenable(subclassController);
@@ -106,8 +106,7 @@ class ClassSelectionScreen extends HookConsumerWidget {
                   }),
               ElevatedButton(
                   onPressed: classController.text.isNotEmpty
-                      ? () => Navigator.of(context)
-                          .pushNamed(AppRouter.abilitySelectionScreen)
+                      ? () => Navigator.pushNamed(context, AppRouter.abilitySelectionScreen)
                       : null,
                   child: const Text('Select Class')),
             ],
