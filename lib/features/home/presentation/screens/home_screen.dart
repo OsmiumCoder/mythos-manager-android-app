@@ -3,11 +3,7 @@ import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../routing/app_router.dart';
 import '../../../../shared/presentation/components/components.dart';
-import '../../../character_creator/domain/character.dart';
 import '../../../character_creator/presentation/controllers/character_builder_controller.dart';
-
-const placeHolderImage =
-     "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Donald_Trump_official_portrait.jpg/640px-Donald_Trump_official_portrait.jpg";
 
 /// Home screen.
 ///
@@ -15,7 +11,8 @@ const placeHolderImage =
 class HomeScreen extends HookConsumerWidget {
   const HomeScreen({super.key});
 
-  final cardTextStyle = const TextStyle(color: Colors.white, fontWeight: FontWeight.w500);
+  final cardTextStyle =
+      const TextStyle(color: Colors.white, fontWeight: FontWeight.w500);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,7 +32,9 @@ class HomeScreen extends HookConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: BoxShadowImage(
-                  image: const Image(image: Svg("assets/images/campaign_button_image.svg"), height: 200),
+                  image: const Image(
+                      image: Svg("assets/images/campaign_button_image.svg"),
+                      height: 200),
                   text: Text(
                     "Campaigns",
                     textAlign: TextAlign.center,
@@ -55,7 +54,7 @@ class HomeScreen extends HookConsumerWidget {
                       padding: const EdgeInsets.symmetric(
                           vertical: 5, horizontal: 10),
                       child: BoxShadowImage(
-                        image: Image.network(placeHolderImage, height: 200,),
+                        height: 200,
                         text: Text(
                           "Favourite\nCharacter",
                           textAlign: TextAlign.center,
@@ -71,7 +70,10 @@ class HomeScreen extends HookConsumerWidget {
                       padding: const EdgeInsets.symmetric(
                           vertical: 5, horizontal: 10),
                       child: BoxShadowImage(
-                        image: const Image(image: Svg("assets/images/current_campaign_button_image.svg"), height: 200),
+                        image: const Image(
+                            image: Svg(
+                                "assets/images/current_campaign_button_image.svg"),
+                            height: 200),
                         text: Text(
                           "Current\nCampaign",
                           textAlign: TextAlign.center,
@@ -89,7 +91,11 @@ class HomeScreen extends HookConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: BoxShadowImage(
-                  image: const Image(image: Svg("assets/images/character_creator_button_image.svg"), height: 200, ),
+                  image: const Image(
+                    image:
+                        Svg("assets/images/character_creator_button_image.svg"),
+                    height: 200,
+                  ),
                   text: Text(
                     "Character Creator",
                     textAlign: TextAlign.center,
@@ -98,7 +104,8 @@ class HomeScreen extends HookConsumerWidget {
                   textPadding: 50,
                   onTap: () {
                     // Reset character creation state
-                    ref.read(characterBuilderProvider.notifier).state = CharacterBuilderController();
+                    ref.read(characterBuilderProvider.notifier).state =
+                        CharacterBuilderController();
                     Navigator.pushNamed(context, AppRouter.raceSelectionScreen);
                   },
                 ),

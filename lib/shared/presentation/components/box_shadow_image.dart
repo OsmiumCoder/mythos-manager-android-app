@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 /// Author: Liam Welsh
 class BoxShadowImage extends StatefulWidget {
@@ -7,11 +6,13 @@ class BoxShadowImage extends StatefulWidget {
   static const boxShadowOpacity = 0.5;
 
   final double textPadding;
-  final Image image;
+  final Image? image;
   final void Function()? onTap;
   final Text text;
+  final double? height;
+  final double? width;
   const BoxShadowImage(
-      {super.key, required this.image, this.onTap, required this.text, this.textPadding = 10});
+      {super.key, this.image, this.onTap, required this.text, this.textPadding = 10, this.height, this.width});
 
   @override
   State<BoxShadowImage> createState() => _BoxShadowImageState();
@@ -19,7 +20,7 @@ class BoxShadowImage extends StatefulWidget {
 
 class _BoxShadowImageState extends State<BoxShadowImage> {
   var _isPressed = false;
-  
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -28,13 +29,14 @@ class _BoxShadowImageState extends State<BoxShadowImage> {
       onTapUp: (_) => setState(() => _isPressed = false),
       onTapCancel: () => setState(() => _isPressed = false),
       child: Container(
-        height: widget.image.height,
-        width: widget.image.width,
+        height: widget.image?.height ?? widget.height,
+        width: widget.image?.width ?? widget.width,
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: widget.image.image,
+          image: widget.image != null ? DecorationImage(
+            image: widget.image!.image,
             fit: BoxFit.cover,
-          ),
+          ) : null,
+          color: widget.image == null ? Theme.of(context).appBarTheme.backgroundColor : null,
           borderRadius: const BorderRadius.all(Radius.circular(15)),
           border: Border.all(color: Colors.black),
           boxShadow: [
@@ -57,7 +59,7 @@ class _BoxShadowImageState extends State<BoxShadowImage> {
           padding: EdgeInsets.all(widget.textPadding),
 
             child: FittedBox(
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.contain,
                   child: widget.text,
                 )
         ),
