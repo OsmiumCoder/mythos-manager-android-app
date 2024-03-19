@@ -3,7 +3,7 @@ import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../routing/app_router.dart';
 import '../../../../shared/presentation/components/components.dart';
-import '../../../character_creator/presentation/controllers/character_builder_controller.dart';
+import '../../../characters/presentation/controllers/character_builder_controller.dart';
 
 /// Home screen.
 ///

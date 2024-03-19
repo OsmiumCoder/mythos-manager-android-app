@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 import 'package:mythos_manager/features/authentication/presentation/screens/screens.dart';
-import 'package:mythos_manager/features/character_creator/presentation/screens/screens.dart';
+import 'package:mythos_manager/features/characters/presentation/screens/screens.dart';
 import 'package:mythos_manager/features/home/presentation/screens/screens.dart';
 import 'package:mythos_manager/routing/app_router.dart';
 import 'package:network_image_mock/network_image_mock.dart';
