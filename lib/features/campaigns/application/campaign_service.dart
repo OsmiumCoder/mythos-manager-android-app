@@ -4,6 +4,7 @@ import 'package:mythos_manager/features/authentication/data/authentication_repos
 import 'package:mythos_manager/features/authentication/exceptions/no_user_found_exception.dart';
 import 'package:mythos_manager/features/campaigns/data/campaign_repository.dart';
 import 'package:mythos_manager/features/campaigns/domain/campaign.dart';
+import 'package:mythos_manager/features/campaigns/domain/note.dart';
 
 final campaignServiceProvider = Provider((ref) {
   return CampaignService(ref.watch(campaignRepositoryProvider),
@@ -46,5 +47,16 @@ class CampaignService {
       throw NoUserFoundException();
     }
     return await _campaignRepository.fetchCampaignsForUser(auth.uid);
+  }
+
+  /// Stores a [Note] in cloud firestore.
+  Future<void> createNote(String campaignID, String title, String details) async {
+    Note note = Note(campaignUID: campaignID, title: title, description: details);
+    await _campaignRepository.createNote(note);
+  }
+
+  /// Returns a list of [Note]'s for a given campaign.
+  Future<List<Note>> fetchNotesForCampaign(String campaignID) async {
+    return await _campaignRepository.fetchNotesForCampaign(campaignID);
   }
 }
