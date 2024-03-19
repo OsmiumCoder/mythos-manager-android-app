@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mythos_manager/features/character_creator/domain/character.dart';
+import 'package:mythos_manager/features/characters/domain/character.dart';
 
 /// The [Campaign] model holds basic information for a campaign.
 ///
