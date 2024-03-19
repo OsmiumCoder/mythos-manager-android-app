@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 import 'package:mythos_manager/features/authentication/exceptions/no_user_found_exception.dart';
-import 'package:mythos_manager/features/character_creator/domain/character.dart';
 import 'package:mythos_manager/features/characters/data/character_repository.dart';
+import 'package:mythos_manager/features/characters/domain/character.dart';
 
 /// Provides a [CharacterService].
 final characterServiceProvider = Provider((ref) {
@@ -23,6 +23,19 @@ class CharacterService {
 
   /// Constructs a [CharacterService].
   CharacterService(this._characterRepository, this._authenticationRepository);
+
+  /// Stores a [Character] in cloud firestore.
+  ///
+  /// Throws a [NoUserFoundException] if no user is signed in to attach the
+  /// character to.
+  Future<void> createCharacter(Character character) async {
+    User? auth = _authenticationRepository.currentUser();
+    if (auth == null) {
+      throw NoUserFoundException();
+    }
+    character.userID = auth.uid;
+    await _characterRepository.createCharacter(character);
+  }
 
   /// Returns a list of [Character]s created by the signed in user.
   ///
