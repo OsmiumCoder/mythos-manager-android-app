@@ -26,20 +26,19 @@ class CampaignCreationScreen extends HookWidget {
                 decoration: InputDecoration(
                     fillColor: Theme.of(context).inputDecorationTheme.fillColor,
                     filled: true,
-                    hintText: "Campaign Name"
-                ),
+                    hintText: "Campaign Name"),
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 50),
               child: TextField(
                 controller: detailsController,
+                maxLines: 5,
                 decoration: InputDecoration(
-                    fillColor: Theme.of(context).inputDecorationTheme.fillColor,
-                    filled: true,
-                    hintText: "Campaign Details",
-                    contentPadding:
-                        EdgeInsets.only(top: 50, bottom: 50, left: 15)),
+                  fillColor: Theme.of(context).inputDecorationTheme.fillColor,
+                  filled: true,
+                  hintText: "Campaign Details",
+                ),
               ),
             ),
             Padding(
