@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class CampaignCreationScreen extends StatelessWidget {
+class CampaignCreationScreen extends HookWidget {
   const CampaignCreationScreen({super.key});
 
   @override
