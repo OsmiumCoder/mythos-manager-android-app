@@ -3,6 +3,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/campaigns/presentation/controllers/campaign_controller.dart';
 
+import '../../../../routing/app_router.dart';
+
 class CampaignCreationScreen extends HookConsumerWidget {
   const CampaignCreationScreen({super.key});
 
@@ -59,7 +61,7 @@ class CampaignCreationScreen extends HookConsumerWidget {
                 onPressed: () {
                   ref.read(campaignControllerProvider.notifier).createCampaign(
                       nameController.text, descriptionController.text);
-                  // TODO Route user to campaign list screen
+                  Navigator.pushReplacementNamed(context, AppRouter.campaignListScreen);
                 },
               ),
             ),

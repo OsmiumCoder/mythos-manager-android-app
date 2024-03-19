@@ -10,9 +10,9 @@ class MythosDrawer extends Drawer {
 
   _handleRouting(BuildContext context, String routeName) {
     if (routeName == selectedScreen) {
-      Navigator.of(context).pop();
+      Navigator.pop(context);
     } else {
-      Navigator.of(context).pushNamed(routeName);
+      Navigator.pushNamed(context, routeName);
     }
   }
 
@@ -51,7 +51,7 @@ class MythosDrawer extends Drawer {
                 ),
               ),
               Container(
-                color: null, // TODO implement color when current route is campaigns,
+                color: selectedScreen == AppRouter.campaignListScreen ? selectedColor : null,
                 child: ListTile(
                   leading: const Icon(
                     Icons.event_note_outlined,
@@ -59,7 +59,7 @@ class MythosDrawer extends Drawer {
                   ),
                   title:
                   const Text("Campaigns", style: TextStyle(color: Colors.white)),
-                  onTap: () {}, // TODO implement routing
+                  onTap: () => _handleRouting(context, AppRouter.campaignListScreen),
                 ),
               ),
               Container(
