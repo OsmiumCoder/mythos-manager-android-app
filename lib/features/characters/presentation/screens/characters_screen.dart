@@ -52,16 +52,19 @@ class CharactersScreen extends HookConsumerWidget {
                 data: (characters) => Column(
                       children: [
                         ...characters.map(
-                          (character) => BoxShadowImage(
-                            text: Text(
-                              character.name ??
-                                  "Character #${characters.indexOf(character)}",
-                              style: const TextStyle(color: Colors.white),
+                          (character) => Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: BoxShadowImage(
+                              text: Text(
+                                character.name ??
+                                    "Character #${characters.indexOf(character)}",
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              height: 100,
+                              width: 300,
+                              textPadding: 25,
+                              onTap: () {} // TODO Handle navigation,
                             ),
-                            height: 100,
-                            width: 300,
-                            textPadding: 25,
-                            onTap: () {} // TODO Handle navigation,
                           ),
                         )
                       ],
