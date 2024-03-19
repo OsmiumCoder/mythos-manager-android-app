@@ -59,7 +59,7 @@ class _BoxShadowImageState extends State<BoxShadowImage> {
           padding: EdgeInsets.all(widget.textPadding),
 
             child: FittedBox(
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.contain,
                   child: widget.text,
                 )
         ),
