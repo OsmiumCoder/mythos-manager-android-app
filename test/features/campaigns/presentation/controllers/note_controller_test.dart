@@ -45,7 +45,7 @@ void main() {
           .read(noteControllerProvider("id").notifier)
           .createNote("id", "title  ", "details");
 
-      verify(() => mockCampaignService.fetchNotesForCampaign("id")).called(2);
+      verify(() => mockCampaignService.fetchNotesForCampaign("id")).called(1);
     });
   });
 }
