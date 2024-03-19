@@ -41,7 +41,7 @@ class HomeScreen extends HookConsumerWidget {
                     style: cardTextStyle,
                   ),
                   textPadding: 70,
-                  onTap: () => Navigator.pushNamed(context, AppRouter.campaignCreationScreen), // TODO onTap Handler for navigation
+                  onTap: () {}, // TODO onTap Handler for navigation
                 ),
               ),
             ),
