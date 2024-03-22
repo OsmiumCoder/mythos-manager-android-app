@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import '../../domain/character.dart';
+
 class CharacterDisplayScreen extends HookWidget {
-  const CharacterDisplayScreen({super.key});
+  final Character character;
+  const CharacterDisplayScreen({super.key, required this.character});
 
   String _getTitle(int selectedScreen) {
     if (selectedScreen == 0) {
@@ -20,7 +23,7 @@ class CharacterDisplayScreen extends HookWidget {
   
   Widget _getSelectedScreen(int selectedScreen) {
     if (selectedScreen == 0) {
-      return const Text("Character screen"); // TODO implement character screen
+      return Text("${character.name}"); // TODO implement character screen
     }
     if (selectedScreen == 1) {
       return const Text("Spells screen"); // TODO implement spells screen

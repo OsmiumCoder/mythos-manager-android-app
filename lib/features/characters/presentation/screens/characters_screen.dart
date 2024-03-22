@@ -66,7 +66,7 @@ class CharactersScreen extends HookConsumerWidget {
                                 textPadding: 25,
                                 onTap: () {
                                   Navigator.pushNamed(
-                                      context, AppRouter.characterDisplayScreen);
+                                      context, AppRouter.characterDisplayScreen, arguments: character);
                                 },
                           ),
                         ))

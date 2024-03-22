@@ -8,6 +8,7 @@ import 'package:mythos_manager/features/campaigns/presentation/screens/campaign_
 import 'package:mythos_manager/features/campaigns/presentation/screens/campaign_list_screen.dart';
 import 'package:mythos_manager/features/characters/presentation/screens/character_display_screen.dart';
 import 'package:mythos_manager/features/home/presentation/screens/screens.dart';
+import '../features/characters/domain/character.dart';
 import 'unknown_screen.dart';
 import 'package:mythos_manager/features/characters/presentation/screens/screens.dart';
 
@@ -80,7 +81,7 @@ class AppRouter {
         );
       case characterDisplayScreen:
         return MaterialPageRoute(
-          builder: (_) => const CharacterDisplayScreen(),
+          builder: (_) => CharacterDisplayScreen(character: settings.arguments as Character),
         );
     }
     if (kDebugMode) {
