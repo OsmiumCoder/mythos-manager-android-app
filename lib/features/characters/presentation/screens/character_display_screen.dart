@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../domain/character.dart';
 
+/// Author Liam Welsh
 class CharacterDisplayScreen extends HookWidget {
   final Character character;
   const CharacterDisplayScreen({super.key, required this.character});
