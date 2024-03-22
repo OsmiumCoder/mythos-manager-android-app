@@ -3,7 +3,7 @@ import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/character_builder_controller.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/character_controller.dart';
-import 'package:mythos_manager/features/characters/presentation/screens/character_display_display.dart';
+import 'package:mythos_manager/features/characters/presentation/screens/character_display_screen.dart';
 import 'package:mythos_manager/shared/presentation/components/components.dart';
 
 import '../../../../routing/app_router.dart';
