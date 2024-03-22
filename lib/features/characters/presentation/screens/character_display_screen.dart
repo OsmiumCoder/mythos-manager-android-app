@@ -46,6 +46,8 @@ class CharacterDisplayScreen extends HookWidget {
       bottomNavigationBar: NavigationBar(
           selectedIndex: selectedScreen.value,
           onDestinationSelected: (index) => selectedScreen.value = index,
+          backgroundColor: Theme.of(context).primaryColor,
+
           destinations: const [
             NavigationDestination(
               selectedIcon: Icon(Icons.person),
