@@ -12,6 +12,9 @@ class ProficienciesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     List<String> skills = skillProficiencies?.map((skill) {
+      return skill.split(" ")[1];
+    }).toList() ?? [];
     return Card(
       child: Column(
         children: [
@@ -23,7 +26,7 @@ class ProficienciesCard extends StatelessWidget {
                 style: TextStyle(color: Colors.white, fontSize: 16),
               ),
               subtitle: Text(
-                  "Skills:\n${skillProficiencies?.join("\n") ?? ""}\n\nEquipment:\n${equipmentProficiencies?.join("\n") ?? ""}"),
+                  "Skills:\n${skills.join("\n")}\n\nEquipment:\n${equipmentProficiencies?.join("\n") ?? ""}"),
               subtitleTextStyle: const TextStyle(color: Colors.black),
             ),
           )
