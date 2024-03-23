@@ -164,5 +164,33 @@ void main() {
 
       verify(() => repository.getSpellsForClass('')).called(1);
     });
+
+    test("getClassFeatures calls getClassFeatures in repository", () async {
+      final container = createContainer(overrides: [
+        dndApiService.overrideWith((ref) {
+          return DNDAPIService(repository);
+        })
+      ]);
+
+      when(() => repository.getClassFeatures('')). thenAnswer((_) async => []);
+
+      container.read(dndApiService).getClassFeatures('');
+
+      verify(() => repository.getClassFeatures('')).called(1);
+    });
+
+    test("getSubclassFeatures calls getSubclassFeatures in repository", () async {
+      final container = createContainer(overrides: [
+        dndApiService.overrideWith((ref) {
+          return DNDAPIService(repository);
+        })
+      ]);
+
+      when(() => repository.getSubclassFeatures('')). thenAnswer((_) async => []);
+
+      container.read(dndApiService).getSubclassFeatures('');
+
+      verify(() => repository.getSubclassFeatures('')).called(1);
+    });
   });
 }

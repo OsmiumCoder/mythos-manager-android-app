@@ -71,5 +71,13 @@ class DNDAPIService {
     return await _repository.getEquipment(category);
   }
 
+  /// Returns list of class features.
+  Future<List<Map<String, dynamic>>> getClassFeatures(String className) async {
+    return await _repository.getClassFeatures(className);
+  }
 
+  /// Returns list of subclass features.
+  Future<List<Map<String, dynamic>>> getSubclassFeatures(String subclass) async {
+    return await _repository.getSubclassFeatures(subclass);
+  }
 }

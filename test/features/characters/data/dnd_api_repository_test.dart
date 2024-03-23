@@ -220,6 +220,44 @@ void main() {
       expect(spellsForClassJson["count"], 204);
       expect(spellsForClassJson["results"], isList);
     });
+
+    test("getClassFeatures returns correct json data", () async {
+      final container = createContainer(overrides: [
+        dndApiRepository.overrideWith((ref) {
+          return DNDAPIRepository(client: mockHttpClient);
+        })
+      ]);
+
+      when(() => mockHttpClient
+          .get(Uri.parse('https://www.dnd5eapi.co/api/classes/barbarian/levels')))
+          .thenAnswer((invocation) async => http.Response(levelsForClass, 200));
+
+      when(() => mockHttpClient
+          .get(Uri.parse('https://www.dnd5eapi.co/api/features/rage')))
+          .thenAnswer((invocation) async => http.Response(classFeature, 200));
+
+      final featuresForClassJson = await container.read(dndApiRepository).getClassFeatures("barbarian");
+      expect(featuresForClassJson, isList);
+    });
+
+    test("getSubclassFeatures returns correct json data", () async {
+      final container = createContainer(overrides: [
+        dndApiRepository.overrideWith((ref) {
+          return DNDAPIRepository(client: mockHttpClient);
+        })
+      ]);
+
+      when(() => mockHttpClient
+          .get(Uri.parse('https://www.dnd5eapi.co/api/subclasses/berserker/levels')))
+          .thenAnswer((invocation) async => http.Response(levelsForSubclass, 200));
+
+      when(() => mockHttpClient
+          .get(Uri.parse('https://www.dnd5eapi.co/api/features/frenzy')))
+          .thenAnswer((invocation) async => http.Response(subclassFeature, 200));
+
+      final featuresForClassJson = await container.read(dndApiRepository).getSubclassFeatures("berserker");
+      expect(featuresForClassJson, isList);
+    });
   });
 }
 
@@ -2324,4 +2362,107 @@ const spellsForClass = '''
 		}
 	]
 }
+''';
+const levelsForClass = '''
+[
+	{
+		"level": 1,
+		"ability_score_bonuses": 0,
+		"prof_bonus": 2,
+		"features": [
+			{
+				"index": "rage",
+				"name": "Rage",
+				"url": "/api/features/rage"
+			}
+		],
+		"class_specific": {
+			"rage_count": 2,
+			"rage_damage_bonus": 2,
+			"brutal_critical_dice": 0
+		},
+		"index": "barbarian-1",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/1"
+	}
+]
+''';
+
+const classFeature = '''
+{
+	"index": "rage",
+	"class": {
+		"index": "barbarian",
+		"name": "Barbarian",
+		"url": "/api/classes/barbarian"
+	},
+	"name": "Rage",
+	"level": 1,
+	"prerequisites": [],
+	"desc": [
+		"In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action. While raging, you gain the following benefits if you aren't wearing heavy armor:",
+		"- You have advantage on Strength checks and Strength saving throws.",
+		"- When you make a melee weapon Attack using Strength, you gain a +2 bonus to the damage roll. This bonus increases as you level.",
+		"- You have Resistance to bludgeoning, piercing, and slashing damage.",
+		"If you are able to cast Spells, you can't cast them or concentrate on them while raging.",
+		"Your rage lasts for 1 minute. It ends early if you are knocked Unconscious or if Your Turn ends and you haven't attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on Your Turn as a Bonus Action.",
+		"Once you have raged the maximum number of times for your barbarian level, you must finish a Long Rest before you can rage again. You may rage 2 times at 1st level, 3 at 3rd, 4 at 6th, 5 at 12th, and 6 at 17th."
+	],
+	"url": "/api/features/rage"
+}
+''';
+
+const levelsForSubclass = '''
+[
+	{
+		"level": 3,
+		"features": [
+			{
+				"index": "frenzy",
+				"name": "Frenzy",
+				"url": "/api/features/frenzy"
+			}
+		],
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"subclass": {
+			"index": "berserker",
+			"name": "Berserker",
+			"url": "/api/subclasses/berserker"
+		},
+		"url": "/api/subclasses/berserker/levels/3",
+		"index": "berserker-3"
+	}
+]
+''';
+
+const subclassFeature = '''
+{
+	"index": "frenzy",
+	"class": {
+		"index": "barbarian",
+		"name": "Barbarian",
+		"url": "/api/classes/barbarian"
+	},
+	"subclass": {
+		"index": "berserker",
+		"name": "Berserker",
+		"url": "/api/subclasses/berserker"
+	},
+	"name": "Frenzy",
+	"level": 3,
+	"prerequisites": [],
+	"desc": [
+		"Starting when you choose this path at 3rd level, you can go into a frenzy when you rage. If you do so, for the duration of your rage you can make a single melee weapon attack as a bonus action on each of your turns after this one. When your rage ends, you suffer one level of exhaustion (as described in appendix A)."
+	],
+	"url": "/api/features/frenzy"
+}
+
 ''';

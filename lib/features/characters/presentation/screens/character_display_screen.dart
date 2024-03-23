@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:mythos_manager/features/characters/presentation/screens/components/components.dart';
 
 import '../../domain/character.dart';
 
@@ -9,31 +10,29 @@ class CharacterDisplayScreen extends HookWidget {
   const CharacterDisplayScreen({super.key, required this.character});
 
   String _getTitle(int selectedScreen) {
-    if (selectedScreen == 0) {
-      return "Character";
+    switch (selectedScreen) {
+      case 0:
+        return character.name ?? "Character Name";
+      case 1:
+        return "Spells";
+      case 2:
+        return "Backstory";
+      default:
+        return "Unknown Screen";
     }
-    if (selectedScreen == 1) {
-      return "Spells";
-    }
-    if (selectedScreen == 2) {
-      return "Backstory";
-    }
-    
-    return "Unknown Screen";
   }
   
   Widget _getSelectedScreen(int selectedScreen) {
-    if (selectedScreen == 0) {
-      return Text("${character.name}"); // TODO implement character screen
+    switch (selectedScreen) {
+      case 0:
+        return MainCharacterDisplay(character: character);
+      case 1:
+        return const Text("Spells screen"); // TODO implement spells screen
+      case 2:
+        return const Text("Backstory screen"); // TODO implement backstory screen
+      default:
+        return const Text("Unknown Character Screen");
     }
-    if (selectedScreen == 1) {
-      return const Text("Spells screen"); // TODO implement spells screen
-    }
-    if (selectedScreen == 2) {
-      return const Text("Backstory screen"); // TODO implement backstory screen
-    }
-
-    return const Text("Unknown Character Screen");
   }
   
   @override

@@ -25,7 +25,7 @@ class BackgroundFutureBuilder extends HookConsumerWidget {
 
             final proficienciesText = proficiencies
                 .map((proficiency) {
-                  if ((proficiency["name"] as String).toLowerCase() == "skill") {
+                  if ((proficiency["name"] as String).toLowerCase().contains("skill")) {
                     characterBuilder.state.backgroundSkillProfs.add(proficiency["name"]);
                   } else {
                     characterBuilder.state.backgroundEquipmentProfs.add(proficiency["name"]);

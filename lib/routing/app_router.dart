@@ -80,8 +80,9 @@ class AppRouter {
           builder: (_) => const CampaignListScreen(),
         );
       case characterDisplayScreen:
+        Character character = settings.arguments as Character;
         return MaterialPageRoute(
-          builder: (_) => CharacterDisplayScreen(character: settings.arguments as Character),
+          builder: (_) => CharacterDisplayScreen(character: character),
         );
     }
     if (kDebugMode) {

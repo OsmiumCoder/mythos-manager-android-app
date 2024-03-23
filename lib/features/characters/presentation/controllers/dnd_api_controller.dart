@@ -71,4 +71,14 @@ class DNDAPIController {
   Future<Map<String, dynamic>> getEquipment(String category) async {
     return await _service.getEquipment(category);
   }
+
+  /// Returns list of class features.
+  Future<List<Map<String, dynamic>>> getClassFeatures(String className) async {
+    return await _service.getClassFeatures(className);
+  }
+
+  /// Returns list of subclass features.
+  Future<List<Map<String, dynamic>>> getSubclassFeatures(String subclass) async {
+    return await _service.getSubclassFeatures(subclass);
+  }
 }

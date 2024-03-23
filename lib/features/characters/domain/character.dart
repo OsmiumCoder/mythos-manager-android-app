@@ -34,9 +34,9 @@ class Character {
   /// Example
   /// ```
   /// {
-  ///   "str": 2,
-  ///   "dex": 1,
-  ///   "con": 1
+  ///   "STR": 2,
+  ///   "DEX": 1,
+  ///   "CON": 1
   /// }
   /// ```
   final Map<String, int>? abilityScoreIncreases;
@@ -61,7 +61,7 @@ class Character {
   ///
   /// Example:
   /// ```
-  /// ["wis", "str"]
+  /// ["WIS", "STR"]
   /// ```
   final Set<String>? savingThrows;
 
@@ -70,12 +70,12 @@ class Character {
   /// Example
   /// ```
   /// {
-  ///   "str": 18,
-  ///   "dex": 10,
-  ///   "con": 14,
-  ///   "int": 12,
-  ///   "wis": 16,
-  ///   "cha": 9
+  ///   "STR": 18,
+  ///   "DEX": 10,
+  ///   "CON": 14,
+  ///   "INT": 12,
+  ///   "WIS": 16,
+  ///   "CHA": 9
   /// }
   /// ```
   final Map<String, int>? abilityScores;

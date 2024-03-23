@@ -40,4 +40,5 @@ final themeData = ThemeData(
         maximumSize: MaterialStateProperty.resolveWith(
                 (states) => const Size(double.infinity, 200))),
   ),
+  cardTheme: const CardTheme(color: Color(0xFF90714A))
 );

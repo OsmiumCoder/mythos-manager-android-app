@@ -165,5 +165,35 @@ void main() {
 
       verify(() => service.getSpellsForClass('')).called(1);
     });
+
+    test("getClassFeatures calls getClassFeatures in service", () {
+      final container = createContainer(overrides: [
+        dndApiController.overrideWith((ref) {
+          return DNDAPIController(service);
+        })
+      ]);
+
+      when(() => service.getClassFeatures(''))
+          .thenAnswer((_) async => []);
+
+      container.read(dndApiController).getClassFeatures('');
+
+      verify(() => service.getClassFeatures('')).called(1);
+    });
+
+    test("getSubclassFeatures calls getSubclassFeatures in service", () {
+      final container = createContainer(overrides: [
+        dndApiController.overrideWith((ref) {
+          return DNDAPIController(service);
+        })
+      ]);
+
+      when(() => service.getSubclassFeatures(''))
+          .thenAnswer((_) async => []);
+
+      container.read(dndApiController).getSubclassFeatures('');
+
+      verify(() => service.getSubclassFeatures('')).called(1);
+    });
   });
 }
