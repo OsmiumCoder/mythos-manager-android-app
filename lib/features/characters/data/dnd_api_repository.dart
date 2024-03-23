@@ -109,7 +109,7 @@ class DNDAPIRepository {
   }
 
   /// Returns list of class features.
-  Future<List<Map<String, dynamic>>> getFeatures(String className) async {
+  Future<List<Map<String, dynamic>>> getClassFeatures(String className) async {
     const String classEndpoint = '/classes/';
     const String levelsEndpoint = '/levels';
     const String featuresEndpoint = "/features/";
@@ -133,5 +133,32 @@ class DNDAPIRepository {
     }
 
     return classFeatures;
+  }
+
+  /// Returns list of subclass features.
+  Future<List<Map<String, dynamic>>> getSubclassFeatures(String subclass) async {
+    const String subclassEndpoint = '/subclasses/';
+    const String levelsEndpoint = '/levels';
+    const String featuresEndpoint = "/features/";
+    final response = await client.get(
+        Uri.parse(apiEndpoint + subclassEndpoint + subclass + levelsEndpoint));
+
+    final List<dynamic> levels = jsonDecode(response.body);
+
+    List<Map<String, dynamic>> subclassFeatures = [];
+
+    for (var level in levels) {
+      List levelFeatures = level["features"];
+      for (var feature in levelFeatures) {
+        String featureName = feature["index"];
+
+        final response = await client
+            .get(Uri.parse(apiEndpoint + featuresEndpoint + featureName));
+
+        subclassFeatures.add(jsonDecode(response.body));
+      }
+    }
+
+    return subclassFeatures;
   }
 }

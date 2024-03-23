@@ -221,7 +221,7 @@ void main() {
       expect(spellsForClassJson["results"], isList);
     });
 
-    test("getFeatures returns correct json data", () async {
+    test("getClassFeatures returns correct json data", () async {
       final container = createContainer(overrides: [
         dndApiRepository.overrideWith((ref) {
           return DNDAPIRepository(client: mockHttpClient);
@@ -236,7 +236,26 @@ void main() {
           .get(Uri.parse('https://www.dnd5eapi.co/api/features/rage')))
           .thenAnswer((invocation) async => http.Response(classFeature, 200));
 
-      final featuresForClassJson = await container.read(dndApiRepository).getFeatures("barbarian");
+      final featuresForClassJson = await container.read(dndApiRepository).getClassFeatures("barbarian");
+      expect(featuresForClassJson, isList);
+    });
+
+    test("getSubclassFeatures returns correct json data", () async {
+      final container = createContainer(overrides: [
+        dndApiRepository.overrideWith((ref) {
+          return DNDAPIRepository(client: mockHttpClient);
+        })
+      ]);
+
+      when(() => mockHttpClient
+          .get(Uri.parse('https://www.dnd5eapi.co/api/subclasses/berserker/levels')))
+          .thenAnswer((invocation) async => http.Response(levelsForSubclass, 200));
+
+      when(() => mockHttpClient
+          .get(Uri.parse('https://www.dnd5eapi.co/api/features/frenzy')))
+          .thenAnswer((invocation) async => http.Response(subclassFeature, 200));
+
+      final featuresForClassJson = await container.read(dndApiRepository).getSubclassFeatures("berserker");
       expect(featuresForClassJson, isList);
     });
   });
@@ -2395,4 +2414,55 @@ const classFeature = '''
 	],
 	"url": "/api/features/rage"
 }
+''';
+
+const levelsForSubclass = '''
+[
+	{
+		"level": 3,
+		"features": [
+			{
+				"index": "frenzy",
+				"name": "Frenzy",
+				"url": "/api/features/frenzy"
+			}
+		],
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"subclass": {
+			"index": "berserker",
+			"name": "Berserker",
+			"url": "/api/subclasses/berserker"
+		},
+		"url": "/api/subclasses/berserker/levels/3",
+		"index": "berserker-3"
+	}
+]
+''';
+
+const subclassFeature = '''
+{
+	"index": "frenzy",
+	"class": {
+		"index": "barbarian",
+		"name": "Barbarian",
+		"url": "/api/classes/barbarian"
+	},
+	"subclass": {
+		"index": "berserker",
+		"name": "Berserker",
+		"url": "/api/subclasses/berserker"
+	},
+	"name": "Frenzy",
+	"level": 3,
+	"prerequisites": [],
+	"desc": [
+		"Starting when you choose this path at 3rd level, you can go into a frenzy when you rage. If you do so, for the duration of your rage you can make a single melee weapon attack as a bonus action on each of your turns after this one. When your rage ends, you suffer one level of exhaustion (as described in appendix A)."
+	],
+	"url": "/api/features/frenzy"
+}
+
 ''';

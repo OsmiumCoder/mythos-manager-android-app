@@ -165,18 +165,32 @@ void main() {
       verify(() => repository.getSpellsForClass('')).called(1);
     });
 
-    test("getFeature calls getFeature in repository", () async {
+    test("getClassFeatures calls getClassFeatures in repository", () async {
       final container = createContainer(overrides: [
         dndApiService.overrideWith((ref) {
           return DNDAPIService(repository);
         })
       ]);
 
-      when(() => repository.getFeatures('')). thenAnswer((_) async => []);
+      when(() => repository.getClassFeatures('')). thenAnswer((_) async => []);
 
-      container.read(dndApiService).getFeatures('');
+      container.read(dndApiService).getClassFeatures('');
 
-      verify(() => repository.getFeatures('')).called(1);
+      verify(() => repository.getClassFeatures('')).called(1);
+    });
+
+    test("getSubclassFeatures calls getSubclassFeatures in repository", () async {
+      final container = createContainer(overrides: [
+        dndApiService.overrideWith((ref) {
+          return DNDAPIService(repository);
+        })
+      ]);
+
+      when(() => repository.getSubclassFeatures('')). thenAnswer((_) async => []);
+
+      container.read(dndApiService).getSubclassFeatures('');
+
+      verify(() => repository.getSubclassFeatures('')).called(1);
     });
   });
 }
