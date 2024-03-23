@@ -103,7 +103,25 @@ class DNDAPIRepository {
   /// Returns list of equipment of a certain category
   Future<Map<String, dynamic>> getEquipment(String category) async {
     const String equipmentEndpoint = "/equipment-categories/";
-    final response = await client.get(Uri.parse(apiEndpoint + equipmentEndpoint + category));
+    final response =
+        await client.get(Uri.parse(apiEndpoint + equipmentEndpoint + category));
+    return jsonDecode(response.body);
+  }
+
+  /// Returns list of level feature names for a given class.
+  Future<List> getClassLevels(String className) async {
+    const String classEndpoint = '/classes/';
+    const String levelsEndpoint = '/levels';
+    final response = await client.get(
+        Uri.parse(apiEndpoint + classEndpoint + className + levelsEndpoint));
+    return jsonDecode(response.body);
+  }
+
+  /// Returns information for a given feature
+  Future<Map<String, dynamic>> getFeature(String feature) async {
+    const String featuresEndpoint = "/features/";
+    final response =
+        await client.get(Uri.parse(apiEndpoint + featuresEndpoint + feature));
     return jsonDecode(response.body);
   }
   

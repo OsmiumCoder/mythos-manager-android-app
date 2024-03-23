@@ -220,6 +220,37 @@ void main() {
       expect(spellsForClassJson["count"], 204);
       expect(spellsForClassJson["results"], isList);
     });
+    
+    test("getClassLevels returns correct json data", () async {
+      final container = createContainer(overrides: [
+        dndApiRepository.overrideWith((ref) {
+          return DNDAPIRepository(client: mockHttpClient);
+        })
+      ]);
+
+      when(() => mockHttpClient
+          .get(Uri.parse('https://www.dnd5eapi.co/api/classes/barbarian/levels')))
+          .thenAnswer((invocation) async => http.Response(levelsForClass, 200));
+      
+      final levelsForClassJson = await container.read(dndApiRepository).getClassLevels("barbarian");
+      expect(levelsForClassJson, isList);
+      expect(levelsForClassJson.length, 20);
+    });
+
+    test("getFeature returns correct json data", () async {
+      final container = createContainer(overrides: [
+        dndApiRepository.overrideWith((ref) {
+          return DNDAPIRepository(client: mockHttpClient);
+        })
+      ]);
+
+      when(() => mockHttpClient
+          .get(Uri.parse('https://www.dnd5eapi.co/api/features/rage')))
+          .thenAnswer((invocation) async => http.Response(classFeature, 200));
+
+      final levelsForClassJson = await container.read(dndApiRepository).getFeature("rage");
+      expect(levelsForClassJson, isMap);
+    });
   });
 }
 
@@ -2323,5 +2354,511 @@ const spellsForClass = '''
 			"url": "/api/spells/wish"
 		}
 	]
+}
+''';
+
+const levelsForClass = '''
+[
+	{
+		"level": 1,
+		"ability_score_bonuses": 0,
+		"prof_bonus": 2,
+		"features": [
+			{
+				"index": "rage",
+				"name": "Rage",
+				"url": "/api/features/rage"
+			},
+			{
+				"index": "barbarian-unarmored-defense",
+				"name": "Unarmored Defense",
+				"url": "/api/features/barbarian-unarmored-defense"
+			}
+		],
+		"class_specific": {
+			"rage_count": 2,
+			"rage_damage_bonus": 2,
+			"brutal_critical_dice": 0
+		},
+		"index": "barbarian-1",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/1"
+	},
+	{
+		"level": 2,
+		"ability_score_bonuses": 0,
+		"prof_bonus": 2,
+		"features": [
+			{
+				"index": "reckless-attack",
+				"name": "Reckless Attack",
+				"url": "/api/features/reckless-attack"
+			},
+			{
+				"index": "danger-sense",
+				"name": "Danger Sense",
+				"url": "/api/features/danger-sense"
+			}
+		],
+		"class_specific": {
+			"rage_count": 2,
+			"rage_damage_bonus": 2,
+			"brutal_critical_dice": 0
+		},
+		"index": "barbarian-2",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/2"
+	},
+	{
+		"level": 3,
+		"ability_score_bonuses": 0,
+		"prof_bonus": 2,
+		"features": [
+			{
+				"index": "primal-path",
+				"name": "Primal Path",
+				"url": "/api/features/primal-path"
+			}
+		],
+		"class_specific": {
+			"rage_count": 3,
+			"rage_damage_bonus": 2,
+			"brutal_critical_dice": 0
+		},
+		"index": "barbarian-3",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/3"
+	},
+	{
+		"level": 4,
+		"ability_score_bonuses": 1,
+		"prof_bonus": 2,
+		"features": [
+			{
+				"index": "barbarian-ability-score-improvement-1",
+				"name": "Ability Score Improvement",
+				"url": "/api/features/barbarian-ability-score-improvement-1"
+			}
+		],
+		"class_specific": {
+			"rage_count": 3,
+			"rage_damage_bonus": 2,
+			"brutal_critical_dice": 0
+		},
+		"index": "barbarian-4",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/4"
+	},
+	{
+		"level": 5,
+		"ability_score_bonuses": 1,
+		"prof_bonus": 3,
+		"features": [
+			{
+				"index": "barbarian-extra-attack",
+				"name": "Extra Attack",
+				"url": "/api/features/barbarian-extra-attack"
+			},
+			{
+				"index": "fast-movement",
+				"name": "Fast Movement",
+				"url": "/api/features/fast-movement"
+			}
+		],
+		"class_specific": {
+			"rage_count": 3,
+			"rage_damage_bonus": 2,
+			"brutal_critical_dice": 0
+		},
+		"index": "barbarian-5",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/5"
+	},
+	{
+		"level": 6,
+		"ability_score_bonuses": 1,
+		"prof_bonus": 3,
+		"features": [],
+		"class_specific": {
+			"rage_count": 4,
+			"rage_damage_bonus": 2,
+			"brutal_critical_dice": 0
+		},
+		"index": "barbarian-6",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/6"
+	},
+	{
+		"level": 7,
+		"ability_score_bonuses": 1,
+		"prof_bonus": 3,
+		"features": [
+			{
+				"index": "feral-instinct",
+				"name": "Feral Instinct",
+				"url": "/api/features/feral-instinct"
+			}
+		],
+		"class_specific": {
+			"rage_count": 4,
+			"rage_damage_bonus": 2,
+			"brutal_critical_dice": 0
+		},
+		"index": "barbarian-7",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/7"
+	},
+	{
+		"level": 8,
+		"ability_score_bonuses": 2,
+		"prof_bonus": 3,
+		"features": [
+			{
+				"index": "barbarian-ability-score-improvement-2",
+				"name": "Ability Score Improvement",
+				"url": "/api/features/barbarian-ability-score-improvement-2"
+			}
+		],
+		"class_specific": {
+			"rage_count": 4,
+			"rage_damage_bonus": 2,
+			"brutal_critical_dice": 0
+		},
+		"index": "barbarian-8",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/8"
+	},
+	{
+		"level": 9,
+		"ability_score_bonuses": 2,
+		"prof_bonus": 4,
+		"features": [
+			{
+				"index": "brutal-critical-1-die",
+				"name": "Brutal Critical (1 die)",
+				"url": "/api/features/brutal-critical-1-die"
+			}
+		],
+		"class_specific": {
+			"rage_count": 4,
+			"rage_damage_bonus": 3,
+			"brutal_critical_dice": 1
+		},
+		"index": "barbarian-9",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/9"
+	},
+	{
+		"level": 10,
+		"ability_score_bonuses": 2,
+		"prof_bonus": 4,
+		"features": [],
+		"class_specific": {
+			"rage_count": 4,
+			"rage_damage_bonus": 3,
+			"brutal_critical_dice": 1
+		},
+		"index": "barbarian-10",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/10"
+	},
+	{
+		"level": 11,
+		"ability_score_bonuses": 2,
+		"prof_bonus": 4,
+		"features": [
+			{
+				"index": "relentless-rage",
+				"name": "Relentless Rage",
+				"url": "/api/features/relentless-rage"
+			}
+		],
+		"class_specific": {
+			"rage_count": 4,
+			"rage_damage_bonus": 3,
+			"brutal_critical_dice": 1
+		},
+		"index": "barbarian-11",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/11"
+	},
+	{
+		"level": 12,
+		"ability_score_bonuses": 3,
+		"prof_bonus": 4,
+		"features": [
+			{
+				"index": "barbarian-ability-score-improvement-3",
+				"name": "Ability Score Improvement",
+				"url": "/api/features/barbarian-ability-score-improvement-3"
+			}
+		],
+		"class_specific": {
+			"rage_count": 5,
+			"rage_damage_bonus": 3,
+			"brutal_critical_dice": 1
+		},
+		"index": "barbarian-12",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/12"
+	},
+	{
+		"level": 13,
+		"ability_score_bonuses": 3,
+		"prof_bonus": 5,
+		"features": [
+			{
+				"index": "brutal-critical-2-dice",
+				"name": "Brutal Critical (2 dice)",
+				"url": "/api/features/brutal-critical-2-dice"
+			}
+		],
+		"class_specific": {
+			"rage_count": 5,
+			"rage_damage_bonus": 3,
+			"brutal_critical_dice": 2
+		},
+		"index": "barbarian-13",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/13"
+	},
+	{
+		"level": 14,
+		"ability_score_bonuses": 3,
+		"prof_bonus": 5,
+		"features": [],
+		"class_specific": {
+			"rage_count": 5,
+			"rage_damage_bonus": 3,
+			"brutal_critical_dice": 2
+		},
+		"index": "barbarian-14",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/14"
+	},
+	{
+		"level": 15,
+		"ability_score_bonuses": 3,
+		"prof_bonus": 5,
+		"features": [
+			{
+				"index": "persistent-rage",
+				"name": "Persistent Rage",
+				"url": "/api/features/persistent-rage"
+			}
+		],
+		"class_specific": {
+			"rage_count": 5,
+			"rage_damage_bonus": 3,
+			"brutal_critical_dice": 2
+		},
+		"index": "barbarian-15",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/15"
+	},
+	{
+		"level": 16,
+		"ability_score_bonuses": 4,
+		"prof_bonus": 5,
+		"features": [
+			{
+				"index": "barbarian-ability-score-improvement-4",
+				"name": "Ability Score Improvement",
+				"url": "/api/features/barbarian-ability-score-improvement-4"
+			}
+		],
+		"class_specific": {
+			"rage_count": 5,
+			"rage_damage_bonus": 4,
+			"brutal_critical_dice": 2
+		},
+		"index": "barbarian-16",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/16"
+	},
+	{
+		"level": 17,
+		"ability_score_bonuses": 4,
+		"prof_bonus": 6,
+		"features": [
+			{
+				"index": "brutal-critical-3-dice",
+				"name": "Brutal Critical (3 dice)",
+				"url": "/api/features/brutal-critical-3-dice"
+			}
+		],
+		"class_specific": {
+			"rage_count": 6,
+			"rage_damage_bonus": 4,
+			"brutal_critical_dice": 3
+		},
+		"index": "barbarian-17",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/17"
+	},
+	{
+		"level": 18,
+		"ability_score_bonuses": 4,
+		"prof_bonus": 6,
+		"features": [
+			{
+				"index": "indomitable-might",
+				"name": "Indomitable Might",
+				"url": "/api/features/indomitable-might"
+			}
+		],
+		"class_specific": {
+			"rage_count": 6,
+			"rage_damage_bonus": 4,
+			"brutal_critical_dice": 3
+		},
+		"index": "barbarian-18",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/18"
+	},
+	{
+		"level": 19,
+		"ability_score_bonuses": 5,
+		"prof_bonus": 6,
+		"features": [
+			{
+				"index": "barbarian-ability-score-improvement-5",
+				"name": "Ability Score Improvement",
+				"url": "/api/features/barbarian-ability-score-improvement-5"
+			}
+		],
+		"class_specific": {
+			"rage_count": 6,
+			"rage_damage_bonus": 4,
+			"brutal_critical_dice": 3
+		},
+		"index": "barbarian-19",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/19"
+	},
+	{
+		"level": 20,
+		"ability_score_bonuses": 5,
+		"prof_bonus": 6,
+		"features": [
+			{
+				"index": "primal-champion",
+				"name": "Primal Champion",
+				"url": "/api/features/primal-champion"
+			}
+		],
+		"class_specific": {
+			"rage_count": 9999,
+			"rage_damage_bonus": 4,
+			"brutal_critical_dice": 3
+		},
+		"index": "barbarian-20",
+		"class": {
+			"index": "barbarian",
+			"name": "Barbarian",
+			"url": "/api/classes/barbarian"
+		},
+		"url": "/api/classes/barbarian/levels/20"
+	}
+]
+''';
+
+const classFeature = '''
+{
+	"index": "rage",
+	"class": {
+		"index": "barbarian",
+		"name": "Barbarian",
+		"url": "/api/classes/barbarian"
+	},
+	"name": "Rage",
+	"level": 1,
+	"prerequisites": [],
+	"desc": [
+		"In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action. While raging, you gain the following benefits if you aren't wearing heavy armor:",
+		"- You have advantage on Strength checks and Strength saving throws.",
+		"- When you make a melee weapon Attack using Strength, you gain a +2 bonus to the damage roll. This bonus increases as you level.",
+		"- You have Resistance to bludgeoning, piercing, and slashing damage.",
+		"If you are able to cast Spells, you can't cast them or concentrate on them while raging.",
+		"Your rage lasts for 1 minute. It ends early if you are knocked Unconscious or if Your Turn ends and you haven't attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on Your Turn as a Bonus Action.",
+		"Once you have raged the maximum number of times for your barbarian level, you must finish a Long Rest before you can rage again. You may rage 2 times at 1st level, 3 at 3rd, 4 at 6th, 5 at 12th, and 6 at 17th."
+	],
+	"url": "/api/features/rage"
 }
 ''';
