@@ -166,21 +166,6 @@ void main() {
       verify(() => service.getSpellsForClass('')).called(1);
     });
 
-    test("getClassLevels calls getClassLevels in service", () {
-      final container = createContainer(overrides: [
-        dndApiController.overrideWith((ref) {
-          return DNDAPIController(service);
-        })
-      ]);
-
-      when(() => service.getClassLevels(''))
-          .thenAnswer((_) async => []);
-
-      container.read(dndApiController).getClassLevels('');
-
-      verify(() => service.getClassLevels('')).called(1);
-    });
-
     test("getFeature calls getFeature in service", () {
       final container = createContainer(overrides: [
         dndApiController.overrideWith((ref) {
@@ -188,12 +173,12 @@ void main() {
         })
       ]);
 
-      when(() => service.getFeature(''))
-          .thenAnswer((_) async => {"success": 1});
+      when(() => service.getFeatures(''))
+          .thenAnswer((_) async => []);
 
-      container.read(dndApiController).getFeature('');
+      container.read(dndApiController).getFeatures('');
 
-      verify(() => service.getFeature('')).called(1);
+      verify(() => service.getFeatures('')).called(1);
     });
   });
 }

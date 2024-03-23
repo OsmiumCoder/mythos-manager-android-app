@@ -71,14 +71,9 @@ class DNDAPIService {
     return await _repository.getEquipment(category);
   }
 
-  /// Returns list of level feature names for a given class.
-  Future<List> getClassLevels(String className) async {
-    return await _repository.getClassLevels(className);
-  }
-
-  /// Returns information for a given feature.
-  Future<Map<String, dynamic>> getFeature(String feature) async {
-    return await _repository.getFeature(feature);
+  /// Returns list of class features.
+  Future<List<Map<String, dynamic>>> getFeatures(String className) async {
+    return await _repository.getFeatures(className);
   }
 
 
