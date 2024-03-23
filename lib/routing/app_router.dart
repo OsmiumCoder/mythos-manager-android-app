@@ -6,7 +6,9 @@ import 'package:mythos_manager/features/authentication/data/authentication_repos
 import 'package:mythos_manager/features/authentication/presentation/screens/screens.dart';
 import 'package:mythos_manager/features/campaigns/presentation/screens/campaign_creation_screen.dart';
 import 'package:mythos_manager/features/campaigns/presentation/screens/campaign_list_screen.dart';
+import 'package:mythos_manager/features/characters/presentation/screens/character_display_screen.dart';
 import 'package:mythos_manager/features/home/presentation/screens/screens.dart';
+import '../features/characters/domain/character.dart';
 import 'unknown_screen.dart';
 import 'package:mythos_manager/features/characters/presentation/screens/screens.dart';
 
@@ -29,6 +31,7 @@ class AppRouter {
   static const String classSelectionScreen = '/characters/creator/class-selection';
   static const String campaignCreationScreen = '/campaigns/creator';
   static const String campaignListScreen = "/campaigns";
+  static const String characterDisplayScreen = "/characters/display";
 
   // Screens that do not require authentication
   static const noAuthScreens = [loginScreen, signupScreen];
@@ -75,6 +78,10 @@ class AppRouter {
       case campaignListScreen:
         return MaterialPageRoute(
           builder: (_) => const CampaignListScreen(),
+        );
+      case characterDisplayScreen:
+        return MaterialPageRoute(
+          builder: (_) => CharacterDisplayScreen(character: settings.arguments as Character),
         );
     }
     if (kDebugMode) {
