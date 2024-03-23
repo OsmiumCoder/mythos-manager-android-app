@@ -3,10 +3,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/characters/domain/character.dart';
 import 'package:mythos_manager/shared/extensions/capitalize.dart';
 
-class MainCharacterDisplayScreen extends ConsumerWidget {
+class MainCharacterDisplay extends ConsumerWidget {
   final Character character;
 
-  const MainCharacterDisplayScreen({super.key, required this.character});
+  const MainCharacterDisplay({super.key, required this.character});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

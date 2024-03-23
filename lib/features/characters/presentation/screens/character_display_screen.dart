@@ -25,7 +25,7 @@ class CharacterDisplayScreen extends HookWidget {
   Widget _getSelectedScreen(int selectedScreen) {
     switch (selectedScreen) {
       case 0:
-        return MainCharacterDisplayScreen(character: character);
+        return MainCharacterDisplay(character: character);
       case 1:
         return const Text("Spells screen"); // TODO implement spells screen
       case 2:
