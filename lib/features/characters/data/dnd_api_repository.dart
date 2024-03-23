@@ -112,18 +112,17 @@ class DNDAPIRepository {
   Future<List<Map<String, dynamic>>> getFeatures(String className) async {
     const String classEndpoint = '/classes/';
     const String levelsEndpoint = '/levels';
+    const String featuresEndpoint = "/features/";
     final response = await client.get(
         Uri.parse(apiEndpoint + classEndpoint + className + levelsEndpoint));
 
-    final List<Map<String, dynamic>> levels = jsonDecode(response.body);
+    final List<dynamic> levels = jsonDecode(response.body);
 
     List<Map<String, dynamic>> classFeatures = [];
 
     for (var level in levels) {
-      List<Map<String, dynamic>> levelFeatures = level["features"];
+      List levelFeatures = level["features"];
       for (var feature in levelFeatures) {
-        const String featuresEndpoint = "/features/";
-
         String featureName = feature["index"];
 
         final response = await client
