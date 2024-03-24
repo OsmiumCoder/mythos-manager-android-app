@@ -46,45 +46,20 @@ class HomeScreen extends HookConsumerWidget {
               ),
             ),
             Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 10),
-                      child: BoxShadowImage(
-                        height: 200,
-                        text: Text(
-                          "Favourite\nCharacter",
-                          textAlign: TextAlign.center,
-                          style: cardTextStyle,
-                        ),
-                        textPadding: 30,
-                        onTap: () {}, // TODO onTap Handler for navigation
-                      ),
-                    ),
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: BoxShadowImage(
+                  image: const Image(
+                      image: Svg("assets/images/characters_button_image.svg"),
+                      height: 200),
+                  text: Text(
+                    "Characters",
+                    textAlign: TextAlign.center,
+                    style: cardTextStyle,
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 10),
-                      child: BoxShadowImage(
-                        image: const Image(
-                            image: Svg(
-                                "assets/images/current_campaign_button_image.svg"),
-                            height: 200),
-                        text: Text(
-                          "Current\nCampaign",
-                          textAlign: TextAlign.center,
-                          style: cardTextStyle,
-                        ),
-                        textPadding: 30,
-                        onTap: () {}, // TODO onTap Handler for navigation
-                      ),
-                    ),
-                  ),
-                ],
+                  textPadding: 70,
+                  onTap: () => Navigator.pushNamed(context, AppRouter.campaignListScreen),
+                ),
               ),
             ),
             Expanded(
