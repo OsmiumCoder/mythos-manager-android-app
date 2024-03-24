@@ -47,7 +47,7 @@ class MythosDrawer extends Drawer {
                     "Characters",
                     style: TextStyle(color: Colors.white),
                   ),
-                  onTap: () => _handleRouting(context, AppRouter.charactersScreen), // TODO implement routing
+                  onTap: () => _handleRouting(context, AppRouter.charactersScreen),
                 ),
               ),
               Container(

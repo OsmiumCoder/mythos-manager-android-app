@@ -159,7 +159,9 @@ void main() {
       ]);
 
       when(() => service.getSpellsForClass(''))
-          .thenAnswer((_) async => {"success": 1});
+          .thenAnswer((_) async => [
+            {"success": 1}
+          ]);
 
       container.read(dndApiController).getSpellsForClass('');
 
