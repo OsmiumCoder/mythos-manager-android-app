@@ -111,8 +111,6 @@ class DNDAPIRepository {
       classSpells.add(jsonDecode(response.body));
     }
 
-    classSpells.sort((a, b) { return a["level"] > b["level"]; });
-
     return classSpells;
   }
 
