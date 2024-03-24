@@ -36,13 +36,7 @@ class CharacterController extends AsyncNotifier<List<Character>> {
 
   /// Returns a list of the signed in users [Character]s.
   Future<List<Character>> _fetchCharacters() async {
-    try {
-      return ref.watch(characterServiceProvider).fetchCharacters();
-    } catch (e) {
-      print("ERROR");
-      print(e);
-    }
-    return [];
+    return ref.watch(characterServiceProvider).fetchCharacters();
   }
 
   Future<List<Character>> fetchPublicCharacters(
