@@ -62,7 +62,7 @@ class HomeScreen extends HookConsumerWidget {
                     style: cardTextStyle,
                   ),
                   textPadding: 70,
-                  onTap: () => Navigator.pushNamed(context, AppRouter.campaignListScreen),
+                  onTap: () => Navigator.pushNamed(context, AppRouter.charactersScreen),
                 ),
               ),
             ),
@@ -86,7 +86,7 @@ class HomeScreen extends HookConsumerWidget {
                     // Reset character creation state
                     ref.read(characterBuilderProvider.notifier).state =
                         CharacterBuilderController();
-                    Navigator.pushNamed(context, AppRouter.charactersScreen);
+                    Navigator.pushNamed(context, AppRouter.raceSelectionScreen);
                   },
                 ),
               ),
