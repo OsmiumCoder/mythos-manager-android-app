@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mythos_manager/features/characters/domain/character.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/character_builder_controller.dart';
@@ -34,6 +36,12 @@ void main() {
       Character character = characterBuilderController.toCharacter();
 
       expect(character.equipment, {"test1", "test2"});
+    });
+
+    test("toCharacter defaults isPublic to false", () {
+      final CharacterBuilderController characterBuilderController = CharacterBuilderController();
+      Character character = characterBuilderController.toCharacter();
+      expect(character.isPublic, false);
     });
 
   });

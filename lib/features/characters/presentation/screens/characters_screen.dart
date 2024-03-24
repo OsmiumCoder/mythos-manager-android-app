@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -56,8 +57,13 @@ class CharactersScreen extends HookConsumerWidget {
                        CharacterList(characters: characters)
                       ],
                     ),
-                error: (_, __) =>
-                    const Text("Your characters could not be loaded"),
+                error: (e, st) {
+                  if (kDebugMode) {
+                    print(e);
+                    print(st);
+                  }
+                  return const Text("Your characters could not be loaded");
+                },
                 loading: () => const CircularProgressIndicator())
           ],
         ),

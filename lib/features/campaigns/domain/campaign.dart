@@ -37,7 +37,7 @@ class Campaign {
   ) {
     final data = snapshot.data();
     return Campaign(
-        uid: data?["id"],
+        uid: snapshot.id,
         userID: data?["user_id"],
         name: data?["name"],
         description: data?["description"],

@@ -29,6 +29,14 @@ class CharacterRepository {
         .add(character);
   }
 
+  /// Updates a [Character] in cloud firestore
+  Future<void> updateCharacter(Character character) async {
+    await _firestore
+        .collection("characters")
+        .doc(character.id)
+        .update(character.toFirestore());
+  }
+
   /// Returns a list of [Character]s created by the given user.
   Future<List<Character>> fetchCharactersForUser(String userID) async {
     QuerySnapshot<Character> querySnapshot = await _firestore
@@ -38,6 +46,33 @@ class CharacterRepository {
             fromFirestore: Character.fromFirestore,
             toFirestore: (Character character, options) =>
                 character.toFirestore())
+        .get();
+
+    return querySnapshot.docs.map((document) {
+      Character character = document.data();
+      return character;
+    }).toList();
+  }
+
+  Future<List<Character>> fetchPublicCharacters(
+      String? className, String? subclass) async {
+    
+    Query query = _firestore
+        .collection("characters")
+        .where("is_public", isEqualTo: true);
+
+    if (className != null) {
+      query = query.where("class", isEqualTo: className);
+    }
+
+    if (subclass != null) {
+      query = query.where("subclass", isEqualTo: subclass);
+    }
+
+    QuerySnapshot<Character> querySnapshot = await query.withConverter(
+    fromFirestore: Character.fromFirestore,
+    toFirestore: (Character character, options) =>
+    character.toFirestore())
         .get();
 
     return querySnapshot.docs.map((document) {
