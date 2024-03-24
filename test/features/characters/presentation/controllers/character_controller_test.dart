@@ -64,6 +64,38 @@ void main() {
           .called(1);
     });
 
+    test("updateCharacter calls service updateCharacter", () async {
+      final container = createContainer(overrides: [
+        characterServiceProvider.overrideWith((ref) {
+          return mockCharacterService;
+        })
+      ]);
+
+      when(() => mockCharacterService.updateCharacter(character))
+          .thenAnswer((invocation) async => true);
+
+      container.read(characterControllerProvider.notifier).updateCharacter(character);
+
+      verify(() => mockCharacterService.updateCharacter(character))
+          .called(1);
+    });
+
+    test("fetchPublicCharacters calls service fetchCharacters", () async {
+      final container = createContainer(overrides: [
+        characterServiceProvider.overrideWith((ref) {
+          return mockCharacterService;
+        })
+      ]);
+
+      when(() => mockCharacterService.fetchPublicCharacters(null, null))
+          .thenAnswer((invocation) async => [character]);
+
+      container.read(characterControllerProvider.notifier).fetchPublicCharacters();
+
+      verify(() => mockCharacterService.fetchPublicCharacters(null, null))
+          .called(1);
+    });
+
     test("build calls service fetchCharacters of service", () async {
       final container = createContainer(overrides: [
         characterServiceProvider.overrideWith((ref) {
