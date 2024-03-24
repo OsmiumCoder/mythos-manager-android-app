@@ -24,9 +24,32 @@ class CharacterController extends AsyncNotifier<List<Character>> {
     });
   }
 
+  /// Updates a [Character] in cloud firestore.
+  Future<void> updateCharacter(Character character) async {
+    state = const AsyncValue.loading();
+
+    state = await AsyncValue.guard(() {
+      ref.watch(characterServiceProvider).updateCharacter(character);
+      return _fetchCharacters();
+    });
+  }
+
   /// Returns a list of the signed in users [Character]s.
   Future<List<Character>> _fetchCharacters() async {
-    return ref.watch(characterServiceProvider).fetchCharacters();
+    try {
+      return ref.watch(characterServiceProvider).fetchCharacters();
+    } catch (e) {
+      print("ERROR");
+      print(e);
+    }
+    return [];
+  }
+
+  Future<List<Character>> fetchPublicCharacters(
+      {String? className, String? subclass}) async {
+    return ref
+        .watch(characterServiceProvider)
+        .fetchPublicCharacters(className, subclass);
   }
 
   @override

@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// This model holds all relevant data for a [Character].
 class Character {
+  /// The firestore document id
+  String? id;
+
   /// The id of the user who owns the character.
   String? userID;
 
@@ -107,7 +110,11 @@ class Character {
   /// The name of the [Character].
   final String? name;
 
+  /// Flag determining if the [Character] is public
+  bool isPublic;
+
   Character({
+    this.id,
     this.userID,
     this.skillProficiencies,
     this.equipmentProficiencies,
@@ -133,6 +140,7 @@ class Character {
     this.height,
     this.backstory,
     this.name,
+    this.isPublic = false,
   });
 
   factory Character.withCollectionsInitialized() {
@@ -155,6 +163,7 @@ class Character {
   ) {
     final data = snapshot.data();
     return Character(
+        id: data?["id"],
         userID: data?["user_id"],
         skillProficiencies: data?["skill_proficiencies"] is Iterable
             ? Set.from(data?["skill_proficiencies"])
@@ -195,7 +204,9 @@ class Character {
         weight: data?["weight"],
         height: data?["height"],
         backstory: data?["backstory"],
-        name: data?["name"]);
+        name: data?["name"],
+        isPublic: data?["is_public"] ?? false,
+    );
   }
 
   /// Returns a map of a [Character]'s attributes to store in Firestore.
@@ -240,7 +251,10 @@ class Character {
       if (weight != null) "weight": weight,
       if (height != null) "height": height,
       if (backstory != null) "backstory": backstory,
-      if (name != null) "name": name
+      if (name != null) "name": name,
+
+      // Visibility
+      "is_public": isPublic,
     };
   }
 }
