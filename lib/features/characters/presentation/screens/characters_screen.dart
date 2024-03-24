@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/characters/domain/character.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/character_builder_controller.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/character_controller.dart';
+import 'package:mythos_manager/features/characters/presentation/screens/components/character_list.dart';
 import 'package:mythos_manager/shared/presentation/components/components.dart';
 
 import '../../../../routing/app_router.dart';
@@ -52,24 +53,7 @@ class CharactersScreen extends HookConsumerWidget {
             characterController.when(
                 data: (List<Character> characters) => Column(
                       children: [
-                        ...characters.map((Character character) => Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: BoxShadowImage(
-                                text: Text(
-                                  character.name ??
-                                      "Character #${characters.indexOf(character)}",
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                                height: 100,
-                                width: 300,
-                                textPadding: 25,
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                      context, AppRouter.characterDisplayScreen,
-                                      arguments: character);
-                                },
-                              ),
-                            ))
+                       CharacterList(characters: characters)
                       ],
                     ),
                 error: (_, __) =>

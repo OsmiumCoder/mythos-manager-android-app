@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 import 'package:mythos_manager/features/authentication/presentation/screens/screens.dart';
-import 'package:mythos_manager/features/campaigns/presentation/screens/campaign_creation_screen.dart';
-import 'package:mythos_manager/features/campaigns/presentation/screens/campaign_list_screen.dart';
-import 'package:mythos_manager/features/characters/presentation/screens/character_display_screen.dart';
+import 'package:mythos_manager/features/campaigns/presentation/screens/screens.dart';
 import 'package:mythos_manager/features/home/presentation/screens/screens.dart';
 import '../features/characters/domain/character.dart';
 import 'unknown_screen.dart';
@@ -32,6 +30,7 @@ class AppRouter {
   static const String campaignCreationScreen = '/campaigns/creator';
   static const String campaignListScreen = "/campaigns";
   static const String characterDisplayScreen = "/characters/display";
+  static const String publicCharactersScreen = "/characters/public";
 
   // Screens that do not require authentication
   static const noAuthScreens = [loginScreen, signupScreen];
@@ -83,6 +82,10 @@ class AppRouter {
         Character character = settings.arguments as Character;
         return MaterialPageRoute(
           builder: (_) => CharacterDisplayScreen(character: character),
+        );
+      case publicCharactersScreen:
+        return MaterialPageRoute(
+          builder: (_) => const PublicCharactersScreen(),
         );
     }
     if (kDebugMode) {

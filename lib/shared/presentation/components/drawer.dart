@@ -63,7 +63,7 @@ class MythosDrawer extends Drawer {
                 ),
               ),
               Container(
-                color: null, // TODO implement color when current route is publicCharacters,
+                color: selectedScreen == AppRouter.publicCharactersScreen ? selectedColor : null,
                 child: ListTile(
                   leading: const Icon(
                     Icons.store_outlined,
@@ -71,7 +71,7 @@ class MythosDrawer extends Drawer {
                   ),
                   title: const Text("Public Characters",
                       style: TextStyle(color: Colors.white)),
-                  onTap: () {}, // TODO implement routing
+                  onTap: () => _handleRouting(context, AppRouter.publicCharactersScreen),
                 ),
               ),
               Container(
