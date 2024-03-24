@@ -63,7 +63,7 @@ class DNDAPIController {
   }
 
   /// Returns the list of spells for a specific class.
-  Future<Map<String, dynamic>> getSpellsForClass(String className) async {
+  Future<List<Map<String, dynamic>>> getSpellsForClass(String className) async {
     return await _service.getSpellsForClass(className);
   }
 

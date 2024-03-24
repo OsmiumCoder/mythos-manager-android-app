@@ -92,12 +92,28 @@ class DNDAPIRepository {
   }
 
   /// Returns the list of spells for a specific class.
-  Future<Map<String, dynamic>> getSpellsForClass(String className) async {
+  Future<List<Map<String, dynamic>>> getSpellsForClass(String className) async {
     const String classEndpoint = '/classes/';
-    const String spellsEndpoint = '/spells';
+    const String spellsEndpoint = '/spells/';
     final response = await client.get(
         Uri.parse(apiEndpoint + classEndpoint + className + spellsEndpoint));
-    return jsonDecode(response.body);
+
+    final List spells = jsonDecode(response.body)["results"];
+
+    List<Map<String, dynamic>> classSpells = [];
+
+    for (var spell in spells) {
+      String spellName = spell["index"];
+
+      final response = await client
+          .get(Uri.parse(apiEndpoint + spellsEndpoint + spellName));
+
+      classSpells.add(jsonDecode(response.body));
+    }
+
+    classSpells.sort((a, b) { return a["level"] > b["level"]; });
+
+    return classSpells;
   }
 
   /// Returns list of equipment of a certain category
