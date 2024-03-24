@@ -86,7 +86,7 @@ class HomeScreen extends HookConsumerWidget {
                     // Reset character creation state
                     ref.read(characterBuilderProvider.notifier).state =
                         CharacterBuilderController();
-                    Navigator.pushNamed(context, AppRouter.raceSelectionScreen);
+                    Navigator.pushNamed(context, AppRouter.charactersScreen);
                   },
                 ),
               ),
