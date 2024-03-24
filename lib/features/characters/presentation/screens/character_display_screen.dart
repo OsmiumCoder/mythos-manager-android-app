@@ -27,7 +27,7 @@ class CharacterDisplayScreen extends HookWidget {
       case 0:
         return MainCharacterDisplay(character: character);
       case 1:
-        return const Text("Spells screen"); // TODO implement spells screen
+        return CharacterSpellDisplay(className: character.className!);
       case 2:
         return const Text("Backstory screen"); // TODO implement backstory screen
       default:
