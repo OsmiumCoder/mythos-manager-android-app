@@ -163,7 +163,7 @@ class Character {
   ) {
     final data = snapshot.data();
     return Character(
-        id: data?["id"],
+        id: snapshot.id,
         userID: data?["user_id"],
         skillProficiencies: data?["skill_proficiencies"] is Iterable
             ? Set.from(data?["skill_proficiencies"])
