@@ -22,7 +22,7 @@ class CharacterSpellDisplay extends ConsumerWidget {
               builder: (BuildContext context,
                   AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
                 if (snapshot.hasData) {
-                  List spells = snapshot.data ?? [];
+                  List spells = snapshot.data!;
 
                   if (spells.isEmpty) {
                     return Center(
