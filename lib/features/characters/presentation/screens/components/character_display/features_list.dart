@@ -37,7 +37,7 @@ class FeaturesList extends ConsumerWidget {
           builder:
               (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
             if (snapshot.hasData) {
-              List features = snapshot.data!;
+              List features = snapshot.data ?? [];
               return FeaturesListCard(features: features);
             } else {
               return Container(
