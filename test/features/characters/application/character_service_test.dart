@@ -96,6 +96,24 @@ void main() {
               throwsA(isA<NoUserFoundException>()));
         });
 
+    test("updateCharacter throws NoUserFoundException when no user signed in",
+            () async {
+          final container = createContainer(overrides: [
+            characterServiceProvider.overrideWith((ref) {
+              return CharacterService(
+                  mockCharacterRepository, mockAuthRepo);
+            })
+          ]);
+
+          when(() => mockAuthRepo.currentUser()).thenReturn(null);
+
+          expectLater(
+              container
+                  .read(characterServiceProvider)
+                  .updateCharacter(character),
+              throwsA(isA<NoUserFoundException>()));
+        });
+
     test("fetchCharacters calls repo fetchCharactersForUser with user id",
         () async {
       final container = createContainer(overrides: [

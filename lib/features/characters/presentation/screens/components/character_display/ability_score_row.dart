@@ -14,17 +14,17 @@ class AbilityScoreRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final strengthTotal =
-        abilityScores["STR"]! + (abilityScoreIncreases["STR"] ?? 0);
+        abilityScores["STR"] ?? 0 + (abilityScoreIncreases["STR"] ?? 0);
     final dexterityTotal =
-        abilityScores["DEX"]! + (abilityScoreIncreases["DEX"] ?? 0);
+        abilityScores["DEX"] ?? 0 + (abilityScoreIncreases["DEX"] ?? 0);
     final constitutionTotal =
-        abilityScores["CON"]! + (abilityScoreIncreases["CON"] ?? 0);
+        abilityScores["CON"] ?? 0 + (abilityScoreIncreases["CON"] ?? 0);
     final intelligenceTotal =
-        abilityScores["INT"]! + (abilityScoreIncreases["INT"] ?? 0);
+        abilityScores["INT"] ?? 0 + (abilityScoreIncreases["INT"] ?? 0);
     final wisdomTotal =
-        abilityScores["WIS"]! + (abilityScoreIncreases["WIS"] ?? 0);
+        abilityScores["WIS"] ?? 0 + (abilityScoreIncreases["WIS"] ?? 0);
     final charismaTotal =
-        abilityScores["CHA"]! + (abilityScoreIncreases["CHA"] ?? 0);
+        abilityScores["CHA"] ?? 0 + (abilityScoreIncreases["CHA"] ?? 0);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),

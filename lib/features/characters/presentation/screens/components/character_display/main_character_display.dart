@@ -23,22 +23,22 @@ class MainCharacterDisplay extends ConsumerWidget {
           children: [
             Center(
                 child: Text(
-              character.className!,
+              character.className ?? "",
               style: const TextStyle(fontSize: 20),
             )),
             Container(
               margin: const EdgeInsets.only(bottom: 10),
               child: Center(
                 child: Text(
-                  "${character.race!.capitalize()}, ${character.subrace != null ? "${character.subrace!.capitalize()}, " : ""}${character.size}",
+                  "${character.race != null ? "${character.race?.capitalize()}, " : ""}${character.subrace != null ? "${character.subrace!.capitalize()}, " : ""}${character.size}",
                   style: const TextStyle(fontSize: 16),
                 ),
               ),
             ),
             AbilityScoreRow(
-                abilityScores: character.abilityScores!,
-                abilityScoreIncreases: character.abilityScoreIncreases!,
-                savingThrows: character.savingThrows!),
+                abilityScores: character.abilityScores ?? {},
+                abilityScoreIncreases: character.abilityScoreIncreases ?? {},
+                savingThrows: character.savingThrows ?? {}),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -87,8 +87,8 @@ class MainCharacterDisplay extends ConsumerWidget {
             EquipmentCard(equipment: character.equipment),
             RacialTraitCard(racialTraits: character.racialTraits),
             FeaturesList(
-              className: character.className!,
-              subclass: character.subclass!,
+              className: character.className ?? "",
+              subclass: character.subclass ?? "",
             ),
           ],
         ),

@@ -37,6 +37,17 @@ class CharacterService {
     await _characterRepository.createCharacter(character);
   }
 
+  /// Updates a [Character] in cloud firestore.
+  ///
+  /// Throws a [NoUserFoundException] if no user is signed in
+  Future<void> updateCharacter(Character character) async {
+    User? auth = _authenticationRepository.currentUser();
+    if (auth == null) {
+      throw NoUserFoundException();
+    }
+    await _characterRepository.updateCharacter(character);
+  }
+
   /// Returns a list of [Character]s created by the signed in user.
   ///
   /// Throws a [NoUserFoundException] if no user is signed in.
@@ -46,5 +57,18 @@ class CharacterService {
       throw NoUserFoundException();
     }
     return await _characterRepository.fetchCharactersForUser(auth.uid);
+  }
+
+  /// Returns a list of public [Characters]s
+  ///
+  /// Throws a [NoUserFoundException] if no user is signed in
+  Future<List<Character>> fetchPublicCharacters(
+      String? className, String? subclass) async {
+    User? auth = _authenticationRepository.currentUser();
+    if (auth == null) {
+      throw NoUserFoundException();
+    }
+    return await _characterRepository.fetchPublicCharacters(
+        className, subclass);
   }
 }
