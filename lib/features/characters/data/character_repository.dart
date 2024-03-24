@@ -33,11 +33,8 @@ class CharacterRepository {
   Future<void> updateCharacter(Character character) async {
     await _firestore
         .collection("characters")
-        .withConverter(
-            fromFirestore: Character.fromFirestore,
-            toFirestore: (Character character, _) => character.toFirestore())
         .doc(character.id)
-        .set(character);
+        .update(character.toFirestore());
   }
 
   /// Returns a list of [Character]s created by the given user.
