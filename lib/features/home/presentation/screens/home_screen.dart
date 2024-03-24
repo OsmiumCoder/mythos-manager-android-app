@@ -34,7 +34,9 @@ class HomeScreen extends HookConsumerWidget {
                 child: BoxShadowImage(
                   image: const Image(
                       image: Svg("assets/images/campaign_button_image.svg"),
-                      height: 200),
+                      height: 200,
+                     width: 290,
+                  ),
                   text: Text(
                     "Campaigns",
                     textAlign: TextAlign.center,
@@ -51,7 +53,9 @@ class HomeScreen extends HookConsumerWidget {
                 child: BoxShadowImage(
                   image: const Image(
                       image: Svg("assets/images/characters_button_image.svg"),
-                      height: 200),
+                      height: 200,
+                    width: 290,
+                  ),
                   text: Text(
                     "Characters",
                     textAlign: TextAlign.center,
@@ -70,9 +74,10 @@ class HomeScreen extends HookConsumerWidget {
                     image:
                         Svg("assets/images/character_creator_button_image.svg"),
                     height: 200,
+                    width: 290,
                   ),
                   text: Text(
-                    "Character Creator",
+                    "Character\nCreator",
                     textAlign: TextAlign.center,
                     style: cardTextStyle,
                   ),
