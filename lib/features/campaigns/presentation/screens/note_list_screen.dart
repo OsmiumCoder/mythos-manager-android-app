@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mythos_manager/features/campaigns/domain/campaign.dart';
+import 'package:mythos_manager/features/campaigns/domain/note.dart';
 import 'package:mythos_manager/features/campaigns/presentation/controllers/note_controller.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/character_controller.dart';
-import 'package:mythos_manager/shared/presentation/components/components.dart';
-
-import '../../../../routing/app_router.dart';
-import '../../domain/campaign.dart';
+import 'package:mythos_manager/routing/app_router.dart';
 
 /// Author: Shreif Abdalla
-
 class NoteListScreen extends HookConsumerWidget {
   const NoteListScreen(this.campaign, {super.key});
 
@@ -16,7 +14,6 @@ class NoteListScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Notes"),
@@ -34,11 +31,10 @@ class NoteListScreen extends HookConsumerWidget {
                       onTap: () => Navigator.pushNamed(
                           context, AppRouter.noteCreationScreen,
                           arguments: campaign.uid),
-                      child: Card(
-                        color: theme.cardTheme.color,
-                        child: Container(
+                      child: const Card(
+                        child: SizedBox(
                           height: 150,
-                          child: const Center(
+                          child: Center(
                             child: Text(
                               "New Note",
                               style: TextStyle(
@@ -63,7 +59,6 @@ class NoteListScreen extends HookConsumerWidget {
                                 arguments: snapshot.data!)
                             : null,
                         child: Card(
-                          color: theme.cardTheme.color,
                           child: Container(
                             height: 150,
                             alignment: Alignment.center,
@@ -86,22 +81,19 @@ class NoteListScreen extends HookConsumerWidget {
               ),
               // Following is your existing code for notes display
               ref.watch(noteControllerProvider(campaign.uid!)).when(
-                    data: (notes) => Column(
-                      children: notes.map((note) {
+                    data: (List<Note> notes) => Column(
+                      children: notes.map((Note note) {
                         return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Card(
-                              color: theme.cardTheme.color,
                               child: ListTile(
                                 title: Text(
                                   note.title,
-                                  style: theme.textTheme.titleLarge
-                                      ?.copyWith(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white, fontSize: 16),
                                 ),
                                 subtitle: Text(
                                   note.description,
-                                  style: theme.textTheme.bodyMedium
-                                      ?.copyWith(color: Colors.black),
+                                  style: const TextStyle(color: Colors.black),
                                 ),
                               ),
                             ));

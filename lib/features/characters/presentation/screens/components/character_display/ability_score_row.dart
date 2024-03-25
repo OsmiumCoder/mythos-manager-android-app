@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Author: Jonathon Meney
 class AbilityScoreRow extends StatelessWidget {
   final Map<String, int> abilityScores;
   final Map<String, int> abilityScoreIncreases;

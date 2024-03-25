@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mythos_manager/features/characters/domain/character.dart';
+import 'package:mythos_manager/routing/app_router.dart';
+import 'package:mythos_manager/shared/presentation/components/components.dart';
 
-import '../../../../../routing/app_router.dart';
-import '../../../../../shared/presentation/components/box_shadow_image.dart';
-import '../../../domain/character.dart';
 
 /// Author: Liam Welsh
 class CharacterList extends StatelessWidget {

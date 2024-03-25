@@ -62,6 +62,7 @@ void main() {
       expect(character.height, "6 feet");
       expect(
           character.backstory, "A tragic story with parents being murdered.");
+      expect(character.isPublic, false);
     });
 
     test("toFirestore returns correct map", () {
@@ -95,7 +96,8 @@ void main() {
         'age': '300 years',
         'weight': '200 lbs.',
         'height': '6 feet',
-        'backstory': 'A tragic story with parents being murdered.'
+        'backstory': 'A tragic story with parents being murdered.',
+        'is_public': false
       });
     });
   });

@@ -113,6 +113,7 @@ class Character {
   /// Flag determining if the [Character] is public
   bool isPublic;
 
+  /// Constructs a [Character].
   Character({
     this.id,
     this.userID,

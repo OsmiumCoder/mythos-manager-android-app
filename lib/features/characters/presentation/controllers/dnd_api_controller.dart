@@ -3,13 +3,14 @@ import 'dart:async';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/characters/application/dnd_api_service.dart';
 
-/// Authors: Jonathon Meney, Liam Welsh
-
 /// Provides a [DNDAPIController].
 final dndApiController = Provider<DNDAPIController>((ref) {
   return DNDAPIController(ref.watch(dndApiService));
 });
 
+/// Calls [DNDAPIService] to fetch data from public API.
+///
+/// Authors: Jonathon Meney, Liam Welsh
 class DNDAPIController {
   /// The [DNDAPIService] used to fetch API data.
   final DNDAPIService _service;

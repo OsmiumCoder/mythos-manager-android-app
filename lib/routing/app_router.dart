@@ -6,10 +6,10 @@ import 'package:mythos_manager/features/authentication/data/authentication_repos
 import 'package:mythos_manager/features/authentication/presentation/screens/screens.dart';
 import 'package:mythos_manager/features/campaigns/domain/campaign.dart';
 import 'package:mythos_manager/features/campaigns/presentation/screens/note_creation_screen.dart';
+import 'package:mythos_manager/features/campaigns/presentation/screens/note_list_screen.dart';
 import 'package:mythos_manager/features/campaigns/presentation/screens/screens.dart';
+import 'package:mythos_manager/features/characters/domain/character.dart';
 import 'package:mythos_manager/features/home/presentation/screens/screens.dart';
-import '../features/campaigns/presentation/screens/note_list_screen.dart';
-import '../features/characters/domain/character.dart';
 import 'unknown_screen.dart';
 import 'package:mythos_manager/features/characters/presentation/screens/screens.dart';
 

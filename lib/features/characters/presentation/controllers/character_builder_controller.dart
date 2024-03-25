@@ -1,14 +1,15 @@
-import 'package:equatable/equatable.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/characters/domain/character.dart';
 
-/// Author: Liam Welsh
-///
 /// Provides a [CharacterBuilderController] for character creation
 final characterBuilderProvider = StateProvider<CharacterBuilderController>(
     (ref) => CharacterBuilderController());
 
-class CharacterBuilderController extends Equatable {
+/// Used to piece together a [Character] in the creation form.
+///
+/// Author: Liam Welsh
+class CharacterBuilderController {
+  // TODO: document all attrs and method
   String? race;
   String? subrace;
   String? className;
@@ -80,39 +81,4 @@ class CharacterBuilderController extends Equatable {
         racialTraits: racialTraits,
         savingThrows: classSavingThrows,
       );
-
-  @override
-  List<Object?> get props => [
-        race,
-        subrace,
-        className,
-        size,
-        speed,
-        hitDie,
-        subclass,
-        raceAbilityScores,
-        raceLanguages,
-        racialTraits,
-        raceEquipmentProfs,
-        raceSkillProfs,
-        classSavingThrows,
-        classEquipmentProfs,
-        classSkillProfs,
-        classEquipment,
-        selectedAbilityScoreIncreases,
-        background,
-        backgroundEquipment,
-        backgroundEquipmentProfs,
-        backgroundSkillProfs,
-        backgroundLanguages,
-        age,
-        weight,
-        height,
-        backstory,
-        name,
-        alignment,
-      ];
-
-  @override
-  bool? get stringify => true;
 }

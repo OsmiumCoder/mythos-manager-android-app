@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Author: Jonathon Meney
 class SpellCard extends StatelessWidget {
   const SpellCard({
     super.key,

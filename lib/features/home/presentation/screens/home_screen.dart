@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../routing/app_router.dart';
-import '../../../../shared/presentation/components/components.dart';
-import '../../../characters/presentation/controllers/character_builder_controller.dart';
+import 'package:mythos_manager/features/characters/presentation/controllers/character_builder_controller.dart';
+import 'package:mythos_manager/routing/app_router.dart';
+import 'package:mythos_manager/shared/presentation/components/components.dart';
 
 /// Home screen.
 ///

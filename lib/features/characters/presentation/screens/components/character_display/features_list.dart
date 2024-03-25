@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/dnd_api_controller.dart';
 import 'package:mythos_manager/features/characters/presentation/screens/components/character_display/features_list_card.dart';
 
+/// Author: Jonathon Meney
 class FeaturesList extends ConsumerWidget {
   const FeaturesList({
     super.key,

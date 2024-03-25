@@ -56,10 +56,8 @@ class CharacterRepository {
 
   Future<List<Character>> fetchPublicCharacters(
       String? className, String? subclass) async {
-    
-    Query query = _firestore
-        .collection("characters")
-        .where("is_public", isEqualTo: true);
+    Query query =
+        _firestore.collection("characters").where("is_public", isEqualTo: true);
 
     if (className != null) {
       query = query.where("class", isEqualTo: className);
@@ -69,10 +67,11 @@ class CharacterRepository {
       query = query.where("subclass", isEqualTo: subclass);
     }
 
-    QuerySnapshot<Character> querySnapshot = await query.withConverter(
-    fromFirestore: Character.fromFirestore,
-    toFirestore: (Character character, options) =>
-    character.toFirestore())
+    QuerySnapshot<Character> querySnapshot = await query
+        .withConverter(
+            fromFirestore: Character.fromFirestore,
+            toFirestore: (Character character, options) =>
+                character.toFirestore())
         .get();
 
     return querySnapshot.docs.map((document) {
@@ -81,16 +80,15 @@ class CharacterRepository {
     }).toList();
   }
 
-
   /// Fetches a [Character] by id
   Future<Character?> fetchCharacterById(String id) async {
     DocumentSnapshot<Character> querySnapshot = await _firestore
         .collection("characters")
         .doc(id)
         .withConverter(
-        fromFirestore: Character.fromFirestore,
-        toFirestore: (Character character, options) =>
-            character.toFirestore())
+            fromFirestore: Character.fromFirestore,
+            toFirestore: (Character character, options) =>
+                character.toFirestore())
         .get();
 
     return querySnapshot.data();

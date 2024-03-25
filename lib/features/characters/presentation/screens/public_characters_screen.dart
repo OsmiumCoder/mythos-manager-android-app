@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -6,9 +5,9 @@ import 'package:mythos_manager/features/characters/presentation/controllers/char
 import 'package:mythos_manager/features/characters/presentation/controllers/dnd_api_controller.dart';
 import 'package:mythos_manager/features/characters/presentation/screens/components/character_list.dart';
 import 'package:mythos_manager/features/characters/presentation/screens/components/public_characters/class_future_builder.dart';
+import 'package:mythos_manager/routing/app_router.dart';
 import 'package:mythos_manager/shared/presentation/components/components.dart';
 
-import '../../../../routing/app_router.dart';
 
 /// Author: Liam Welsh
 class PublicCharactersScreen extends HookConsumerWidget {
