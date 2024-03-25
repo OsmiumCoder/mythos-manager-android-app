@@ -44,7 +44,7 @@ void main() {
 
       await container
           .read(campaignServiceProvider)
-          .createCampaign("name", "description");
+          .createCampaign("name", "description", "");
 
       verify(() => mockCampaignRepository.createCampaign(any())).called(1);
     });
@@ -62,7 +62,7 @@ void main() {
       expectLater(
           container
               .read(campaignServiceProvider)
-              .createCampaign("name", "description"),
+              .createCampaign("name", "description", ""),
           throwsA(isA<NoUserFoundException>()));
     });
 

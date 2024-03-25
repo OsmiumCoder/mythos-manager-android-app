@@ -317,6 +317,47 @@ void main() {
       expect(characters.length, 1);
     });
 
+    test("fetchCharacterById returns only the character of given id",
+            () async {
+          final container = createContainer(overrides: [
+            characterRepositoryProvider.overrideWith((ref) {
+              return CharacterRepository(fakeFirebaseFirestore);
+            })
+          ]);
+
+          // add a test character
+          fakeFirebaseFirestore
+              .collection("characters")
+              .withConverter(
+              fromFirestore: Character.fromFirestore,
+              toFirestore: (Character character, options) =>
+                  character.toFirestore())
+              .add(character);
+
+          // add character that should not be returned
+          fakeFirebaseFirestore
+              .collection("characters")
+              .withConverter(
+              fromFirestore: Character.fromFirestore,
+              toFirestore: (Character character, options) =>
+                  character.toFirestore())
+              .add(otherIDCharacter);
+
+          List<Character> characters = await container
+              .read(characterRepositoryProvider)
+              .fetchCharactersForUser("valid-id");
+
+          expect(characters, isA<List<Character>>());
+          expect(characters.length, 1);
+
+          Character? fetchedCharacter = await container
+              .read(characterRepositoryProvider)
+              .fetchCharacterById(characters[0].id!);
+
+          expect(fetchedCharacter == null, false);
+          expect(fetchedCharacter?.id, characters[0].id);
+        });
+
 
     test("fetchPublicCharacters returns only public characters that match filter parameters",
             () async {

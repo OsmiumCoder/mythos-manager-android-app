@@ -80,4 +80,19 @@ class CharacterRepository {
       return character;
     }).toList();
   }
+
+
+  /// Fetches a [Character] by id
+  Future<Character?> fetchCharacterById(String id) async {
+    DocumentSnapshot<Character> querySnapshot = await _firestore
+        .collection("characters")
+        .doc(id)
+        .withConverter(
+        fromFirestore: Character.fromFirestore,
+        toFirestore: (Character character, options) =>
+            character.toFirestore())
+        .get();
+
+    return querySnapshot.data();
+  }
 }

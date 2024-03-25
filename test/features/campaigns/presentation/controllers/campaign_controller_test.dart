@@ -36,9 +36,9 @@ void main() {
         })
       ]);
 
-      when(() => mockCampaignService.createCampaign("name", "description")).thenAnswer((invocation) async {});
+      when(() => mockCampaignService.createCampaign("name", "description", "")).thenAnswer((invocation) async {});
 
-      container.read(campaignControllerProvider.notifier).createCampaign("name", "description");
+      container.read(campaignControllerProvider.notifier).createCampaign("name", "description", "");
 
       verify(() =>  mockCampaignService.fetchCampaigns()).called(2);
     });

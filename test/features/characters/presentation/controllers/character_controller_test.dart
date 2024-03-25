@@ -109,5 +109,21 @@ void main() {
 
       verify(() =>  mockCharacterService.fetchCharacters()).called(1);
     });
+
+    test("fetchCharacterById calls service fetchCharacterById", () async {
+      final container = createContainer(overrides: [
+        characterServiceProvider.overrideWith((ref) {
+          return mockCharacterService;
+        })
+      ]);
+
+      when(() => mockCharacterService.fetchCharacterById("someId"))
+          .thenAnswer((invocation) async => character);
+
+      container.read(characterControllerProvider.notifier).fetchCharacterById("someId");
+
+      verify(() => mockCharacterService.fetchCharacterById("someId"))
+          .called(1);
+    });
   });
 }

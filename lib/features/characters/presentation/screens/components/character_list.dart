@@ -18,7 +18,7 @@ class CharacterList extends StatelessWidget {
           child: BoxShadowImage(
             text: Text(
               character.name ??
-                  "Character #${characters.indexOf(character)}",
+                  "Character #${characters.indexOf(character) + 1}",
               style: const TextStyle(color: Colors.white),
             ),
             height: 100,

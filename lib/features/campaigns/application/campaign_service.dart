@@ -27,14 +27,13 @@ class CampaignService {
   ///
   /// Throws a [NoUserFoundException] if no user is signed in to attach the
   /// campaign to.
-  Future<void> createCampaign(String name, String description) async {
+  Future<void> createCampaign(String name, String description, String characterId) async {
     User? auth = _authenticationRepository.currentUser();
     if (auth == null) {
       throw NoUserFoundException();
     }
     Campaign campaign =
-        Campaign(userID: auth.uid, name: name, description: description);
-
+        Campaign(userID: auth.uid, name: name, description: description, characterUID: characterId);
     await _campaignRepository.createCampaign(campaign);
   }
 

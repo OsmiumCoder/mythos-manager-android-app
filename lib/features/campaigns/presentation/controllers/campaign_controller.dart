@@ -14,11 +14,11 @@ final campaignControllerProvider = AsyncNotifierProvider<CampaignController, Lis
 /// Author: Jonathon Meney
 class CampaignController extends AsyncNotifier<List<Campaign>> {
   /// Creates a new [Campaign].
-  Future<void> createCampaign(String name, String description) async {
+  Future<void> createCampaign(String name, String description, String characterId) async {
     state = const AsyncValue.loading();
 
     state = await AsyncValue.guard(() async {
-      ref.watch(campaignServiceProvider).createCampaign(name, description);
+      ref.watch(campaignServiceProvider).createCampaign(name, description, characterId);
       return _fetchCampaigns();
     });
   }
