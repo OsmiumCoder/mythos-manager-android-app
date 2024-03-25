@@ -71,4 +71,9 @@ class CharacterService {
     return await _characterRepository.fetchPublicCharacters(
         className, subclass);
   }
+
+  /// Fetches a [Character] by id
+  Future<Character?> fetchCharacterById(String id) {
+    return _characterRepository.fetchCharacterById(id);
+  }
 }

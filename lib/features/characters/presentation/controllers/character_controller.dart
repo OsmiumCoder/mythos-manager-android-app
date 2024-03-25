@@ -39,6 +39,12 @@ class CharacterController extends AsyncNotifier<List<Character>> {
     return ref.watch(characterServiceProvider).fetchCharacters();
   }
 
+  /// Fetches a [Character] by id
+  Future<Character?> fetchCharacterById(String id) {
+    return ref.watch(characterServiceProvider).fetchCharacterById(id);
+  }
+
+  /// Returns a list of public [Character]s
   Future<List<Character>> fetchPublicCharacters(
       {String? className, String? subclass}) async {
     return ref

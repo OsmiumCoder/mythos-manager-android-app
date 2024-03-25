@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 import 'package:mythos_manager/features/authentication/presentation/screens/screens.dart';
+import 'package:mythos_manager/features/campaigns/domain/campaign.dart';
 import 'package:mythos_manager/features/campaigns/presentation/screens/note_creation_screen.dart';
 import 'package:mythos_manager/features/campaigns/presentation/screens/screens.dart';
 import 'package:mythos_manager/features/home/presentation/screens/screens.dart';
@@ -98,9 +99,9 @@ class AppRouter {
           builder: (_) =>  NoteCreationScreen(campaignID),
         );
       case noteListScreen:
-        String campaignID = settings.arguments as String;
+        Campaign campaign = settings.arguments as Campaign;
         return MaterialPageRoute(
-          builder: (_) => NoteListScreen(campaignID),
+          builder: (_) => NoteListScreen(campaign),
         );
 
     }

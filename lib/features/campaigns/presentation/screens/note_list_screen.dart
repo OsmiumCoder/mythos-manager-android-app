@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mythos_manager/features/campaigns/presentation/controllers/campaign_controller.dart';
 import 'package:mythos_manager/features/campaigns/presentation/controllers/note_controller.dart';
+import 'package:mythos_manager/features/characters/presentation/controllers/character_controller.dart';
 import 'package:mythos_manager/shared/presentation/components/components.dart';
 
 import '../../../../routing/app_router.dart';
+import '../../domain/campaign.dart';
 
 /// Author: Shreif Abdalla
 
 class NoteListScreen extends HookConsumerWidget {
-  const NoteListScreen(this.campaignID, {super.key});
+  const NoteListScreen(this.campaign, {super.key});
 
-  final String campaignID;
+  final Campaign campaign;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,7 +34,7 @@ class NoteListScreen extends HookConsumerWidget {
                     child: GestureDetector(
                       onTap: () => Navigator.pushNamed(
                           context, AppRouter.noteCreationScreen,
-                          arguments: campaignID),
+                          arguments: campaign.uid),
                       child: Card(
                         color: theme.cardTheme.color,
                         child: Container(
@@ -52,20 +53,29 @@ class NoteListScreen extends HookConsumerWidget {
                     ),
                   ),
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: Card(
-                        color: theme.cardTheme.color,
-                        child: Container(
-                          height: 150,
-                          alignment: Alignment.center,
-                          child: const Center(
-                            child: Text(
-                              "Campaign Character",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
+                    child: FutureBuilder(
+                      future: ref
+                          .watch(characterControllerProvider.notifier)
+                          .fetchCharacterById(campaign.characterUID ?? ""),
+                      builder: (context, snapshot) => GestureDetector(
+                        onTap: snapshot.hasData && snapshot.data != null
+                            ? () => Navigator.pushNamed(
+                                context, AppRouter.characterDisplayScreen,
+                                arguments: snapshot.data!)
+                            : null,
+                        child: Card(
+                          color: theme.cardTheme.color,
+                          child: Container(
+                            height: 150,
+                            alignment: Alignment.center,
+                            child: const Center(
+                              child: Text(
+                                "Campaign Character",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                ),
                               ),
                             ),
                           ),
@@ -76,7 +86,7 @@ class NoteListScreen extends HookConsumerWidget {
                 ],
               ),
               // Following is your existing code for notes display
-              ref.watch(noteControllerProvider(campaignID)).when(
+              ref.watch(noteControllerProvider(campaign.uid!)).when(
                     data: (notes) => Column(
                       children: notes.map((note) {
                         return Padding(
@@ -90,16 +100,16 @@ class NoteListScreen extends HookConsumerWidget {
                                       ?.copyWith(color: Colors.white),
                                 ),
                                 subtitle: Text(
-                                  note.description ?? 'No description provided',
-                                  style: theme.textTheme.bodyMedium?.copyWith(
-                                      color: Colors.black),
+                                  note.description,
+                                  style: theme.textTheme.bodyMedium
+                                      ?.copyWith(color: Colors.black),
                                 ),
                               ),
                             ));
                       }).toList(),
                     ),
                     error: (_, __) =>
-                        const Text("Error occurred loading notess"),
+                        const Text("Error occurred loading notes"),
                     loading: () => const CircularProgressIndicator(),
                   ),
             ],
