@@ -6,7 +6,6 @@ import 'package:mythos_manager/features/characters/presentation/controllers/dnd_
 import 'package:mythos_manager/features/characters/presentation/screens/components/components.dart';
 import 'package:mythos_manager/routing/app_router.dart';
 
-
 ///Author: Shreif Abdalla, Liam Welsh
 class ClassSelectionScreen extends HookConsumerWidget {
   const ClassSelectionScreen({super.key});
@@ -106,7 +105,8 @@ class ClassSelectionScreen extends HookConsumerWidget {
                   }),
               ElevatedButton(
                   onPressed: classController.text.isNotEmpty
-                      ? () => Navigator.pushNamed(context, AppRouter.abilitySelectionScreen)
+                      ? () => Navigator.pushNamed(
+                          context, AppRouter.abilitySelectionScreen)
                       : null,
                   child: const Text('Select Class')),
             ],

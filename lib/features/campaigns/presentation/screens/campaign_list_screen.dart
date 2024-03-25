@@ -6,7 +6,6 @@ import 'package:mythos_manager/features/campaigns/presentation/controllers/campa
 import 'package:mythos_manager/routing/app_router.dart';
 import 'package:mythos_manager/shared/presentation/components/components.dart';
 
-
 class CampaignListScreen extends HookConsumerWidget {
   const CampaignListScreen({super.key});
 

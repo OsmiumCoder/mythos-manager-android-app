@@ -5,6 +5,7 @@ import 'package:mythos_manager/features/authentication/application/authenticatio
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 
 class MockFirebaseAuth extends Mock implements FirebaseAuth {}
+
 class MockUserCredential extends Mock implements UserCredential {}
 
 /// Author: Jonathon Meney
@@ -29,7 +30,8 @@ void main() {
           email: 'valid email', password: 'password')).called(1);
     });
 
-    test('signUpAndLogin creates user with valid data and logins in user', () async {
+    test('signUpAndLogin creates user with valid data and logins in user',
+        () async {
       final userCredential = MockUserCredential();
 
       when(() => auth.createUserWithEmailAndPassword(

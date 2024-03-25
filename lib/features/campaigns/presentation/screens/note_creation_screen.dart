@@ -28,9 +28,8 @@ class NoteCreationScreen extends HookConsumerWidget {
                   top: 25, bottom: 15, left: 50, right: 50),
               child: TextField(
                 controller: titleController,
-                decoration: const InputDecoration(
-                    filled: true,
-                    hintText: "Note Title"),
+                decoration:
+                    const InputDecoration(filled: true, hintText: "Note Title"),
               ),
             ),
             Padding(
@@ -54,7 +53,8 @@ class NoteCreationScreen extends HookConsumerWidget {
                       .createNote(campaignID, titleController.text,
                           descriptionController.text);
                   Navigator.pushReplacementNamed(
-                      context, AppRouter.noteListScreen,arguments: campaignID);
+                      context, AppRouter.noteListScreen,
+                      arguments: campaignID);
                 },
               ),
             ),

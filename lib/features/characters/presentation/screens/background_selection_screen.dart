@@ -38,11 +38,17 @@ class BackgroundSelectionScreen extends HookConsumerWidget {
                               DropdownMenu(
                                   controller: backgroundController,
                                   onSelected: (background) {
-                                    characterBuilder.state.background = background;
-                                    characterBuilder.state.backgroundLanguages.clear();
-                                    characterBuilder.state.backgroundSkillProfs.clear();
-                                    characterBuilder.state.backgroundEquipmentProfs.clear();
-                                    characterBuilder.state.backgroundEquipment.clear();
+                                    characterBuilder.state.background =
+                                        background;
+                                    characterBuilder.state.backgroundLanguages
+                                        .clear();
+                                    characterBuilder.state.backgroundSkillProfs
+                                        .clear();
+                                    characterBuilder
+                                        .state.backgroundEquipmentProfs
+                                        .clear();
+                                    characterBuilder.state.backgroundEquipment
+                                        .clear();
                                   },
                                   width: 200,
                                   hintText: "Background",

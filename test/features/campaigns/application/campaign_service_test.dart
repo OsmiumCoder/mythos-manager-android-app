@@ -114,7 +114,9 @@ void main() {
       verify(() => mockCampaignRepository.createNote(any())).called(1);
     });
 
-    test("fetchNotesForCampaign calls repo fetchNotesForCampaign with campaign id", () async {
+    test(
+        "fetchNotesForCampaign calls repo fetchNotesForCampaign with campaign id",
+        () async {
       final container = createContainer(overrides: [
         campaignServiceProvider.overrideWith((ref) {
           return CampaignService(mockCampaignRepository, mockAuthRepo);

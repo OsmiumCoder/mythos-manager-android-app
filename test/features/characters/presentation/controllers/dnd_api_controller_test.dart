@@ -1,4 +1,3 @@
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:mythos_manager/features/characters/application/dnd_api_service.dart';
@@ -23,8 +22,7 @@ void main() {
         })
       ]);
 
-      when(() => service.getAllRaces())
-          .thenAnswer((_) async => {"success": 1});
+      when(() => service.getAllRaces()).thenAnswer((_) async => {"success": 1});
 
       container.read(dndApiController).getAllRaces();
 
@@ -38,8 +36,7 @@ void main() {
         })
       ]);
 
-      when(() => service.getRace(''))
-          .thenAnswer((_) async => {"success": 1});
+      when(() => service.getRace('')).thenAnswer((_) async => {"success": 1});
 
       container.read(dndApiController).getRace('');
 
@@ -83,8 +80,7 @@ void main() {
         })
       ]);
 
-      when(() => service.getClass(''))
-          .thenAnswer((_) async => {"success": 1});
+      when(() => service.getClass('')).thenAnswer((_) async => {"success": 1});
 
       container.read(dndApiController).getClass('');
 
@@ -158,8 +154,7 @@ void main() {
         })
       ]);
 
-      when(() => service.getSpellsForClass(''))
-          .thenAnswer((_) async => [
+      when(() => service.getSpellsForClass('')).thenAnswer((_) async => [
             {"success": 1}
           ]);
 
@@ -175,8 +170,7 @@ void main() {
         })
       ]);
 
-      when(() => service.getClassFeatures(''))
-          .thenAnswer((_) async => []);
+      when(() => service.getClassFeatures('')).thenAnswer((_) async => []);
 
       container.read(dndApiController).getClassFeatures('');
 
@@ -190,8 +184,7 @@ void main() {
         })
       ]);
 
-      when(() => service.getSubclassFeatures(''))
-          .thenAnswer((_) async => []);
+      when(() => service.getSubclassFeatures('')).thenAnswer((_) async => []);
 
       container.read(dndApiController).getSubclassFeatures('');
 

@@ -7,6 +7,7 @@ import 'package:mythos_manager/features/characters/presentation/controllers/dnd_
 /// Author: Liam Welsh
 class BackgroundLanguageFutureBuilder extends HookConsumerWidget {
   final List<TextEditingController> textEditingControllers;
+
   const BackgroundLanguageFutureBuilder(
       {super.key, required this.textEditingControllers});
 

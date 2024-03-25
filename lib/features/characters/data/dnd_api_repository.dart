@@ -105,8 +105,8 @@ class DNDAPIRepository {
     for (var spell in spells) {
       String spellName = spell["index"];
 
-      final response = await client
-          .get(Uri.parse(apiEndpoint + spellsEndpoint + spellName));
+      final response =
+          await client.get(Uri.parse(apiEndpoint + spellsEndpoint + spellName));
 
       classSpells.add(jsonDecode(response.body));
     }
@@ -150,7 +150,8 @@ class DNDAPIRepository {
   }
 
   /// Returns list of subclass features.
-  Future<List<Map<String, dynamic>>> getSubclassFeatures(String subclass) async {
+  Future<List<Map<String, dynamic>>> getSubclassFeatures(
+      String subclass) async {
     const String subclassEndpoint = '/subclasses/';
     const String levelsEndpoint = '/levels';
     const String featuresEndpoint = "/features/";

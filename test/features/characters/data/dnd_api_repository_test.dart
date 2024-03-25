@@ -40,10 +40,11 @@ void main() {
       ]);
 
       when(() => mockHttpClient
-          .get(Uri.parse('https://www.dnd5eapi.co/api/races/elf')))
+              .get(Uri.parse('https://www.dnd5eapi.co/api/races/elf')))
           .thenAnswer((invocation) async => http.Response(singleRace, 200));
 
-      final singleRaceJson = await container.read(dndApiRepository).getRace('elf');
+      final singleRaceJson =
+          await container.read(dndApiRepository).getRace('elf');
       expect(singleRaceJson, isMap);
       expect(singleRaceJson.containsKey("index"), isTrue);
       expect(singleRaceJson.containsKey("name"), isTrue);
@@ -68,10 +69,11 @@ void main() {
       ]);
 
       when(() => mockHttpClient
-          .get(Uri.parse('https://www.dnd5eapi.co/api/subraces/high-elf')))
+              .get(Uri.parse('https://www.dnd5eapi.co/api/subraces/high-elf')))
           .thenAnswer((invocation) async => http.Response(singleSubrace, 200));
 
-      final singleSubraceJson = await container.read(dndApiRepository).getSubrace("high-elf");
+      final singleSubraceJson =
+          await container.read(dndApiRepository).getSubrace("high-elf");
       expect(singleSubraceJson, isMap);
       expect(singleSubraceJson.containsKey("index"), isTrue);
       expect(singleSubraceJson.containsKey("name"), isTrue);
@@ -92,10 +94,11 @@ void main() {
       ]);
 
       when(() => mockHttpClient
-          .get(Uri.parse('https://www.dnd5eapi.co/api/classes')))
+              .get(Uri.parse('https://www.dnd5eapi.co/api/classes')))
           .thenAnswer((invocation) async => http.Response(allClasses, 200));
 
-      final allClassesJson = await container.read(dndApiRepository).getAllClasses();
+      final allClassesJson =
+          await container.read(dndApiRepository).getAllClasses();
       expect(allClassesJson, isMap);
       expect(allClassesJson["count"], 12);
       expect(allClassesJson["results"], isList);
@@ -109,10 +112,11 @@ void main() {
       ]);
 
       when(() => mockHttpClient
-          .get(Uri.parse('https://www.dnd5eapi.co/api/classes/barbarian')))
+              .get(Uri.parse('https://www.dnd5eapi.co/api/classes/barbarian')))
           .thenAnswer((invocation) async => http.Response(singleClass, 200));
 
-      final singleClassJson = await container.read(dndApiRepository).getClass("barbarian");
+      final singleClassJson =
+          await container.read(dndApiRepository).getClass("barbarian");
       expect(singleClassJson, isMap);
       expect(singleClassJson.containsKey("index"), isTrue);
       expect(singleClassJson.containsKey("name"), isTrue);
@@ -133,11 +137,12 @@ void main() {
         })
       ]);
 
-      when(() => mockHttpClient
-          .get(Uri.parse('https://www.dnd5eapi.co/api/subclasses/berserker')))
+      when(() => mockHttpClient.get(
+              Uri.parse('https://www.dnd5eapi.co/api/subclasses/berserker')))
           .thenAnswer((invocation) async => http.Response(singleSubclass, 200));
 
-      final singleSubclassJson = await container.read(dndApiRepository).getSubclass("berserker");
+      final singleSubclassJson =
+          await container.read(dndApiRepository).getSubclass("berserker");
       expect(singleSubclassJson, isMap);
       expect(singleSubclassJson.containsKey("index"), isTrue);
       expect(singleSubclassJson.containsKey("class"), isTrue);
@@ -156,10 +161,11 @@ void main() {
       ]);
 
       when(() => mockHttpClient
-          .get(Uri.parse('https://www.dnd5eapi.co/api/backgrounds')))
+              .get(Uri.parse('https://www.dnd5eapi.co/api/backgrounds')))
           .thenAnswer((invocation) async => http.Response(allBackgrounds, 200));
 
-      final allBackgroundsJson = await container.read(dndApiRepository).getAllBackgrounds();
+      final allBackgroundsJson =
+          await container.read(dndApiRepository).getAllBackgrounds();
       expect(allBackgroundsJson, isMap);
       expect(allBackgroundsJson["count"], 1);
       expect(allBackgroundsJson["results"], isList);
@@ -172,18 +178,22 @@ void main() {
         })
       ]);
 
-      when(() => mockHttpClient
-          .get(Uri.parse('https://www.dnd5eapi.co/api/backgrounds/acolyte')))
-          .thenAnswer((invocation) async => http.Response(singleBackground, 200));
+      when(() => mockHttpClient.get(
+              Uri.parse('https://www.dnd5eapi.co/api/backgrounds/acolyte')))
+          .thenAnswer(
+              (invocation) async => http.Response(singleBackground, 200));
 
-      final singleBackgroundJson = await container.read(dndApiRepository).getBackground("acolyte");
+      final singleBackgroundJson =
+          await container.read(dndApiRepository).getBackground("acolyte");
       expect(singleBackgroundJson, isMap);
       expect(singleBackgroundJson.containsKey("index"), isTrue);
       expect(singleBackgroundJson.containsKey("name"), isTrue);
-      expect(singleBackgroundJson.containsKey("starting_proficiencies"), isTrue);
+      expect(
+          singleBackgroundJson.containsKey("starting_proficiencies"), isTrue);
       expect(singleBackgroundJson.containsKey("language_options"), isTrue);
       expect(singleBackgroundJson.containsKey("starting_equipment"), isTrue);
-      expect(singleBackgroundJson.containsKey("starting_equipment_options"), isTrue);
+      expect(singleBackgroundJson.containsKey("starting_equipment_options"),
+          isTrue);
       expect(singleBackgroundJson.containsKey("feature"), isTrue);
     });
 
@@ -195,10 +205,11 @@ void main() {
       ]);
 
       when(() => mockHttpClient
-          .get(Uri.parse('https://www.dnd5eapi.co/api/languages')))
+              .get(Uri.parse('https://www.dnd5eapi.co/api/languages')))
           .thenAnswer((invocation) async => http.Response(allLanguages, 200));
 
-      final allLanguagesJson = await container.read(dndApiRepository).getAllLanguages();
+      final allLanguagesJson =
+          await container.read(dndApiRepository).getAllLanguages();
       expect(allLanguagesJson, isMap);
       expect(allLanguagesJson["count"], 16);
       expect(allLanguagesJson["results"], isList);
@@ -211,15 +222,17 @@ void main() {
         })
       ]);
 
-      when(() => mockHttpClient
-          .get(Uri.parse('https://www.dnd5eapi.co/api/classes/wizard/spells/')))
+      when(() => mockHttpClient.get(
+              Uri.parse('https://www.dnd5eapi.co/api/classes/wizard/spells/')))
           .thenAnswer((invocation) async => http.Response(spellsForClass, 200));
 
       when(() => mockHttpClient
-          .get(Uri.parse('https://www.dnd5eapi.co/api/spells/acid-splash')))
-          .thenAnswer((invocation) async => http.Response(acidSplashSpell, 200));
+              .get(Uri.parse('https://www.dnd5eapi.co/api/spells/acid-splash')))
+          .thenAnswer(
+              (invocation) async => http.Response(acidSplashSpell, 200));
 
-      final spellsForClassJson = await container.read(dndApiRepository).getSpellsForClass("wizard");
+      final spellsForClassJson =
+          await container.read(dndApiRepository).getSpellsForClass("wizard");
       expect(spellsForClassJson, isList);
     });
 
@@ -230,15 +243,16 @@ void main() {
         })
       ]);
 
-      when(() => mockHttpClient
-          .get(Uri.parse('https://www.dnd5eapi.co/api/classes/barbarian/levels')))
+      when(() => mockHttpClient.get(Uri.parse(
+              'https://www.dnd5eapi.co/api/classes/barbarian/levels')))
           .thenAnswer((invocation) async => http.Response(levelsForClass, 200));
 
       when(() => mockHttpClient
-          .get(Uri.parse('https://www.dnd5eapi.co/api/features/rage')))
+              .get(Uri.parse('https://www.dnd5eapi.co/api/features/rage')))
           .thenAnswer((invocation) async => http.Response(classFeature, 200));
 
-      final featuresForClassJson = await container.read(dndApiRepository).getClassFeatures("barbarian");
+      final featuresForClassJson =
+          await container.read(dndApiRepository).getClassFeatures("barbarian");
       expect(featuresForClassJson, isList);
     });
 
@@ -249,15 +263,19 @@ void main() {
         })
       ]);
 
-      when(() => mockHttpClient
-          .get(Uri.parse('https://www.dnd5eapi.co/api/subclasses/berserker/levels')))
-          .thenAnswer((invocation) async => http.Response(levelsForSubclass, 200));
+      when(() => mockHttpClient.get(Uri.parse(
+              'https://www.dnd5eapi.co/api/subclasses/berserker/levels')))
+          .thenAnswer(
+              (invocation) async => http.Response(levelsForSubclass, 200));
 
       when(() => mockHttpClient
-          .get(Uri.parse('https://www.dnd5eapi.co/api/features/frenzy')))
-          .thenAnswer((invocation) async => http.Response(subclassFeature, 200));
+              .get(Uri.parse('https://www.dnd5eapi.co/api/features/frenzy')))
+          .thenAnswer(
+              (invocation) async => http.Response(subclassFeature, 200));
 
-      final featuresForClassJson = await container.read(dndApiRepository).getSubclassFeatures("berserker");
+      final featuresForClassJson = await container
+          .read(dndApiRepository)
+          .getSubclassFeatures("berserker");
       expect(featuresForClassJson, isList);
     });
   });

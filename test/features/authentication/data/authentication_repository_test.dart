@@ -4,6 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 
 class MockFirebaseAuth extends Mock implements FirebaseAuth {}
+
 class MockUserCredential extends Mock implements UserCredential {}
 
 /// Author: Jonathon Meney
@@ -45,14 +46,12 @@ void main() {
 
     test('createUser throws exception on bad password', () async {
       when(() => auth.createUserWithEmailAndPassword(
-          email: 'valid email', password: 'short'))
+              email: 'valid email', password: 'short'))
           .thenThrow(FirebaseAuthException(code: "weak-password"));
 
       expect(
-              () async => await repo.createUser(
-              username: "username",
-              email: "valid email",
-              password: "short"),
+          () async => await repo.createUser(
+              username: "username", email: "valid email", password: "short"),
           throwsA(isA<FirebaseAuthException>()));
 
       verify(() => auth.createUserWithEmailAndPassword(

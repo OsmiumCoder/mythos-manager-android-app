@@ -27,13 +27,17 @@ class CampaignService {
   ///
   /// Throws a [NoUserFoundException] if no user is signed in to attach the
   /// campaign to.
-  Future<void> createCampaign(String name, String description, String characterId) async {
+  Future<void> createCampaign(
+      String name, String description, String characterId) async {
     User? auth = _authenticationRepository.currentUser();
     if (auth == null) {
       throw NoUserFoundException();
     }
-    Campaign campaign =
-        Campaign(userID: auth.uid, name: name, description: description, characterUID: characterId);
+    Campaign campaign = Campaign(
+        userID: auth.uid,
+        name: name,
+        description: description,
+        characterUID: characterId);
     await _campaignRepository.createCampaign(campaign);
   }
 
@@ -49,8 +53,10 @@ class CampaignService {
   }
 
   /// Stores a [Note] in cloud firestore.
-  Future<void> createNote(String campaignID, String title, String details) async {
-    Note note = Note(campaignUID: campaignID, title: title, description: details);
+  Future<void> createNote(
+      String campaignID, String title, String details) async {
+    Note note =
+        Note(campaignUID: campaignID, title: title, description: details);
     await _campaignRepository.createNote(note);
   }
 

@@ -3,7 +3,8 @@ import 'package:mythos_manager/features/campaigns/domain/campaign.dart';
 
 void main() {
   group("Campaign tests", () {
-    Campaign campaign = Campaign(userID: "id", name: "name", description: "description");
+    Campaign campaign =
+        Campaign(userID: "id", name: "name", description: "description");
 
     test("fromFirestore returns correct campaign model", () {
       expect(campaign.uid, null);
@@ -14,11 +15,8 @@ void main() {
     });
 
     test("toFirestore returns correct map", () {
-      expect(campaign.toFirestore(), {
-        "user_id": "id",
-        'name': 'name',
-        'description': 'description'
-      });
+      expect(campaign.toFirestore(),
+          {"user_id": "id", 'name': 'name', 'description': 'description'});
     });
   });
 }

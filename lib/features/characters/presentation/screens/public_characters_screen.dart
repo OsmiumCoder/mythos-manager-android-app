@@ -8,14 +8,12 @@ import 'package:mythos_manager/features/characters/presentation/screens/componen
 import 'package:mythos_manager/routing/app_router.dart';
 import 'package:mythos_manager/shared/presentation/components/components.dart';
 
-
 /// Author: Liam Welsh
 class PublicCharactersScreen extends HookConsumerWidget {
   const PublicCharactersScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     // selected class map
     /*
       {

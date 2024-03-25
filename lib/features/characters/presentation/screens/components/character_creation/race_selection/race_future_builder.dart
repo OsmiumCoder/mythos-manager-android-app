@@ -36,8 +36,9 @@ class RaceFutureBuilder extends HookConsumerWidget {
 
             final String abilityBonuses =
                 race["ability_bonuses"].map((element) {
-              characterBuilder.state.raceAbilityScores[
-                  element["ability_score"]["name"]] = element["bonus"];
+              characterBuilder.state
+                      .raceAbilityScores[element["ability_score"]["name"]] =
+                  element["bonus"];
               return "+${element["bonus"]} ${element["ability_score"]["name"]}";
             }).join(", ");
 
@@ -59,11 +60,11 @@ class RaceFutureBuilder extends HookConsumerWidget {
 
             final String startingProficiencies =
                 race["starting_proficiencies"].map((element) {
-                  if ((element["name"] as String).toLowerCase().contains("skill")) {
-                    characterBuilder.state.raceSkillProfs.add(element["name"]);
-                  } else {
-                    characterBuilder.state.raceEquipmentProfs.add(element["name"]);
-                  }
+              if ((element["name"] as String).toLowerCase().contains("skill")) {
+                characterBuilder.state.raceSkillProfs.add(element["name"]);
+              } else {
+                characterBuilder.state.raceEquipmentProfs.add(element["name"]);
+              }
               return "${element["name"]}";
             }).join(", ");
 
@@ -158,8 +159,7 @@ class RaceFutureBuilder extends HookConsumerWidget {
                                     abilityIncreaseController.text.split(" ");
                                 final value = ability[0][1];
                                 final name = ability[1];
-                                characterBuilder
-                                        .state.raceAbilityScores[name] =
+                                characterBuilder.state.raceAbilityScores[name] =
                                     int.parse(value);
                               }
                             },
@@ -208,18 +208,22 @@ class RaceFutureBuilder extends HookConsumerWidget {
                         margin: const EdgeInsets.only(bottom: 10),
                         child: DropdownMenu(
                             onSelected: (element) {
-                              if ((element as String).toLowerCase().contains("skill")) {
-                                characterBuilder.state.raceSkillProfs.add(element);
+                              if ((element as String)
+                                  .toLowerCase()
+                                  .contains("skill")) {
+                                characterBuilder.state.raceSkillProfs
+                                    .add(element);
                               } else {
-                                characterBuilder.state.raceEquipmentProfs.add(element);
+                                characterBuilder.state.raceEquipmentProfs
+                                    .add(element);
                               }
                             },
                             dropdownMenuEntries:
                                 startingProficienciesOptions.map((option) {
-                          return DropdownMenuEntry(
-                              value: option["item"]["name"],
-                              label: option["item"]["name"]);
-                        }).toList()),
+                              return DropdownMenuEntry(
+                                  value: option["item"]["name"],
+                                  label: option["item"]["name"]);
+                            }).toList()),
                       )
                     : const SizedBox.shrink(),
 

@@ -4,12 +4,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/character_builder_controller.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/dnd_api_controller.dart';
 
-
 /// Author: Liam Welsh
 class BackgroundEquipmentFutureBuilder extends HookConsumerWidget {
   final String category;
   final List<TextEditingController> textEditingControllers;
   final List<dynamic> startingEquipment;
+
   const BackgroundEquipmentFutureBuilder(
       {super.key,
       required this.textEditingControllers,
@@ -50,7 +50,8 @@ class BackgroundEquipmentFutureBuilder extends HookConsumerWidget {
                           // Remove old equipment
                           characterBuilder.state.backgroundEquipment
                               .removeWhere((element) =>
-                                  element != eq && !startingEquipment.contains(element) &&
+                                  element != eq &&
+                                  !startingEquipment.contains(element) &&
                                   !textEditingControllers
                                       .map((e) => e.text)
                                       .contains(element));

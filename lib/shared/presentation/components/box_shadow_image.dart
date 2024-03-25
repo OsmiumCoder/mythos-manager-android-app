@@ -11,8 +11,15 @@ class BoxShadowImage extends StatefulWidget {
   final Text text;
   final double? height;
   final double? width;
+
   const BoxShadowImage(
-      {super.key, this.image, this.onTap, required this.text, this.textPadding = 10, this.height, this.width});
+      {super.key,
+      this.image,
+      this.onTap,
+      required this.text,
+      this.textPadding = 10,
+      this.height,
+      this.width});
 
   @override
   State<BoxShadowImage> createState() => _BoxShadowImageState();
@@ -32,11 +39,15 @@ class _BoxShadowImageState extends State<BoxShadowImage> {
         height: widget.image?.height ?? widget.height,
         width: widget.image?.width ?? widget.width,
         decoration: BoxDecoration(
-          image: widget.image != null ? DecorationImage(
-            image: widget.image!.image,
-            fit: BoxFit.cover,
-          ) : null,
-          color: widget.image == null ? Theme.of(context).appBarTheme.backgroundColor : null,
+          image: widget.image != null
+              ? DecorationImage(
+                  image: widget.image!.image,
+                  fit: BoxFit.cover,
+                )
+              : null,
+          color: widget.image == null
+              ? Theme.of(context).appBarTheme.backgroundColor
+              : null,
           borderRadius: const BorderRadius.all(Radius.circular(15)),
           border: Border.all(color: Colors.black),
           boxShadow: [
@@ -52,17 +63,15 @@ class _BoxShadowImageState extends State<BoxShadowImage> {
           ],
         ),
         child: Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(15)),
-            color: Colors.black.withOpacity(0.4),
-          ),
-          padding: EdgeInsets.all(widget.textPadding),
-
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
+              color: Colors.black.withOpacity(0.4),
+            ),
+            padding: EdgeInsets.all(widget.textPadding),
             child: FittedBox(
-                fit: BoxFit.contain,
-                  child: widget.text,
-                )
-        ),
+              fit: BoxFit.contain,
+              child: widget.text,
+            )),
       ),
     );
   }

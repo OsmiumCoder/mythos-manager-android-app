@@ -9,7 +9,6 @@ import 'package:mythos_manager/features/characters/presentation/screens/componen
 import 'package:mythos_manager/routing/app_router.dart';
 import 'package:mythos_manager/shared/presentation/components/components.dart';
 
-
 /// Author: Liam Welsh
 class CharactersScreen extends HookConsumerWidget {
   const CharactersScreen({super.key});
@@ -53,9 +52,7 @@ class CharactersScreen extends HookConsumerWidget {
             ),
             characterController.when(
                 data: (List<Character> characters) => Column(
-                      children: [
-                       CharacterList(characters: characters)
-                      ],
+                      children: [CharacterList(characters: characters)],
                     ),
                 error: (e, st) {
                   if (kDebugMode) {

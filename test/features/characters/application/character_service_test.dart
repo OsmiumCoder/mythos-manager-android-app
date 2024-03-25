@@ -61,8 +61,7 @@ void main() {
     test("createCharacter calls repo createCharacter", () async {
       final container = createContainer(overrides: [
         characterServiceProvider.overrideWith((ref) {
-          return CharacterService(
-              mockCharacterRepository, mockAuthRepo);
+          return CharacterService(mockCharacterRepository, mockAuthRepo);
         })
       ]);
 
@@ -70,49 +69,41 @@ void main() {
       when(() => mockCharacterRepository.createCharacter(character))
           .thenAnswer((invocation) async => true);
 
-      await container
-          .read(characterServiceProvider)
-          .createCharacter(character);
+      await container.read(characterServiceProvider).createCharacter(character);
 
       verify(() => mockCharacterRepository.createCharacter(character))
           .called(1);
     });
 
     test("createCharacter throws NoUserFoundException when no user signed in",
-            () async {
-          final container = createContainer(overrides: [
-            characterServiceProvider.overrideWith((ref) {
-              return CharacterService(
-                  mockCharacterRepository, mockAuthRepo);
-            })
-          ]);
+        () async {
+      final container = createContainer(overrides: [
+        characterServiceProvider.overrideWith((ref) {
+          return CharacterService(mockCharacterRepository, mockAuthRepo);
+        })
+      ]);
 
-          when(() => mockAuthRepo.currentUser()).thenReturn(null);
+      when(() => mockAuthRepo.currentUser()).thenReturn(null);
 
-          expectLater(
-              container
-                  .read(characterServiceProvider)
-                  .createCharacter(character),
-              throwsA(isA<NoUserFoundException>()));
-        });
+      expectLater(
+          container.read(characterServiceProvider).createCharacter(character),
+          throwsA(isA<NoUserFoundException>()));
+    });
 
     test("updateCharacter throws NoUserFoundException when no user signed in",
-            () async {
-          final container = createContainer(overrides: [
-            characterServiceProvider.overrideWith((ref) {
-              return CharacterService(
-                  mockCharacterRepository, mockAuthRepo);
-            })
-          ]);
+        () async {
+      final container = createContainer(overrides: [
+        characterServiceProvider.overrideWith((ref) {
+          return CharacterService(mockCharacterRepository, mockAuthRepo);
+        })
+      ]);
 
-          when(() => mockAuthRepo.currentUser()).thenReturn(null);
+      when(() => mockAuthRepo.currentUser()).thenReturn(null);
 
-          expectLater(
-              container
-                  .read(characterServiceProvider)
-                  .updateCharacter(character),
-              throwsA(isA<NoUserFoundException>()));
-        });
+      expectLater(
+          container.read(characterServiceProvider).updateCharacter(character),
+          throwsA(isA<NoUserFoundException>()));
+    });
 
     test("fetchCharacters calls repo fetchCharactersForUser with user id",
         () async {
@@ -147,22 +138,23 @@ void main() {
     });
 
     test("fetchCharacterById calls repo fetchCharacterById with character id",
-            () async {
-          final container = createContainer(overrides: [
-            characterServiceProvider.overrideWith((ref) {
-              return CharacterService(mockCharacterRepository, mockAuthRepo);
-            })
-          ]);
+        () async {
+      final container = createContainer(overrides: [
+        characterServiceProvider.overrideWith((ref) {
+          return CharacterService(mockCharacterRepository, mockAuthRepo);
+        })
+      ]);
 
-          when(() => mockAuthRepo.currentUser()).thenReturn(mockUser);
-          when(() => mockCharacterRepository.fetchCharacterById("valid-id"))
-              .thenAnswer((invocation) async => character);
+      when(() => mockAuthRepo.currentUser()).thenReturn(mockUser);
+      when(() => mockCharacterRepository.fetchCharacterById("valid-id"))
+          .thenAnswer((invocation) async => character);
 
-          await container.read(characterServiceProvider).fetchCharacterById("valid-id");
+      await container
+          .read(characterServiceProvider)
+          .fetchCharacterById("valid-id");
 
-          verify(() => mockCharacterRepository.fetchCharacterById("valid-id"))
-              .called(1);
-        });
-
+      verify(() => mockCharacterRepository.fetchCharacterById("valid-id"))
+          .called(1);
+    });
   });
 }

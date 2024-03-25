@@ -23,24 +23,26 @@ class BackgroundFutureBuilder extends HookConsumerWidget {
           if (snapshot.hasData) {
             final proficiencies = snapshot.data!["starting_proficiencies"];
 
-            final proficienciesText = proficiencies
-                .map((proficiency) {
-                  if ((proficiency["name"] as String).toLowerCase().contains("skill")) {
-                    characterBuilder.state.backgroundSkillProfs.add(proficiency["name"]);
-                  } else {
-                    characterBuilder.state.backgroundEquipmentProfs.add(proficiency["name"]);
-                  }
+            final proficienciesText = proficiencies.map((proficiency) {
+              if ((proficiency["name"] as String)
+                  .toLowerCase()
+                  .contains("skill")) {
+                characterBuilder.state.backgroundSkillProfs
+                    .add(proficiency["name"]);
+              } else {
+                characterBuilder.state.backgroundEquipmentProfs
+                    .add(proficiency["name"]);
+              }
               return proficiency["name"];
             }).join(", ");
 
             final startingEquipment = snapshot.data!["starting_equipment"];
 
-            final startingEquipmentText = startingEquipment
-                .map((equipment) {
-                  characterBuilder.state.backgroundEquipment.add(equipment["equipment"]["name"]);
+            final startingEquipmentText = startingEquipment.map((equipment) {
+              characterBuilder.state.backgroundEquipment
+                  .add(equipment["equipment"]["name"]);
               return equipment["equipment"]["name"];
-            })
-                .join("; ");
+            }).join("; ");
 
             final numberOfLanguages =
                 snapshot.data!["language_options"]["choose"];
@@ -63,46 +65,53 @@ class BackgroundFutureBuilder extends HookConsumerWidget {
             final equipmentType = snapshot.data!["starting_equipment_options"]
                 [0]["from"]["equipment_category"]["index"];
 
-            final String featureText = snapshot.data!["feature"]["desc"]?[0] ?? "";
+            final String featureText =
+                snapshot.data!["feature"]["desc"]?[0] ?? "";
 
             characterBuilder.state.backgroundFeatureDesc = featureText;
-            characterBuilder.state.backgroundFeatureName = snapshot.data!["feature"]["name"];
+            characterBuilder.state.backgroundFeatureName =
+                snapshot.data!["feature"]["name"];
 
             return Padding(
               padding: const EdgeInsets.only(top: 15.0),
-                child: Column(
-                  children: [
-                    Text(
-                      "Proficiencies: $proficienciesText",
+              child: Column(
+                children: [
+                  Text(
+                    "Proficiencies: $proficienciesText",
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  BackgroundLanguageFutureBuilder(
+                      textEditingControllers: languageTextControllers),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text(
+                      "Starting Equipment: $startingEquipmentText",
                       style: const TextStyle(fontSize: 16),
                     ),
-                    BackgroundLanguageFutureBuilder(
-                        textEditingControllers: languageTextControllers),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(
-                        "Starting Equipment: $startingEquipmentText",
-                        style: const TextStyle(fontSize: 16),
-                      ),
+                  ),
+                  BackgroundEquipmentFutureBuilder(
+                    textEditingControllers: equipmentTextControllers,
+                    category: equipmentType,
+                    startingEquipment: startingEquipment
+                        .map((eq) => eq["equipment"]["name"])
+                        .toList(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Text(
+                      featureText,
+                      style: const TextStyle(fontSize: 16),
                     ),
-                    BackgroundEquipmentFutureBuilder(
-                      textEditingControllers: equipmentTextControllers,
-                      category: equipmentType,
-                      startingEquipment: startingEquipment.map((eq) => eq["equipment"]["name"]).toList(),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Text(featureText, style: const TextStyle(fontSize: 16),),
-                    ),
-
-                    ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, AppRouter.backstorySelectionScreen);
-                        },
-                        child: const Text("Save Background")),
-                  ],
-                ),
-              );
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context, AppRouter.backstorySelectionScreen);
+                      },
+                      child: const Text("Save Background")),
+                ],
+              ),
+            );
           } else {
             return const Padding(
               padding: EdgeInsets.only(top: 10),

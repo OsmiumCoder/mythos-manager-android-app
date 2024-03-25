@@ -5,7 +5,6 @@ import 'package:mythos_manager/features/campaigns/presentation/controllers/campa
 import 'package:mythos_manager/features/characters/presentation/controllers/character_controller.dart';
 import 'package:mythos_manager/routing/app_router.dart';
 
-
 class CampaignCreationScreen extends HookConsumerWidget {
   const CampaignCreationScreen({super.key});
 
@@ -30,8 +29,7 @@ class CampaignCreationScreen extends HookConsumerWidget {
               child: TextField(
                 controller: nameController,
                 decoration: const InputDecoration(
-                    filled: true,
-                    hintText: "Campaign Name"),
+                    filled: true, hintText: "Campaign Name"),
               ),
             ),
             Padding(

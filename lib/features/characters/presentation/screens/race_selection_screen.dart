@@ -6,7 +6,6 @@ import 'package:mythos_manager/features/characters/presentation/controllers/dnd_
 import 'package:mythos_manager/features/characters/presentation/screens/components/components.dart';
 import 'package:mythos_manager/routing/app_router.dart';
 
-
 /// Author: Jonathon Meney, Liam Welsh
 class RaceSelectionScreen extends HookConsumerWidget {
   const RaceSelectionScreen({super.key});
@@ -55,9 +54,11 @@ class RaceSelectionScreen extends HookConsumerWidget {
                                   startingLanguageController.clear();
 
                                   characterBuilder.state.raceLanguages.clear();
-                                  characterBuilder.state.raceEquipmentProfs.clear();
+                                  characterBuilder.state.raceEquipmentProfs
+                                      .clear();
                                   characterBuilder.state.raceSkillProfs.clear();
-                                  characterBuilder.state.raceAbilityScores.clear();
+                                  characterBuilder.state.raceAbilityScores
+                                      .clear();
 
                                   characterBuilder.state.race = race;
                                 },
@@ -89,8 +90,8 @@ class RaceSelectionScreen extends HookConsumerWidget {
                   }),
               ElevatedButton(
                   onPressed: raceController.text.isNotEmpty
-                      ? () => Navigator
-                          .pushNamed(context, AppRouter.classSelectionScreen)
+                      ? () => Navigator.pushNamed(
+                          context, AppRouter.classSelectionScreen)
                       : null,
                   child: const Text("Select Race")),
             ],

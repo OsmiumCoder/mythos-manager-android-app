@@ -8,6 +8,7 @@ import 'package:mythos_manager/features/authentication/presentation/controllers/
 import '../../../../provider_container.dart';
 
 class MockFirebaseAuth extends Mock implements FirebaseAuth {}
+
 class MockUserCredential extends Mock implements UserCredential {}
 
 /// Author: Jonathon Meney

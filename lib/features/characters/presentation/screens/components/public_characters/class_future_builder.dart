@@ -8,7 +8,9 @@ class ClassFutureBuilder extends HookConsumerWidget {
   final TextEditingController subclassController;
 
   const ClassFutureBuilder(
-      {super.key, required this.selectedClass, required this.subclassController});
+      {super.key,
+      required this.selectedClass,
+      required this.subclassController});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

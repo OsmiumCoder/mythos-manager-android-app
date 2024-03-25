@@ -7,7 +7,8 @@ import 'package:mythos_manager/features/authentication/presentation/screens/scre
 void main() {
   group('sign up screen widget tests', () {
     testWidgets('SignUpScreen has three text fields', (widgetTester) async {
-      await widgetTester.pumpWidget(const ProviderScope(child: MaterialApp(home: SignUpScreen())));
+      await widgetTester.pumpWidget(
+          const ProviderScope(child: MaterialApp(home: SignUpScreen())));
 
       final textFields = find.byType(TextField);
 
@@ -16,7 +17,8 @@ void main() {
 
     testWidgets('SignUpScreen has two elevated buttons fields',
         (widgetTester) async {
-      await widgetTester.pumpWidget(const ProviderScope(child: MaterialApp(home: SignUpScreen())));
+      await widgetTester.pumpWidget(
+          const ProviderScope(child: MaterialApp(home: SignUpScreen())));
 
       final textFields = find.byType(ElevatedButton);
 
@@ -26,7 +28,8 @@ void main() {
     testWidgets(
         'SignUpScreen has username, email, and password labeled text fields',
         (widgetTester) async {
-      await widgetTester.pumpWidget(const ProviderScope(child: MaterialApp(home: SignUpScreen())));
+      await widgetTester.pumpWidget(
+          const ProviderScope(child: MaterialApp(home: SignUpScreen())));
 
       final usernameLabel = find.bySemanticsLabel('Username');
       final emailLabel = find.bySemanticsLabel('Email');
@@ -38,7 +41,8 @@ void main() {
     });
 
     testWidgets('SignUpScreen has correct button texts', (widgetTester) async {
-      await widgetTester.pumpWidget(const ProviderScope(child: MaterialApp(home: SignUpScreen())));
+      await widgetTester.pumpWidget(
+          const ProviderScope(child: MaterialApp(home: SignUpScreen())));
 
       final loginButton =
           find.widgetWithText(ElevatedButton, SignUpScreen.signUpButtonText);

@@ -89,7 +89,8 @@ class NoteListScreen extends HookConsumerWidget {
                               child: ListTile(
                                 title: Text(
                                   note.title,
-                                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 16),
                                 ),
                                 subtitle: Text(
                                   note.description,
