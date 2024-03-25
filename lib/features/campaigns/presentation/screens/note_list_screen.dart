@@ -22,7 +22,6 @@ class NoteListScreen extends HookConsumerWidget {
         title: const Text("Notes"),
         centerTitle: true,
       ),
-      drawer: const MythosDrawer(selectedScreen: AppRouter.campaignListScreen),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20),
