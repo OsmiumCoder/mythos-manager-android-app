@@ -51,8 +51,10 @@ class AuthenticationController extends AsyncNotifier<void> {
     state = await AsyncValue.guard(() => authenticationService.signOut());
   }
 
-  /// Returns signed in user
+  /// Returns the currently signed in [User].
+  ///
+  /// If no user is signed in null will be returned.
   User? currentUser() {
-    return ref.read(authenticationRepositoryProvider).currentUser();
+    return ref.read(authenticationServiceProvider).currentUser();
   }
 }
