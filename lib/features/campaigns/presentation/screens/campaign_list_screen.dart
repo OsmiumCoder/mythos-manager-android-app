@@ -50,7 +50,9 @@ class CampaignListScreen extends HookConsumerWidget {
                                       ),
                                       height: 75,
                                       textPadding: 22.5,
-                                      onTap: () {}, // TODO Handle routing
+                                      onTap: () {
+                                        Navigator.pushNamed(context, AppRouter.noteListScreen,arguments: campaign.uid);
+                                      }, 
                                     ),
                                   ),
                                 ),

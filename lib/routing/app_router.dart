@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 import 'package:mythos_manager/features/authentication/presentation/screens/screens.dart';
+import 'package:mythos_manager/features/campaigns/presentation/screens/note_creation_screen.dart';
 import 'package:mythos_manager/features/campaigns/presentation/screens/screens.dart';
 import 'package:mythos_manager/features/home/presentation/screens/screens.dart';
+import '../features/campaigns/presentation/screens/note_list_screen.dart';
 import '../features/characters/domain/character.dart';
 import 'unknown_screen.dart';
 import 'package:mythos_manager/features/characters/presentation/screens/screens.dart';
+
 
 /// Router class
 ///
@@ -31,6 +34,8 @@ class AppRouter {
   static const String campaignListScreen = "/campaigns";
   static const String characterDisplayScreen = "/characters/display";
   static const String publicCharactersScreen = "/characters/public";
+  static const String noteCreationScreen = '/notes/creator';
+  static const String noteListScreen = '/notes';
 
   // Screens that do not require authentication
   static const noAuthScreens = [loginScreen, signupScreen];
@@ -87,6 +92,17 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const PublicCharactersScreen(),
         );
+      case noteCreationScreen:
+        String campaignID = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) =>  NoteCreationScreen(campaignID),
+        );
+      case noteListScreen:
+        String campaignID = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => NoteListScreen(campaignID),
+        );
+
     }
     if (kDebugMode) {
       return MaterialPageRoute(builder: (_) => const UnknownScreen());
