@@ -145,5 +145,24 @@ void main() {
       expectLater(container.read(characterServiceProvider).fetchCharacters(),
           throwsA(isA<NoUserFoundException>()));
     });
+
+    test("fetchCharacterById calls repo fetchCharacterById with user id",
+            () async {
+          final container = createContainer(overrides: [
+            characterServiceProvider.overrideWith((ref) {
+              return CharacterService(mockCharacterRepository, mockAuthRepo);
+            })
+          ]);
+
+          when(() => mockAuthRepo.currentUser()).thenReturn(mockUser);
+          when(() => mockCharacterRepository.fetchCharacterById("valid-id"))
+              .thenAnswer((invocation) async => character);
+
+          await container.read(characterServiceProvider).fetchCharacterById("valid-id");
+
+          verify(() => mockCharacterRepository.fetchCharacterById("valid-id"))
+              .called(1);
+        });
+
   });
 }
