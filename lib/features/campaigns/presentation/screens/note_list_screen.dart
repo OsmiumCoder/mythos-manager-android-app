@@ -5,6 +5,7 @@ import 'package:mythos_manager/features/campaigns/presentation/controllers/note_
 import 'package:mythos_manager/shared/presentation/components/components.dart';
 
 import '../../../../routing/app_router.dart';
+
 /// Author: Shreif Abdalla
 
 class NoteListScreen extends HookConsumerWidget {
@@ -76,25 +77,31 @@ class NoteListScreen extends HookConsumerWidget {
               ),
               // Following is your existing code for notes display
               ref.watch(noteControllerProvider(campaignID)).when(
-                data: (notes) => Column(
-                  children: notes.map((note) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 32),
-                      child: Card(
-                        color: theme.cardTheme.color,
-                        child: ListTile(
-                          title: Text(
-                            note.title,
-                            style: theme.textTheme.titleLarge?.copyWith(color: Colors.black),
-                          ),
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ),
-                error: (_, __) => const Text("Error occurred loading campaigns"),
-                loading: () => const CircularProgressIndicator(),
-              ),
+                    data: (notes) => Column(
+                      children: notes.map((note) {
+                        return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Card(
+                              color: theme.cardTheme.color,
+                              child: ListTile(
+                                title: Text(
+                                  note.title,
+                                  style: theme.textTheme.titleLarge
+                                      ?.copyWith(color: Colors.black),
+                                ),
+                                subtitle: Text(
+                                  note.description ?? 'No description provided',
+                                  style: theme.textTheme.bodyMedium?.copyWith(
+                                      color: Colors.black),
+                                ),
+                              ),
+                            ));
+                      }).toList(),
+                    ),
+                    error: (_, __) =>
+                        const Text("Error occurred loading notess"),
+                    loading: () => const CircularProgressIndicator(),
+                  ),
             ],
           ),
         ),
