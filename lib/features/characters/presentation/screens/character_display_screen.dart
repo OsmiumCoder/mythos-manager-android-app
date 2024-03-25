@@ -43,7 +43,7 @@ class CharacterDisplayScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isPublic = useState(character.isPublic);
 
-    final user = ref.watch(authenticationControllerProvider.notifier).getUser();
+    final user = ref.watch(authenticationControllerProvider.notifier).currentUser();
 
     final isUsersCharacter = character.userID == user?.uid;
 

@@ -54,8 +54,4 @@ class AuthenticationService {
     return await _firebaseAuth.signOut();
   }
 
-  /// Returns signed in user
-  User? getUser() {
-    return _firebaseAuth.currentUser;
-  }
 }
