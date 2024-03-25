@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mythos_manager/features/authentication/presentation/controllers/authentication_controller.dart';
+import 'package:mythos_manager/features/characters/presentation/controllers/character_controller.dart';
 import 'package:mythos_manager/features/characters/presentation/screens/components/components.dart';
 
 import '../../domain/character.dart';
 import 'components/character_display/backstory_character_display.dart';
 
 /// Author Liam Welsh
-class CharacterDisplayScreen extends HookWidget {
+class CharacterDisplayScreen extends HookConsumerWidget {
   final Character character;
   const CharacterDisplayScreen({super.key, required this.character});
 
@@ -22,7 +25,7 @@ class CharacterDisplayScreen extends HookWidget {
         return "Unknown Screen";
     }
   }
-  
+
   Widget _getSelectedScreen(int selectedScreen) {
     switch (selectedScreen) {
       case 0:
@@ -35,23 +38,62 @@ class CharacterDisplayScreen extends HookWidget {
         return const Text("Unknown Character Screen");
     }
   }
-  
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isPublic = useState(character.isPublic);
+
+    final user = ref.watch(authenticationControllerProvider.notifier).currentUser();
+
+    final isUsersCharacter = character.userID == user?.uid;
+
     final selectedScreen = useState(0);
+
+    togglePublicVisibility() {
+      character.isPublic = !character.isPublic;
+      isPublic.value = !isPublic.value;
+      ref.read(characterControllerProvider.notifier).updateCharacter(character);
+    }
 
     return Scaffold(
       appBar: AppBar(
         title: Text(_getTitle(selectedScreen.value)),
+        actions: [
+          if (isUsersCharacter)
+            IconButton(
+                onPressed: () {
+                  togglePublicVisibility();
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                          "Character has been made ${isPublic.value ? "public" : "private"}"),
+                      TextButton(
+                        child: const Text("Undo"),
+                        onPressed: () {
+                          togglePublicVisibility();
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        },
+                      )
+                    ],
+                  )));
+                },
+                tooltip: "Toggle public visibility",
+                icon: Icon(isPublic.value ? Icons.share_outlined : Icons.share,
+                    size: 30,
+                    color: isPublic.value
+                        ? const Color(0xabd3d3d3)
+                        : Colors.black))
+        ],
         centerTitle: true,
       ),
-
       body: _getSelectedScreen(selectedScreen.value),
       bottomNavigationBar: NavigationBar(
           selectedIndex: selectedScreen.value,
           onDestinationSelected: (index) => selectedScreen.value = index,
           backgroundColor: Theme.of(context).primaryColor,
-
           destinations: const [
             NavigationDestination(
               selectedIcon: Icon(Icons.person),

@@ -53,4 +53,12 @@ class AuthenticationService {
   Future<void> signOut() async {
     return await _firebaseAuth.signOut();
   }
+
+  /// Returns the currently signed in [User].
+  ///
+  /// If no user is signed in null will be returned.
+  User? currentUser() {
+    return _authenticationRepository.currentUser();
+  }
+
 }
