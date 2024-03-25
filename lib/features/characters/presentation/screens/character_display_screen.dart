@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:mythos_manager/features/characters/presentation/screens/components/components.dart';
 
 import '../../domain/character.dart';
+import 'components/character_display/backstory_character_display.dart';
 
 /// Author Liam Welsh
 class CharacterDisplayScreen extends HookWidget {
@@ -29,7 +30,7 @@ class CharacterDisplayScreen extends HookWidget {
       case 1:
         return CharacterSpellDisplay(className: character.className!);
       case 2:
-        return const Text("Backstory screen"); // TODO implement backstory screen
+        return BackstoryDisplay(character: character); // TODO implement backstory screen
       default:
         return const Text("Unknown Character Screen");
     }
