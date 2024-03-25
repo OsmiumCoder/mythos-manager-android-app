@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/authentication/application/authentication_service.dart';
 
@@ -47,5 +48,10 @@ class AuthenticationController extends AsyncNotifier<void> {
 
     state = const AsyncLoading();
     state = await AsyncValue.guard(() => authenticationService.signOut());
+  }
+
+  /// Returns signed in user
+  User? getUser() {
+    return ref.read(authenticationServiceProvider).getUser();
   }
 }

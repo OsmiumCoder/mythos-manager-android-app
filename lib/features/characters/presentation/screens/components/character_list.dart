@@ -4,6 +4,7 @@ import '../../../../../routing/app_router.dart';
 import '../../../../../shared/presentation/components/box_shadow_image.dart';
 import '../../../domain/character.dart';
 
+/// Author: Liam Welsh
 class CharacterList extends StatelessWidget {
   final List<Character> characters;
   const CharacterList({super.key, required this.characters});

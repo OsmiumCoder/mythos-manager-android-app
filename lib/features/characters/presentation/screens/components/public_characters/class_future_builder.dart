@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/dnd_api_controller.dart';
 
+/// Author: Liam Welsh
 class ClassFutureBuilder extends HookConsumerWidget {
   final String selectedClass;
   final TextEditingController subclassController;
@@ -18,6 +19,7 @@ class ClassFutureBuilder extends HookConsumerWidget {
           if (snapshot.hasData) {
             List subclasses = snapshot.data?["subclasses"];
             return DropdownMenu(
+                controller: subclassController,
                 dropdownMenuEntries: subclasses
                     .map((subclass) => DropdownMenuEntry(
                         value: subclass["name"], label: subclass["name"]))
