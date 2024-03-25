@@ -87,7 +87,7 @@ class NoteListScreen extends HookConsumerWidget {
                                 title: Text(
                                   note.title,
                                   style: theme.textTheme.titleLarge
-                                      ?.copyWith(color: Colors.black),
+                                      ?.copyWith(color: Colors.white),
                                 ),
                                 subtitle: Text(
                                   note.description ?? 'No description provided',
