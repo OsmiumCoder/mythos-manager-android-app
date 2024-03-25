@@ -5,7 +5,8 @@ import 'package:mythos_manager/features/campaigns/application/campaign_service.d
 import 'package:mythos_manager/features/campaigns/domain/campaign.dart';
 
 /// Provides a [CampaignController].
-final campaignControllerProvider = AsyncNotifierProvider<CampaignController, List<Campaign>>(() {
+final campaignControllerProvider =
+    AsyncNotifierProvider<CampaignController, List<Campaign>>(() {
   return CampaignController();
 });
 
@@ -14,11 +15,14 @@ final campaignControllerProvider = AsyncNotifierProvider<CampaignController, Lis
 /// Author: Jonathon Meney
 class CampaignController extends AsyncNotifier<List<Campaign>> {
   /// Creates a new [Campaign].
-  Future<void> createCampaign(String name, String description, String characterId) async {
+  Future<void> createCampaign(
+      String name, String description, String characterId) async {
     state = const AsyncValue.loading();
 
     state = await AsyncValue.guard(() async {
-      ref.watch(campaignServiceProvider).createCampaign(name, description, characterId);
+      ref
+          .watch(campaignServiceProvider)
+          .createCampaign(name, description, characterId);
       return _fetchCampaigns();
     });
   }

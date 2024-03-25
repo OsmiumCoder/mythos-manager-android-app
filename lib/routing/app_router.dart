@@ -6,13 +6,13 @@ import 'package:mythos_manager/features/authentication/data/authentication_repos
 import 'package:mythos_manager/features/authentication/presentation/screens/screens.dart';
 import 'package:mythos_manager/features/campaigns/domain/campaign.dart';
 import 'package:mythos_manager/features/campaigns/presentation/screens/note_creation_screen.dart';
+import 'package:mythos_manager/features/campaigns/presentation/screens/note_list_screen.dart';
 import 'package:mythos_manager/features/campaigns/presentation/screens/screens.dart';
-import 'package:mythos_manager/features/home/presentation/screens/screens.dart';
-import '../features/campaigns/presentation/screens/note_list_screen.dart';
-import '../features/characters/domain/character.dart';
-import 'unknown_screen.dart';
+import 'package:mythos_manager/features/characters/domain/character.dart';
 import 'package:mythos_manager/features/characters/presentation/screens/screens.dart';
+import 'package:mythos_manager/features/home/presentation/screens/screens.dart';
 
+import 'unknown_screen.dart';
 
 /// Router class
 ///
@@ -30,7 +30,8 @@ class AppRouter {
       '/characters/creator/race-selection';
   static const String abilitySelectionScreen =
       '/characters/creator/ability-selection';
-  static const String classSelectionScreen = '/characters/creator/class-selection';
+  static const String classSelectionScreen =
+      '/characters/creator/class-selection';
   static const String campaignCreationScreen = '/campaigns/creator';
   static const String campaignListScreen = "/campaigns";
   static const String characterDisplayScreen = "/characters/display";
@@ -40,6 +41,7 @@ class AppRouter {
 
   // Screens that do not require authentication
   static const noAuthScreens = [loginScreen, signupScreen];
+
   AppRouter._();
 
   static Route<dynamic> generateRoute(RouteSettings settings, WidgetRef ref) {
@@ -96,14 +98,13 @@ class AppRouter {
       case noteCreationScreen:
         String campaignID = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) =>  NoteCreationScreen(campaignID),
+          builder: (_) => NoteCreationScreen(campaignID),
         );
       case noteListScreen:
         Campaign campaign = settings.arguments as Campaign;
         return MaterialPageRoute(
           builder: (_) => NoteListScreen(campaign),
         );
-
     }
     if (kDebugMode) {
       return MaterialPageRoute(builder: (_) => const UnknownScreen());

@@ -6,9 +6,8 @@ import 'package:mythos_manager/features/characters/domain/character.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/character_builder_controller.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/character_controller.dart';
 import 'package:mythos_manager/features/characters/presentation/screens/components/character_list.dart';
+import 'package:mythos_manager/routing/app_router.dart';
 import 'package:mythos_manager/shared/presentation/components/components.dart';
-
-import '../../../../routing/app_router.dart';
 
 /// Author: Liam Welsh
 class CharactersScreen extends HookConsumerWidget {
@@ -53,9 +52,7 @@ class CharactersScreen extends HookConsumerWidget {
             ),
             characterController.when(
                 data: (List<Character> characters) => Column(
-                      children: [
-                       CharacterList(characters: characters)
-                      ],
+                      children: [CharacterList(characters: characters)],
                     ),
                 error: (e, st) {
                   if (kDebugMode) {

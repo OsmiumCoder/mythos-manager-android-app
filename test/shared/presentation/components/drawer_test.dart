@@ -7,22 +7,21 @@ import 'package:mythos_manager/shared/presentation/components/components.dart';
 void main() {
   group("MythosDrawer Test", () {
     testWidgets("Selecting menu icon opens drawer", (tester) async {
-      await tester.pumpWidget(
-          MaterialApp(
-            home: Scaffold(
-              appBar: AppBar(
-                title: const Text("Test"),
-              ),
-              drawer: const MythosDrawer(selectedScreen: AppRouter.homeScreen),
-            ),
-        )
-      );
+      await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text("Test"),
+          ),
+          drawer: const MythosDrawer(selectedScreen: AppRouter.homeScreen),
+        ),
+      ));
 
       final leadingIconFinder = find.widgetWithIcon(IconButton, Icons.menu);
 
       expect(leadingIconFinder, findsOne);
 
-      final gesture = await tester.startGesture(tester.getCenter(leadingIconFinder));
+      final gesture =
+          await tester.startGesture(tester.getCenter(leadingIconFinder));
 
       await gesture.up();
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Author: Jonathon Meney
 class ProficienciesCard extends StatelessWidget {
   const ProficienciesCard({
     super.key,
@@ -12,9 +13,10 @@ class ProficienciesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     List<String> skills = skillProficiencies?.map((skill) {
-      return skill.split(" ")[1];
-    }).toList() ?? [];
+    List<String> skills = skillProficiencies?.map((skill) {
+          return skill.split(" ")[1];
+        }).toList() ??
+        [];
     return Card(
       child: Column(
         children: [

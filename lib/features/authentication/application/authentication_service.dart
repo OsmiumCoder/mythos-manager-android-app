@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
 
-
 /// Provides an [AuthenticationService].
 final authenticationServiceProvider = Provider<AuthenticationService>((ref) {
   return AuthenticationService(
@@ -42,7 +41,6 @@ class AuthenticationService {
     await login(email: email, password: password);
   }
 
-
   /// Attempts to login a user with the given email and password.
   Future<void> login({required String email, required String password}) async {
     await _firebaseAuth.signInWithEmailAndPassword(
@@ -60,5 +58,4 @@ class AuthenticationService {
   User? currentUser() {
     return _authenticationRepository.currentUser();
   }
-
 }

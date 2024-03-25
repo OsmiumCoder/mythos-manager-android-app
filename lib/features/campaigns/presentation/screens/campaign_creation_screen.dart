@@ -3,8 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/campaigns/presentation/controllers/campaign_controller.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/character_controller.dart';
-
-import '../../../../routing/app_router.dart';
+import 'package:mythos_manager/routing/app_router.dart';
 
 class CampaignCreationScreen extends HookConsumerWidget {
   const CampaignCreationScreen({super.key});
@@ -29,10 +28,8 @@ class CampaignCreationScreen extends HookConsumerWidget {
                   top: 25, bottom: 15, left: 50, right: 50),
               child: TextField(
                 controller: nameController,
-                decoration: InputDecoration(
-                    fillColor: Theme.of(context).inputDecorationTheme.fillColor,
-                    filled: true,
-                    hintText: "Campaign Name"),
+                decoration: const InputDecoration(
+                    filled: true, hintText: "Campaign Name"),
               ),
             ),
             Padding(
@@ -40,8 +37,7 @@ class CampaignCreationScreen extends HookConsumerWidget {
               child: TextField(
                 controller: descriptionController,
                 maxLines: 5,
-                decoration: InputDecoration(
-                  fillColor: Theme.of(context).inputDecorationTheme.fillColor,
+                decoration: const InputDecoration(
                   filled: true,
                   hintText: "Campaign Details",
                 ),

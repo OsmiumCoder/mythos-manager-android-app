@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Author: Jonathon Meney
 class RacialTraitCard extends StatelessWidget {
   const RacialTraitCard({
     super.key,

@@ -5,7 +5,8 @@ import 'package:mythos_manager/features/campaigns/application/campaign_service.d
 import 'package:mythos_manager/features/campaigns/domain/note.dart';
 
 /// Provides a [NoteController].
-final noteControllerProvider = AsyncNotifierProvider.family<NoteController, List<Note>, String>(() {
+final noteControllerProvider =
+    AsyncNotifierProvider.family<NoteController, List<Note>, String>(() {
   return NoteController();
 });
 
@@ -14,7 +15,8 @@ final noteControllerProvider = AsyncNotifierProvider.family<NoteController, List
 /// Author: Jonathon Meney
 class NoteController extends FamilyAsyncNotifier<List<Note>, String> {
   /// Creates a new [Note].
-  Future<void> createNote(String campaignID, String title, String details) async {
+  Future<void> createNote(
+      String campaignID, String title, String details) async {
     state = const AsyncValue.loading();
 
     state = await AsyncValue.guard(() async {

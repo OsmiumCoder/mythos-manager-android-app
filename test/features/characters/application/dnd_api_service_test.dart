@@ -157,8 +157,7 @@ void main() {
         })
       ]);
 
-      when(() => repository.getSpellsForClass(''))
-          .thenAnswer((_) async => [
+      when(() => repository.getSpellsForClass('')).thenAnswer((_) async => [
             {"success": 1}
           ]);
 
@@ -174,21 +173,23 @@ void main() {
         })
       ]);
 
-      when(() => repository.getClassFeatures('')). thenAnswer((_) async => []);
+      when(() => repository.getClassFeatures('')).thenAnswer((_) async => []);
 
       container.read(dndApiService).getClassFeatures('');
 
       verify(() => repository.getClassFeatures('')).called(1);
     });
 
-    test("getSubclassFeatures calls getSubclassFeatures in repository", () async {
+    test("getSubclassFeatures calls getSubclassFeatures in repository",
+        () async {
       final container = createContainer(overrides: [
         dndApiService.overrideWith((ref) {
           return DNDAPIService(repository);
         })
       ]);
 
-      when(() => repository.getSubclassFeatures('')). thenAnswer((_) async => []);
+      when(() => repository.getSubclassFeatures(''))
+          .thenAnswer((_) async => []);
 
       container.read(dndApiService).getSubclassFeatures('');
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Shreif Abdalla
 class CharacterDetailCard extends StatelessWidget {
   final String title;
   final String content;
@@ -20,11 +21,11 @@ class CharacterDetailCard extends StatelessWidget {
       child: ListTile(
         title: Text(
           title,
-          style: theme.textTheme.titleLarge?.copyWith(color: Colors.white),
+          style: const TextStyle(color: Colors.white, fontSize: 16),
         ),
         subtitle: Text(
           content,
-          style: theme.textTheme.bodyMedium?.copyWith(color: Colors.black),
+          style: const TextStyle(color: Colors.black),
         ),
       ),
     );

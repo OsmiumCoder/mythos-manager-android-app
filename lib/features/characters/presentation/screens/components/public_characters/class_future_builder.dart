@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/dnd_api_controller.dart';
@@ -9,7 +8,9 @@ class ClassFutureBuilder extends HookConsumerWidget {
   final TextEditingController subclassController;
 
   const ClassFutureBuilder(
-      {super.key, required this.selectedClass, required this.subclassController});
+      {super.key,
+      required this.selectedClass,
+      required this.subclassController});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

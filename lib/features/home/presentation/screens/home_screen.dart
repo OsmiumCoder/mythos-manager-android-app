@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../routing/app_router.dart';
-import '../../../../shared/presentation/components/components.dart';
-import '../../../characters/presentation/controllers/character_builder_controller.dart';
+import 'package:mythos_manager/features/characters/presentation/controllers/character_builder_controller.dart';
+import 'package:mythos_manager/routing/app_router.dart';
+import 'package:mythos_manager/shared/presentation/components/components.dart';
 
 /// Home screen.
 ///
@@ -33,9 +33,9 @@ class HomeScreen extends HookConsumerWidget {
                 padding: const EdgeInsets.all(10),
                 child: BoxShadowImage(
                   image: const Image(
-                      image: Svg("assets/images/campaign_button_image.svg"),
-                      height: 200,
-                     width: 290,
+                    image: Svg("assets/images/campaign_button_image.svg"),
+                    height: 200,
+                    width: 290,
                   ),
                   text: Text(
                     "Campaigns",
@@ -43,7 +43,8 @@ class HomeScreen extends HookConsumerWidget {
                     style: cardTextStyle,
                   ),
                   textPadding: 70,
-                  onTap: () => Navigator.pushNamed(context, AppRouter.campaignListScreen),
+                  onTap: () => Navigator.pushNamed(
+                      context, AppRouter.campaignListScreen),
                 ),
               ),
             ),
@@ -52,8 +53,8 @@ class HomeScreen extends HookConsumerWidget {
                 padding: const EdgeInsets.all(10),
                 child: BoxShadowImage(
                   image: const Image(
-                      image: Svg("assets/images/characters_button_image.svg"),
-                      height: 200,
+                    image: Svg("assets/images/characters_button_image.svg"),
+                    height: 200,
                     width: 290,
                   ),
                   text: Text(
@@ -62,7 +63,8 @@ class HomeScreen extends HookConsumerWidget {
                     style: cardTextStyle,
                   ),
                   textPadding: 70,
-                  onTap: () => Navigator.pushNamed(context, AppRouter.charactersScreen),
+                  onTap: () =>
+                      Navigator.pushNamed(context, AppRouter.charactersScreen),
                 ),
               ),
             ),

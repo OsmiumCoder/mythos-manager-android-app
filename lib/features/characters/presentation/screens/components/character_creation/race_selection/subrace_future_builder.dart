@@ -3,7 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/character_builder_controller.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/dnd_api_controller.dart';
 
-
 /// Author: Jonathon Meney, Liam Welsh
 class SubraceFutureBuilder extends HookConsumerWidget {
   const SubraceFutureBuilder({
@@ -27,14 +26,15 @@ class SubraceFutureBuilder extends HookConsumerWidget {
             final subrace = snapshot.data!;
 
             final String abilityBonuses =
-            subrace["ability_bonuses"].map((element) {
-              characterBuilder.state.raceAbilityScores[
-              element["ability_score"]["name"]] = element["bonus"];
+                subrace["ability_bonuses"].map((element) {
+              characterBuilder.state
+                      .raceAbilityScores[element["ability_score"]["name"]] =
+                  element["bonus"];
               return "+${element["bonus"]} ${element["ability_score"]["name"]}";
             }).join(", ");
 
             final String startingProficiencies =
-            subrace["starting_proficiencies"].map((element) {
+                subrace["starting_proficiencies"].map((element) {
               if ((element["name"] as String).toLowerCase().contains("skill")) {
                 characterBuilder.state.raceSkillProfs.add(element);
               } else {

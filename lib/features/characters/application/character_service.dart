@@ -59,7 +59,7 @@ class CharacterService {
     return await _characterRepository.fetchCharactersForUser(auth.uid);
   }
 
-  /// Returns a list of public [Characters]s
+  /// Returns a list of public [Character]s
   ///
   /// Throws a [NoUserFoundException] if no user is signed in
   Future<List<Character>> fetchPublicCharacters(

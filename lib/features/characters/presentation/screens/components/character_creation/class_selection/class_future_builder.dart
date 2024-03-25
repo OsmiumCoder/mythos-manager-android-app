@@ -150,13 +150,12 @@ class ClassFutureBuilder extends HookConsumerWidget {
                                 .contains(element));
 
                     characterBuilder.state.classEquipmentProfs.removeWhere(
-                            (element) =>
-                        element != newValue &&
+                        (element) =>
+                            element != newValue &&
                             element != selectedProficiency1Controller.text &&
                             !proficiencyData
                                 .map((e) => e["name"])
                                 .contains(element));
-
 
                     if (newValue!.toLowerCase().contains("skill")) {
                       characterBuilder.state.classSkillProfs.add(newValue);
@@ -174,16 +173,16 @@ class ClassFutureBuilder extends HookConsumerWidget {
                     onSelected: (newValue) {
                       // Remove any old values
                       characterBuilder.state.classSkillProfs.removeWhere(
-                              (element) =>
-                          element != newValue &&
+                          (element) =>
+                              element != newValue &&
                               element != selectedProficiency1Controller.text &&
                               !proficiencyData
                                   .map((e) => e["name"])
                                   .contains(element));
 
                       characterBuilder.state.classEquipmentProfs.removeWhere(
-                              (element) =>
-                          element != newValue &&
+                          (element) =>
+                              element != newValue &&
                               element != selectedProficiency1Controller.text &&
                               !proficiencyData
                                   .map((e) => e["name"])

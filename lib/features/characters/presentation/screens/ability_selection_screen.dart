@@ -95,7 +95,8 @@ class AbilitySelectionScreen extends HookConsumerWidget {
                     child: ElevatedButton(
                       child: const Text("Select Scores"),
                       onPressed: () {
-                        Navigator.pushNamed(context, AppRouter.backgroundSelectionScreen);
+                        Navigator.pushNamed(
+                            context, AppRouter.backgroundSelectionScreen);
                       },
                     ),
                   )

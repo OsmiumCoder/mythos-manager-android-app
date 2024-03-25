@@ -58,10 +58,11 @@ void main() {
       when(() => mockCharacterService.createCharacter(character))
           .thenAnswer((invocation) async => true);
 
-      container.read(characterControllerProvider.notifier).createCharacter(character);
+      container
+          .read(characterControllerProvider.notifier)
+          .createCharacter(character);
 
-      verify(() => mockCharacterService.createCharacter(character))
-          .called(1);
+      verify(() => mockCharacterService.createCharacter(character)).called(1);
     });
 
     test("updateCharacter calls service updateCharacter", () async {
@@ -74,10 +75,11 @@ void main() {
       when(() => mockCharacterService.updateCharacter(character))
           .thenAnswer((invocation) async => true);
 
-      container.read(characterControllerProvider.notifier).updateCharacter(character);
+      container
+          .read(characterControllerProvider.notifier)
+          .updateCharacter(character);
 
-      verify(() => mockCharacterService.updateCharacter(character))
-          .called(1);
+      verify(() => mockCharacterService.updateCharacter(character)).called(1);
     });
 
     test("fetchPublicCharacters calls service fetchCharacters", () async {
@@ -90,7 +92,9 @@ void main() {
       when(() => mockCharacterService.fetchPublicCharacters(null, null))
           .thenAnswer((invocation) async => [character]);
 
-      container.read(characterControllerProvider.notifier).fetchPublicCharacters();
+      container
+          .read(characterControllerProvider.notifier)
+          .fetchPublicCharacters();
 
       verify(() => mockCharacterService.fetchPublicCharacters(null, null))
           .called(1);
@@ -103,11 +107,13 @@ void main() {
         })
       ]);
 
-      when(() => mockCharacterService.fetchCharacters()).thenAnswer((invocation) async => []);
+      when(() => mockCharacterService.fetchCharacters())
+          .thenAnswer((invocation) async => []);
 
-      expectLater(container.read(characterControllerProvider.future), completion([]));
+      expectLater(
+          container.read(characterControllerProvider.future), completion([]));
 
-      verify(() =>  mockCharacterService.fetchCharacters()).called(1);
+      verify(() => mockCharacterService.fetchCharacters()).called(1);
     });
 
     test("fetchCharacterById calls service fetchCharacterById", () async {
@@ -120,10 +126,11 @@ void main() {
       when(() => mockCharacterService.fetchCharacterById("someId"))
           .thenAnswer((invocation) async => character);
 
-      container.read(characterControllerProvider.notifier).fetchCharacterById("someId");
+      container
+          .read(characterControllerProvider.notifier)
+          .fetchCharacterById("someId");
 
-      verify(() => mockCharacterService.fetchCharacterById("someId"))
-          .called(1);
+      verify(() => mockCharacterService.fetchCharacterById("someId")).called(1);
     });
   });
 }

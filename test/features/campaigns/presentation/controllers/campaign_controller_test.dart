@@ -22,11 +22,13 @@ void main() {
         })
       ]);
 
-      when(() => mockCampaignService.fetchCampaigns()).thenAnswer((invocation) async => []);
+      when(() => mockCampaignService.fetchCampaigns())
+          .thenAnswer((invocation) async => []);
 
-      expectLater(container.read(campaignControllerProvider.future), completion([]));
+      expectLater(
+          container.read(campaignControllerProvider.future), completion([]));
 
-      verify(() =>  mockCampaignService.fetchCampaigns()).called(1);
+      verify(() => mockCampaignService.fetchCampaigns()).called(1);
     });
 
     test("createCampaign creates campaign and updates state", () {
@@ -36,11 +38,14 @@ void main() {
         })
       ]);
 
-      when(() => mockCampaignService.createCampaign("name", "description", "")).thenAnswer((invocation) async {});
+      when(() => mockCampaignService.createCampaign("name", "description", ""))
+          .thenAnswer((invocation) async {});
 
-      container.read(campaignControllerProvider.notifier).createCampaign("name", "description", "");
+      container
+          .read(campaignControllerProvider.notifier)
+          .createCampaign("name", "description", "");
 
-      verify(() =>  mockCampaignService.fetchCampaigns()).called(2);
+      verify(() => mockCampaignService.fetchCampaigns()).called(2);
     });
   });
 }

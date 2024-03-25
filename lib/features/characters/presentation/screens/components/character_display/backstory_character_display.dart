@@ -4,6 +4,7 @@ import 'package:mythos_manager/features/characters/domain/character.dart';
 
 import 'character_detail_card.dart';
 
+/// Author: Shreif Abdalla
 class BackstoryDisplay extends HookConsumerWidget {
   final Character character;
 

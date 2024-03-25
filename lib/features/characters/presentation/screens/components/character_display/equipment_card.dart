@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Author: Jonathon Meney
 class EquipmentCard extends StatelessWidget {
   const EquipmentCard({
     super.key,

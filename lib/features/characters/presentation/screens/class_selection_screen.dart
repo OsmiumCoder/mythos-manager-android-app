@@ -4,8 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/character_builder_controller.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/dnd_api_controller.dart';
 import 'package:mythos_manager/features/characters/presentation/screens/components/components.dart';
-
-import '../../../../routing/app_router.dart';
+import 'package:mythos_manager/routing/app_router.dart';
 
 ///Author: Shreif Abdalla, Liam Welsh
 class ClassSelectionScreen extends HookConsumerWidget {
@@ -106,7 +105,8 @@ class ClassSelectionScreen extends HookConsumerWidget {
                   }),
               ElevatedButton(
                   onPressed: classController.text.isNotEmpty
-                      ? () => Navigator.pushNamed(context, AppRouter.abilitySelectionScreen)
+                      ? () => Navigator.pushNamed(
+                          context, AppRouter.abilitySelectionScreen)
                       : null,
                   child: const Text('Select Class')),
             ],

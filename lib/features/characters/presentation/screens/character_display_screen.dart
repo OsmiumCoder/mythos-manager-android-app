@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/authentication/presentation/controllers/authentication_controller.dart';
+import 'package:mythos_manager/features/characters/domain/character.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/character_controller.dart';
 import 'package:mythos_manager/features/characters/presentation/screens/components/components.dart';
 
-import '../../domain/character.dart';
 import 'components/character_display/backstory_character_display.dart';
 
 /// Author Liam Welsh
 class CharacterDisplayScreen extends HookConsumerWidget {
   final Character character;
+
   const CharacterDisplayScreen({super.key, required this.character});
 
   String _getTitle(int selectedScreen) {
@@ -43,7 +44,8 @@ class CharacterDisplayScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isPublic = useState(character.isPublic);
 
-    final user = ref.watch(authenticationControllerProvider.notifier).currentUser();
+    final user =
+        ref.watch(authenticationControllerProvider.notifier).currentUser();
 
     final isUsersCharacter = character.userID == user?.uid;
 

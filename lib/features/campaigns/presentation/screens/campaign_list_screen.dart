@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mythos_manager/features/campaigns/domain/campaign.dart';
 import 'package:mythos_manager/features/campaigns/presentation/controllers/campaign_controller.dart';
+import 'package:mythos_manager/routing/app_router.dart';
 import 'package:mythos_manager/shared/presentation/components/components.dart';
-
-import '../../../../routing/app_router.dart';
 
 class CampaignListScreen extends HookConsumerWidget {
   const CampaignListScreen({super.key});
@@ -23,7 +24,9 @@ class CampaignListScreen extends HookConsumerWidget {
             child: Column(
               children: [
                 BoxShadowImage(
-                  image: null, // TODO Insert Image
+                  image: const Image(
+                    image: Svg("assets/images/campaign_button_image.svg"),
+                  ),
                   text: const Text(
                     "Create Campaign",
                     style: TextStyle(color: Colors.white),
@@ -34,15 +37,16 @@ class CampaignListScreen extends HookConsumerWidget {
                       context, AppRouter.campaignCreationScreen),
                 ),
                 ref.watch(campaignControllerProvider).when(
-                    data: (campaigns) => Column(
+                    data: (List<Campaign> campaigns) => Column(
                           children: campaigns
                               .map(
-                                (campaign) => Padding(
+                                (Campaign campaign) => Padding(
                                   padding: const EdgeInsets.only(top: 32),
                                   child: SizedBox(
                                     width: 300,
                                     child: BoxShadowImage(
-                                      image: null, // TODO Insert image
+                                      image: null,
+                                      // TODO Insert image
                                       text: Text(
                                         campaign.name,
                                         style: const TextStyle(
@@ -51,8 +55,10 @@ class CampaignListScreen extends HookConsumerWidget {
                                       height: 75,
                                       textPadding: 22.5,
                                       onTap: () {
-                                        Navigator.pushNamed(context, AppRouter.noteListScreen,arguments: campaign);
-                                      }, 
+                                        Navigator.pushNamed(
+                                            context, AppRouter.noteListScreen,
+                                            arguments: campaign);
+                                      },
                                     ),
                                   ),
                                 ),

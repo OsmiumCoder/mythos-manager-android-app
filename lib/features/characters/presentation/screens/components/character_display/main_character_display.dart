@@ -8,6 +8,7 @@ import 'package:mythos_manager/features/characters/presentation/screens/componen
 import 'package:mythos_manager/features/characters/presentation/screens/components/character_display/racial_trait_card.dart';
 import 'package:mythos_manager/shared/extensions/capitalize.dart';
 
+/// Author: Jonathon Meney
 class MainCharacterDisplay extends ConsumerWidget {
   final Character character;
 

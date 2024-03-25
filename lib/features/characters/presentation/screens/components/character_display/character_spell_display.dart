@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/dnd_api_controller.dart';
 import 'package:mythos_manager/features/characters/presentation/screens/components/character_display/spell_card.dart';
 
+/// Author: Jonathon Meney
 class CharacterSpellDisplay extends ConsumerWidget {
   final String className;
 

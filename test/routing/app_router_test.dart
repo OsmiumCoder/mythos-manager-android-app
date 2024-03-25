@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:mythos_manager/features/authentication/data/authentication_repository.dart';
@@ -97,22 +97,22 @@ void main() {
     });
 
     testWidgets('Navigating to raceSelectionScreen shows RaceSelectionScreen',
-            (WidgetTester tester) async {
-          WidgetRef ref = MockWidgetRef();
+        (WidgetTester tester) async {
+      WidgetRef ref = MockWidgetRef();
 
-          when(() => ref.read(authenticationStateProvider))
-              .thenReturn(AsyncData(MockUser()));
+      when(() => ref.read(authenticationStateProvider))
+          .thenReturn(AsyncData(MockUser()));
 
-          await tester.pumpWidget(ProviderScope(
-            child: MaterialApp(
-              onGenerateRoute: (settings) {
-                return AppRouter.generateRoute(settings, ref);
-              },
-              initialRoute: AppRouter.raceSelectionScreen,
-            ),
-          ));
+      await tester.pumpWidget(ProviderScope(
+        child: MaterialApp(
+          onGenerateRoute: (settings) {
+            return AppRouter.generateRoute(settings, ref);
+          },
+          initialRoute: AppRouter.raceSelectionScreen,
+        ),
+      ));
 
-          expect(find.byType(RaceSelectionScreen), findsOneWidget);
-        });
+      expect(find.byType(RaceSelectionScreen), findsOneWidget);
+    });
   });
 }

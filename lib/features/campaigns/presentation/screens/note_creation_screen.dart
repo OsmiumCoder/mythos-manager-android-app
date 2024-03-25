@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:mythos_manager/features/campaigns/presentation/controllers/campaign_controller.dart';
 import 'package:mythos_manager/features/campaigns/presentation/controllers/note_controller.dart';
 
-import '../../../../routing/app_router.dart';
 /// Author: Shreif Abdalla
 class NoteCreationScreen extends HookConsumerWidget {
   const NoteCreationScreen(this.campaignID, {super.key});
@@ -29,10 +27,8 @@ class NoteCreationScreen extends HookConsumerWidget {
                   top: 25, bottom: 15, left: 50, right: 50),
               child: TextField(
                 controller: titleController,
-                decoration: InputDecoration(
-                    fillColor: Theme.of(context).inputDecorationTheme.fillColor,
-                    filled: true,
-                    hintText: "Note Title"),
+                decoration:
+                    const InputDecoration(filled: true, hintText: "Note Title"),
               ),
             ),
             Padding(
@@ -40,8 +36,7 @@ class NoteCreationScreen extends HookConsumerWidget {
               child: TextField(
                 controller: descriptionController,
                 maxLines: 5,
-                decoration: InputDecoration(
-                  fillColor: Theme.of(context).inputDecorationTheme.fillColor,
+                decoration: const InputDecoration(
                   filled: true,
                   hintText: "Note Details",
                 ),
@@ -56,8 +51,7 @@ class NoteCreationScreen extends HookConsumerWidget {
                       .read(noteControllerProvider(campaignID).notifier)
                       .createNote(campaignID, titleController.text,
                           descriptionController.text);
-                  Navigator.pushReplacementNamed(
-                      context, AppRouter.noteListScreen,arguments: campaignID);
+                  Navigator.pop(context);
                 },
               ),
             ),

@@ -77,7 +77,8 @@ class DNDAPIService {
   }
 
   /// Returns list of subclass features.
-  Future<List<Map<String, dynamic>>> getSubclassFeatures(String subclass) async {
+  Future<List<Map<String, dynamic>>> getSubclassFeatures(
+      String subclass) async {
     return await _repository.getSubclassFeatures(subclass);
   }
 }

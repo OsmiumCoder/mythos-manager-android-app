@@ -98,7 +98,8 @@ class LoginScreen extends HookConsumerWidget {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, AppRouter.signupScreen);
+                      Navigator.pushReplacementNamed(
+                          context, AppRouter.signupScreen);
                     }),
               )
             ],
