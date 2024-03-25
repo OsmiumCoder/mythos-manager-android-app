@@ -317,7 +317,7 @@ void main() {
       expect(characters.length, 1);
     });
 
-    test("fetchCharacterById returns only the characters of given id",
+    test("fetchCharacterById returns only the character of given id",
             () async {
           final container = createContainer(overrides: [
             characterRepositoryProvider.overrideWith((ref) {

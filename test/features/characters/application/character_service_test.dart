@@ -146,7 +146,7 @@ void main() {
           throwsA(isA<NoUserFoundException>()));
     });
 
-    test("fetchCharacterById calls repo fetchCharacterById with user id",
+    test("fetchCharacterById calls repo fetchCharacterById with character id",
             () async {
           final container = createContainer(overrides: [
             characterServiceProvider.overrideWith((ref) {
