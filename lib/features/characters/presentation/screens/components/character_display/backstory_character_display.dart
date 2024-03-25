@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/characters/domain/character.dart';
 
+import 'character_detail_card.dart';
+
 class BackstoryDisplay extends HookConsumerWidget {
   final Character character;
 
@@ -11,32 +13,8 @@ class BackstoryDisplay extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ThemeData theme = Theme.of(context);
 
-    Widget buildCard(String title, String content) {
-      return Card(
-        color: theme.cardTheme.color,
-        margin: const EdgeInsets.only(bottom: 10),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: theme.textTheme.titleLarge?.copyWith(color: Colors.white),
-              ),
-              Divider(color: Colors.white),
-              Text(
-                content,
-                style: theme.textTheme.bodyMedium?.copyWith(color: Colors.black),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.all(20),
       child: Column(
         children: [
           Text(
@@ -50,24 +28,28 @@ class BackstoryDisplay extends HookConsumerWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 20),
-          buildCard(
-            'Character Details',
-            'Age: ${character.age ?? "Unknown"}\n'
+          CharacterDetailCard(
+            title: 'Character Details',
+            content: 'Age: ${character.age ?? "Unknown"}\n'
                 'Weight: ${character.weight ?? "Unknown"}\n'
                 'Height: ${character.height ?? "Unknown"}',
+            theme: theme,
           ),
-          buildCard(
-            'Background',
-            'Feature Name: ${character.backgroundFeatureName ?? "None"}\n'
-                'Feature Description: ${character.backgroundFeatureDesc ?? "No description provided"}',
+          CharacterDetailCard(
+            title: 'Background',
+            content: '${character.backgroundFeatureName ?? "None"}\n'
+                '${character.backgroundFeatureDesc ?? "No description provided"}',
+            theme: theme,
           ),
-          buildCard(
-            'Languages',
-            character.languages?.join(", ") ?? "No languages provided",
+          CharacterDetailCard(
+            title: 'Languages',
+            content: character.languages?.join(", ") ?? "No languages provided",
+            theme: theme,
           ),
-          buildCard(
-            'Backstory',
-            character.backstory ?? "No backstory provided",
+          CharacterDetailCard(
+            title: 'Backstory',
+            content: character.backstory ?? "No backstory provided",
+            theme: theme,
           ),
         ],
       ),
