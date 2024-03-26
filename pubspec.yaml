@@ -31,15 +31,15 @@ dependencies:
   flutter:
     sdk: flutter
 
-  firebase_core: ^2.25.4
-  cloud_firestore: ^4.15.8
-  firebase_auth: ^4.17.4
+  firebase_core: ^2.27.1
+  cloud_firestore: ^4.15.9
+  firebase_auth: ^4.17.9
   hooks_riverpod: ^2.4.10
-  google_fonts: ^6.1.0
+  google_fonts: ^6.2.1
   flutter_hooks: ^0.20.5
   http: ^1.2.0
   flutter_svg_provider: ^1.0.7
-  equatable: ^2.0.5
+  firebase_app_check: ^0.2.1+18
 
 dev_dependencies:
   flutter_test:
