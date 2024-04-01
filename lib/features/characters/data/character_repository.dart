@@ -9,7 +9,7 @@ final characterRepositoryProvider = Provider((ref) {
 
 /// The [CharacterRepository] handles all CRUD operations for [Character] model.
 ///
-/// Author: Jonathon Meney
+/// Author: Jonathon Meney, Liam Welsh
 class CharacterRepository {
   /// Holds the instance of [FirebaseFirestore].
   final FirebaseFirestore _firestore;

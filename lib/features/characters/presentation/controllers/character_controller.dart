@@ -12,7 +12,7 @@ final characterControllerProvider =
 
 /// Delegates requests related to [Character]'s.
 ///
-/// Author: Jonathon Meney
+/// Author: Jonathon Meney, Liam Welsh
 class CharacterController extends AsyncNotifier<List<Character>> {
   /// Stores a [Character] in cloud firestore.
   Future<void> createCharacter(Character character) async {

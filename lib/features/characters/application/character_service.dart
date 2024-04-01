@@ -5,6 +5,8 @@ import 'package:mythos_manager/features/authentication/exceptions/no_user_found_
 import 'package:mythos_manager/features/characters/data/character_repository.dart';
 import 'package:mythos_manager/features/characters/domain/character.dart';
 
+/// Authors: Jonathon Meney, Liam Welsh
+
 /// Provides a [CharacterService].
 final characterServiceProvider = Provider((ref) {
   return CharacterService(ref.watch(characterRepositoryProvider),

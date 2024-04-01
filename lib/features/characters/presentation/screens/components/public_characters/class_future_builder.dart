@@ -3,6 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/dnd_api_controller.dart';
 
 /// Author: Liam Welsh
+///
+/// [FutureBuilder] that returns a [DropDownMenu] of subclasses for public [Character] filtering
 class ClassFutureBuilder extends HookConsumerWidget {
   final String selectedClass;
   final TextEditingController subclassController;
