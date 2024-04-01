@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-/// Authors: Jonathon Meney, Liam Welsh
-
 /// This model holds all relevant data for a [Character].
+///
+/// Authors: Jonathon Meney, Liam Welsh
 class Character {
   /// The firestore document id
   String? id;
