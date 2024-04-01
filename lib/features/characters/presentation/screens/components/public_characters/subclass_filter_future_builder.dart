@@ -5,11 +5,11 @@ import 'package:mythos_manager/features/characters/presentation/controllers/dnd_
 /// Author: Liam Welsh
 ///
 /// [FutureBuilder] that returns a [DropDownMenu] of subclasses for public [Character] filtering
-class ClassFutureBuilder extends HookConsumerWidget {
+class SubclassFilterFutureBuilder extends HookConsumerWidget {
   final String selectedClass;
   final TextEditingController subclassController;
 
-  const ClassFutureBuilder(
+  const SubclassFilterFutureBuilder(
       {super.key,
       required this.selectedClass,
       required this.subclassController});

@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/character_controller.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/dnd_api_controller.dart';
 import 'package:mythos_manager/features/characters/presentation/screens/components/character_list.dart';
-import 'package:mythos_manager/features/characters/presentation/screens/components/public_characters/class_future_builder.dart';
+import 'package:mythos_manager/features/characters/presentation/screens/components/public_characters/subclass_filter_future_builder.dart';
 import 'package:mythos_manager/routing/app_router.dart';
 import 'package:mythos_manager/shared/presentation/components/components.dart';
 
@@ -61,7 +61,7 @@ class PublicCharactersScreen extends HookConsumerWidget {
                                   DropdownMenuEntry(value: c, label: c["name"]))
                               .toList()),
                       if (selectedClass.value != null)
-                        ClassFutureBuilder(
+                        SubclassFilterFutureBuilder(
                             selectedClass: selectedClass.value["index"],
                             subclassController: subclassController)
                     ],
