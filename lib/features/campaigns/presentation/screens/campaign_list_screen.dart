@@ -24,9 +24,7 @@ class CampaignListScreen extends HookConsumerWidget {
             child: Column(
               children: [
                 BoxShadowImage(
-                  image: const Image(
-                    image: Svg("assets/images/campaign_button_image.svg"),
-                  ),
+                  image: Image.asset("assets/images/campaign_button_image.png"),
                   text: const Text(
                     "Create Campaign",
                     style: TextStyle(color: Colors.white),

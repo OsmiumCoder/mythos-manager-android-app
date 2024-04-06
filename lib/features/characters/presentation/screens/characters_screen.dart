@@ -37,9 +37,8 @@ class CharactersScreen extends HookConsumerWidget {
                       CharacterBuilderController();
                   Navigator.pushNamed(context, AppRouter.raceSelectionScreen);
                 },
-                image: const Image(
-                  image:
-                      Svg("assets/images/character_creator_button_image.svg"),
+                image: Image.asset(
+                  "assets/images/character_creator_button_image.png",
                   height: 200,
                 ),
                 text: const Text(

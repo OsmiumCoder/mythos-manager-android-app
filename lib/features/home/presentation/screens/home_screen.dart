@@ -32,8 +32,8 @@ class HomeScreen extends HookConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: BoxShadowImage(
-                  image: const Image(
-                    image: Svg("assets/images/campaign_button_image.svg"),
+                  image: Image.asset(
+                    "assets/images/campaign_button_image.png",
                     height: 200,
                     width: 290,
                   ),
@@ -52,8 +52,8 @@ class HomeScreen extends HookConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: BoxShadowImage(
-                  image: const Image(
-                    image: Svg("assets/images/characters_button_image.svg"),
+                  image: Image.asset(
+                    "assets/images/characters_button_image.png",
                     height: 200,
                     width: 290,
                   ),
@@ -72,9 +72,8 @@ class HomeScreen extends HookConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: BoxShadowImage(
-                  image: const Image(
-                    image:
-                        Svg("assets/images/character_creator_button_image.svg"),
+                  image: Image.asset(
+                    "assets/images/character_creator_button_image.png",
                     height: 200,
                     width: 290,
                   ),
