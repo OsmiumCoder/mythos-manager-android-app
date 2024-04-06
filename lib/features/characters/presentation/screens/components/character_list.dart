@@ -15,19 +15,28 @@ class CharacterList extends StatelessWidget {
       children: [
         ...characters.map((Character character) => Padding(
               padding: const EdgeInsets.all(16),
-              child: BoxShadowImage(
-                text: Text(
-                  character.name ??
-                      "Character #${characters.indexOf(character) + 1}",
-                  style: const TextStyle(color: Colors.white),
-                ),
-                height: 100,
-                width: 300,
-                textPadding: 25,
+              child: GestureDetector(
                 onTap: () {
                   Navigator.pushNamed(context, AppRouter.characterDisplayScreen,
                       arguments: character);
                 },
+                child: Card(
+                  child: SizedBox(
+                    height: 100,
+                    width: 300,
+                    child: Center(
+                      child: FittedBox(
+                        fit: BoxFit.contain,
+                        child: Text(
+                          character.name ??
+                              "Character #${characters.indexOf(character) + 1}",
+                          style: const TextStyle(color: Colors.white, fontSize: 25),
+                        ),
+                      ),
+                    ),
+                  
+                  ),
+                ),
               ),
             ))
       ],

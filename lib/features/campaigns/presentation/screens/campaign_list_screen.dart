@@ -42,23 +42,27 @@ class CampaignListScreen extends HookConsumerWidget {
                               .map(
                                 (Campaign campaign) => Padding(
                                   padding: const EdgeInsets.only(top: 32),
-                                  child: SizedBox(
-                                    width: 300,
-                                    child: BoxShadowImage(
-                                      image: null,
-                                      // TODO Insert image
-                                      text: Text(
-                                        campaign.name,
-                                        style: const TextStyle(
-                                            color: Colors.white),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                          context, AppRouter.noteListScreen,
+                                          arguments: campaign);
+                                    },
+                                    child: Card(
+                                      child: SizedBox(
+                                        height: 100,
+                                        width: 300,
+                                        child: Center(
+                                          child: FittedBox(
+                                            fit: BoxFit.contain,
+                                            child: Text(
+                                              campaign.name,
+                                              style: const TextStyle(color: Colors.white, fontSize: 25),
+                                            ),
+                                          ),
+                                        ),
+
                                       ),
-                                      height: 75,
-                                      textPadding: 22.5,
-                                      onTap: () {
-                                        Navigator.pushNamed(
-                                            context, AppRouter.noteListScreen,
-                                            arguments: campaign);
-                                      },
                                     ),
                                   ),
                                 ),
