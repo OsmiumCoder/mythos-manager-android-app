@@ -20,12 +20,15 @@ void main() {
           ))));
 
       final boxShadowFinder = find.byType(BoxShadowImage);
+
+      expect(boxShadowFinder, findsOneWidget);
+
       await tester.pumpAndSettle();
       await tester.startGesture(tester.getCenter(boxShadowFinder));
 
       await tester.pump();
 
-      final containerFinder = find.byType(Container);
+      final containerFinder = find.byKey(const Key("BoxShadowContainer"));
 
       final decoration =
           tester.widget<Container>(containerFinder).decoration as BoxDecoration;
@@ -50,7 +53,7 @@ void main() {
 
       final boxShadowFinder = find.byType(BoxShadowImage);
 
-      final prevContainerFinder = find.byType(Container);
+      final prevContainerFinder = find.byKey(const Key("BoxShadowContainer"));
 
       final prevDecoration = tester
           .widget<Container>(prevContainerFinder)
@@ -65,7 +68,7 @@ void main() {
 
       await tester.pump();
 
-      final containerFinder = find.byType(Container);
+      final containerFinder = find.byKey(const Key("BoxShadowContainer"));
 
       final decoration =
           tester.widget<Container>(containerFinder).decoration as BoxDecoration;

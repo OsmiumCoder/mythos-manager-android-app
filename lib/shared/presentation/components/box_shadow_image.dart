@@ -36,6 +36,7 @@ class _BoxShadowImageState extends State<BoxShadowImage> {
       onTapUp: (_) => setState(() => _isPressed = false),
       onTapCancel: () => setState(() => _isPressed = false),
       child: Container(
+        key: const Key("BoxShadowContainer"),
         height: widget.image?.height ?? widget.height,
         width: widget.image?.width ?? widget.width,
         decoration: BoxDecoration(

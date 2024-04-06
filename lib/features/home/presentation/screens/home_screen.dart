@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/character_builder_controller.dart';
 import 'package:mythos_manager/routing/app_router.dart';
@@ -32,8 +31,8 @@ class HomeScreen extends HookConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: BoxShadowImage(
-                  image: const Image(
-                    image: Svg("assets/images/campaign_button_image.svg"),
+                  image: Image.asset(
+                    "assets/images/campaign_button_image.png",
                     height: 200,
                     width: 290,
                   ),
@@ -52,8 +51,8 @@ class HomeScreen extends HookConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: BoxShadowImage(
-                  image: const Image(
-                    image: Svg("assets/images/characters_button_image.svg"),
+                  image: Image.asset(
+                    "assets/images/characters_button_image.png",
                     height: 200,
                     width: 290,
                   ),
@@ -72,9 +71,8 @@ class HomeScreen extends HookConsumerWidget {
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: BoxShadowImage(
-                  image: const Image(
-                    image:
-                        Svg("assets/images/character_creator_button_image.svg"),
+                  image: Image.asset(
+                    "assets/images/character_creator_button_image.png",
                     height: 200,
                     width: 290,
                   ),

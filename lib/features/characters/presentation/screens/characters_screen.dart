@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/characters/domain/character.dart';
 import 'package:mythos_manager/features/characters/presentation/controllers/character_builder_controller.dart';
@@ -37,9 +36,8 @@ class CharactersScreen extends HookConsumerWidget {
                       CharacterBuilderController();
                   Navigator.pushNamed(context, AppRouter.raceSelectionScreen);
                 },
-                image: const Image(
-                  image:
-                      Svg("assets/images/character_creator_button_image.svg"),
+                image: Image.asset(
+                  "assets/images/character_creator_button_image.png",
                   height: 200,
                 ),
                 text: const Text(

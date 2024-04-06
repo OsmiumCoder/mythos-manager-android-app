@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/campaigns/domain/campaign.dart';
 import 'package:mythos_manager/features/campaigns/presentation/controllers/campaign_controller.dart';
@@ -24,9 +23,7 @@ class CampaignListScreen extends HookConsumerWidget {
             child: Column(
               children: [
                 BoxShadowImage(
-                  image: const Image(
-                    image: Svg("assets/images/campaign_button_image.svg"),
-                  ),
+                  image: Image.asset("assets/images/campaign_button_image.png"),
                   text: const Text(
                     "Create Campaign",
                     style: TextStyle(color: Colors.white),
@@ -42,23 +39,27 @@ class CampaignListScreen extends HookConsumerWidget {
                               .map(
                                 (Campaign campaign) => Padding(
                                   padding: const EdgeInsets.only(top: 32),
-                                  child: SizedBox(
-                                    width: 300,
-                                    child: BoxShadowImage(
-                                      image: null,
-                                      // TODO Insert image
-                                      text: Text(
-                                        campaign.name,
-                                        style: const TextStyle(
-                                            color: Colors.white),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                          context, AppRouter.noteListScreen,
+                                          arguments: campaign);
+                                    },
+                                    child: Card(
+                                      child: SizedBox(
+                                        height: 100,
+                                        width: 300,
+                                        child: Center(
+                                          child: FittedBox(
+                                            fit: BoxFit.contain,
+                                            child: Text(
+                                              campaign.name,
+                                              style: const TextStyle(color: Colors.white, fontSize: 25),
+                                            ),
+                                          ),
+                                        ),
+
                                       ),
-                                      height: 75,
-                                      textPadding: 22.5,
-                                      onTap: () {
-                                        Navigator.pushNamed(
-                                            context, AppRouter.noteListScreen,
-                                            arguments: campaign);
-                                      },
                                     ),
                                   ),
                                 ),
