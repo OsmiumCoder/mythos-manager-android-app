@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mythos_manager/features/campaigns/domain/campaign.dart';
 import 'package:mythos_manager/features/campaigns/presentation/controllers/campaign_controller.dart';
