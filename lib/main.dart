@@ -39,7 +39,7 @@ class MyApp extends ConsumerWidget {
       onGenerateRoute: (settings) {
         return AppRouter.generateRoute(settings, ref);
       },
-      // debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

@@ -84,19 +84,6 @@ class MythosDrawer extends Drawer {
                     _handleRouting(context, AppRouter.publicCharactersScreen),
               ),
             ),
-            Container(
-              color: null,
-              // TODO implement color when current route is Homebrew,
-              child: ListTile(
-                leading: const Icon(
-                  Icons.edit_outlined,
-                  color: Colors.white,
-                ),
-                title: const Text("Homebrew",
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {}, // TODO implement routing
-              ),
-            ),
           ],
         ),
       ),

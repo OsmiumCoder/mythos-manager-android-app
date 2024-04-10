@@ -13,13 +13,13 @@ dependencies:
     sdk: flutter
 
   firebase_core: ^2.27.1
-  cloud_firestore: ^4.15.10
+  cloud_firestore: ^4.16.1
   firebase_auth: ^4.17.9
   hooks_riverpod: ^2.4.10
   google_fonts: ^6.2.1
   flutter_hooks: ^0.20.5
   http: ^1.2.0
-  firebase_app_check: ^0.2.1+19
+  firebase_app_check: ^0.2.2+1
 
 dev_dependencies:
   flutter_test:
