@@ -1,6 +1,6 @@
 # Mythos Manager
-
 Mythos Manager is a Dungeons & Dragons character management app that simplifies the creation and tracking of characters and campaigns. The app features character creation, and a campaign tracking tool, along with the ability to share characters with others.
+
 ## Features
 **For a full breakdown of all the features and how to use the app please see the [Presentation](#Presentation) section of this README**
 
@@ -13,7 +13,6 @@ Mythos Manager is a Dungeons & Dragons character management app that simplifies 
 - Campaign tracker, ability to create a campaign as well as notes for that campaign, and link a character to that campaign
 
 - Public characters, to share and see shared characters
-
 
 
 ## Tech Stack
@@ -67,7 +66,6 @@ To run tests, run the following command
   flutter test
 ```
 
-
 ## Authors
 **For exact contributions refer to comments at the top of each file. Also see the project board for Issue and Pull Request breakdown**
 
@@ -83,7 +81,6 @@ To run tests, run the following command
     -  frontend screens
     - connecting frontend to backend
 
-
 ## Roadmap
 
 - Homebrew creation and the ability to share homebrew creations, would include spells and classes
@@ -91,7 +88,6 @@ To run tests, run the following command
 - The ability to go back and edit existing characters
 
 - Add Campaign groups, would include group chat calendar scheduler, share notes
-
 
 ## Presentation
 The presentation PDF can be found [here](presentation/CS-3130%20-%20Android%20Final%20Project%20Presentation.pdf).
