@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mythos_manager/features/characters/domain/character.dart';
 import 'package:mythos_manager/routing/app_router.dart';
-import 'package:mythos_manager/shared/presentation/components/components.dart';
 
 /// Author: Liam Welsh
 class CharacterList extends StatelessWidget {
@@ -27,21 +26,24 @@ class CharacterList extends StatelessWidget {
                     child: Center(
                       child: FittedBox(
                         fit: BoxFit.contain,
-                        child: Column(
-                          children: [
-                            Text(
-                              character.name ??
-                                  "Character #${characters.indexOf(character) + 1}",
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 30),
-                            ),
-                            if (character.className != null)
+                        child: Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Column(
+                            children: [
                               Text(
-                                character.className as String,
+                                character.name ??
+                                    "Character #${characters.indexOf(character) + 1}",
                                 style: const TextStyle(
-                                    color: Colors.white70, fontSize: 20),
-                              )
-                          ],
+                                    color: Colors.white, fontSize: 30),
+                              ),
+                              if (character.className != null)
+                                Text(
+                                  character.className as String,
+                                  style: const TextStyle(
+                                      color: Colors.white70, fontSize: 20),
+                                )
+                            ],
+                          ),
                         ),
                       ),
                     ),

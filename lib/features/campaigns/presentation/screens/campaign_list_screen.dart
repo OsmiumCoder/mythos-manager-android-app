@@ -49,12 +49,15 @@ class CampaignListScreen extends HookConsumerWidget {
                                       child: SizedBox(
                                         height: 100,
                                         width: 300,
-                                        child: Center(
-                                          child: FittedBox(
-                                            fit: BoxFit.contain,
-                                            child: Text(
-                                              campaign.name,
-                                              style: const TextStyle(color: Colors.white, fontSize: 25),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(20),
+                                          child: Center(
+                                            child: FittedBox(
+                                              fit: BoxFit.contain,
+                                              child: Text(
+                                                campaign.name,
+                                                style: const TextStyle(color: Colors.white, fontSize: 25),
+                                              ),
                                             ),
                                           ),
                                         ),
