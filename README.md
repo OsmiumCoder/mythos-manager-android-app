@@ -95,3 +95,6 @@ To run tests, run the following command
 
 ## Presentation
 The presentation PDF can be found [here](presentation/CS-3130%20-%20Android%20Final%20Project%20Presentation.pdf).
+
+## Mockups
+All mockups can be found [here](mockups)
